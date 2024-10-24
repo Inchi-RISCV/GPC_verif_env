@@ -33,9 +33,6 @@ USER_COMP_OPTS +=	-Mdir=./${mode}/exec/csrc -o ./${mode}/exec/simv \
                   -CC "-Wl,-rpath,$(RISCV)/lib" \
                   $(RISCV)/lib/libfesvr.a \
                   +define+CLOCK_PERIOD=1.0 \
-                  +define+RANDOMIZE_REG_INIT \
-                  +define+RANDOMIZE_GARBAGE_ASSIGN \
-                  +define+RANDOMIZE_INVALID_ASSIGN \
                   +define+RANDOMIZE_DELAY=0.1 \
 						      +define+FSDB+define+WAVES_FSDB+define+WAVES="fsdb"\
 						      +libext+.v 
