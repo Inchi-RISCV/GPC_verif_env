@@ -150,7 +150,7 @@ task vpu_scb::commit_check();
 		    end
 
 
-		    if(data_act_tr.verif_commit_currPc[0] == 'h8000_0000) begin
+		    if(data_act_tr.verif_commit_currPc[63:0] == 'h8000_0000) begin
 		    	dut_start_cp = 1;
 		    	init_spike_info(data_act_tr);
 				  //force tb_top.testHarness.SimDTM.debug_req_bits_data[31:0] = 0;
@@ -318,7 +318,7 @@ task vpu_scb::init_spike_info(data_trans data_act_tr);
 
     bit [63:0] spike_arry[154];
 
-    spike_arry[6] = data_act_tr.verif_commit_currPc;
+    spike_arry[6] = data_act_tr.verif_commit_currPc[63:0];
 
 		for(int i=0;i<31;i++)begin
     	spike_arry[i+122+1] = data_act_tr.verif_reg_gpr_arr[i];
@@ -333,28 +333,28 @@ task vpu_scb::init_spike_info(data_trans data_act_tr);
 
 
 
-  spike_arry[24] =   data_act_tr.verif_csr_mstatusWr  ;      
-  spike_arry[22] =   data_act_tr.verif_csr_mepcWr     ;      
-  spike_arry[20] =   data_act_tr.verif_csr_mtvalWr    ;      
-  spike_arry[18] =   data_act_tr.verif_csr_mtvecWr    ;      
-  spike_arry[16] =   data_act_tr.verif_csr_mcauseWr   ;      
-  spike_arry[13] =   data_act_tr.verif_csr_mipWr      ;      
-  spike_arry[12] =   data_act_tr.verif_csr_mieWr      ;      
-  spike_arry[11] =   data_act_tr.verif_csr_mscratchWr ;      
-  spike_arry[9]  =   data_act_tr.verif_csr_midelegWr  ;      
-  spike_arry[8]  =   data_act_tr.verif_csr_medelegWr  ;      
-  spike_arry[5]  =   data_act_tr.verif_csr_minstretWr ;      
-  spike_arry[23] =   data_act_tr.verif_csr_sstatusWr  ;      
-  spike_arry[21] =   data_act_tr.verif_csr_sepcWr     ;      
-  spike_arry[19] =   data_act_tr.verif_csr_stvalWr    ;      
-  spike_arry[17] =   data_act_tr.verif_csr_stvecWr    ;      
-  spike_arry[15] =   data_act_tr.verif_csr_scauseWr   ;      
-  spike_arry[14] =   data_act_tr.verif_csr_satpWr     ;      
-  spike_arry[10] =   data_act_tr.verif_csr_sscratchWr ;      
-  spike_arry[4]  =   data_act_tr.verif_csr_vtypeWr    ;      
-  spike_arry[3]  =   data_act_tr.verif_csr_vcsrWr     ;      
-  spike_arry[2]  =   data_act_tr.verif_csr_vlWr       ;      
-  spike_arry[1]  =   data_act_tr.verif_csr_vstartWr   ;      
+  spike_arry[24] =   data_act_tr.verif_csr_mstatusWr[63:0]  ;      
+  spike_arry[22] =   data_act_tr.verif_csr_mepcWr[63:0]     ;      
+  spike_arry[20] =   data_act_tr.verif_csr_mtvalWr[63:0]    ;      
+  spike_arry[18] =   data_act_tr.verif_csr_mtvecWr[63:0]    ;      
+  spike_arry[16] =   data_act_tr.verif_csr_mcauseWr[63:0]   ;      
+  spike_arry[13] =   data_act_tr.verif_csr_mipWr[63:0]      ;      
+  spike_arry[12] =   data_act_tr.verif_csr_mieWr[63:0]      ;      
+  spike_arry[11] =   data_act_tr.verif_csr_mscratchWr[63:0] ;      
+  spike_arry[9]  =   data_act_tr.verif_csr_midelegWr[63:0]  ;      
+  spike_arry[8]  =   data_act_tr.verif_csr_medelegWr[63:0]  ;      
+  spike_arry[5]  =   data_act_tr.verif_csr_minstretWr[63:0] ;      
+  spike_arry[23] =   data_act_tr.verif_csr_sstatusWr[63:0]  ;      
+  spike_arry[21] =   data_act_tr.verif_csr_sepcWr[63:0]     ;      
+  spike_arry[19] =   data_act_tr.verif_csr_stvalWr[63:0]    ;      
+  spike_arry[17] =   data_act_tr.verif_csr_stvecWr[63:0]    ;      
+  spike_arry[15] =   data_act_tr.verif_csr_scauseWr[63:0]   ;      
+  spike_arry[14] =   data_act_tr.verif_csr_satpWr[63:0]     ;      
+  spike_arry[10] =   data_act_tr.verif_csr_sscratchWr[63:0] ;      
+  spike_arry[4]  =   data_act_tr.verif_csr_vtypeWr[63:0]    ;      
+  spike_arry[3]  =   data_act_tr.verif_csr_vcsrWr[63:0]     ;      
+  spike_arry[2]  =   data_act_tr.verif_csr_vlWr[63:0]       ;      
+  spike_arry[1]  =   data_act_tr.verif_csr_vstartWr[63:0]   ;      
   //`uvm_info(get_type_name(),$sformatf(" get set_reg initial value %0h",data_act_tr.verif_csr_medelegWr ),UVM_NONE);
 
 	inchi_difftest_set_reg(spike_arry);
