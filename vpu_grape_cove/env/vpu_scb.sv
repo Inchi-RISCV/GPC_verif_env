@@ -31,7 +31,7 @@ class vpu_scb extends uvm_component;
 	static event time_out_refresh;
 
 	data_trans  data_act_tr,data_exp_tr,data_act_tr_trap;
-	bit comp_pass;
+	bit comp_pass_low,comp_pass_high;
 
 
 endclass : vpu_scb 
@@ -96,6 +96,7 @@ task vpu_scb::end_sim_check();
 
 
 endtask
+
 
 task vpu_scb::commit_check();
 
@@ -165,17 +166,20 @@ task vpu_scb::commit_check();
 					 	inchi_difftest_exec();
 		       	do_exp_tr();
 
-		     	 	comp_pass = data_act_tr.my_compare_low(data_exp_tr);
+		     	 	comp_pass_low = data_act_tr.my_compare_low(data_exp_tr);
 		     	 	commit_num ++;
 
-		     	 	if(comp_pass)begin
-           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,prevPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc,commit_num),UVM_NONE);
+		     	 	if(comp_pass_low)begin
+           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc[63:0],commit_num),UVM_NONE);
 		     	 	end
 		     	 	else begin
 
-         	 	  `uvm_info(get_type_name(),{" scb get act data : ",data_act_tr.sprint},UVM_NONE);
-		     	 		`uvm_info(get_type_name(),{" scb get exp data : ",data_exp_tr.sprint},UVM_NONE);
-		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,prevPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc,commit_num));
+         	 	  `uvm_info(get_type_name(),(" scb get act data : -------------- "),UVM_NONE);
+		     	 		data_act_tr.sprint_low(data_act_tr);
+							//`uvm_info(get_type_name(),{" scb get exp data : ",data_exp_tr.sprint},UVM_NONE);
+							`uvm_info(get_type_name(),(" scb get exp data : -------------- "),UVM_NONE);
+		     	 		data_act_tr.sprint_low(data_exp_tr);
+		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc[63:0],commit_num));
 
 		     	 	end// end else if comp pass
 					 end
@@ -184,17 +188,19 @@ task vpu_scb::commit_check();
 					 	inchi_difftest_exec();
 		       	do_exp_tr();
 
-		     	 	comp_pass = data_act_tr.my_compare_high(data_exp_tr);
+		     	 	comp_pass_high = data_act_tr.my_compare_high(data_exp_tr);
 		     	 	commit_num ++;
 
-		     	 	if(comp_pass)begin
-           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,prevPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc,commit_num),UVM_NONE);
+		     	 	if(comp_pass_high)begin
+           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc[127:64],commit_num),UVM_NONE);
 		     	 	end
 		     	 	else begin
 
-         	 	  `uvm_info(get_type_name(),{" scb get act data : ",data_act_tr.sprint},UVM_NONE);
-		     	 		`uvm_info(get_type_name(),{" scb get exp data : ",data_exp_tr.sprint},UVM_NONE);
-		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,prevPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc,commit_num));
+         	 	  `uvm_info(get_type_name(),(" scb get act data : -------------- "),UVM_NONE);
+		     	 		data_act_tr.sprint_high(data_act_tr);
+							`uvm_info(get_type_name(),(" scb get exp data : -------------- "),UVM_NONE);
+		     	 		data_act_tr.sprint_low(data_exp_tr);
+		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc[127:64],commit_num));
 
 		     	 	end// end else if comp pass
 					 end

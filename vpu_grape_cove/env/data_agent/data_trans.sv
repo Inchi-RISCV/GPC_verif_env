@@ -93,6 +93,8 @@ class data_trans extends uvm_sequence_item;
 
 
   extern function new(string name = "data_trans");
+  extern function string sprint_low(data_trans act_trans);
+  extern function string sprint_high(data_trans act_trans);
 
 	function bit my_compare_low(data_trans exp_trans);
   	return (this.verif_commit_valid[0] == exp_trans.verif_commit_valid)&&
@@ -136,7 +138,7 @@ class data_trans extends uvm_sequence_item;
    				 (this.verif_sim_halt == exp_trans.verif_sim_halt)&&
    				 (this.verif_trap_valid == exp_trans.verif_trap_valid)&&
    				 (this.verif_trap_code == exp_trans.verif_trap_code)&&
-   				 (this.verif_reg_gpr_arr[31:62] == exp_trans.verif_reg_gpr_arr)&&
+   				 (this.verif_reg_gpr_arr[31:61] == exp_trans.verif_reg_gpr_arr)&&
    				 (this.verif_reg_fpr_arr[32:63] == exp_trans.verif_reg_fpr_arr)&&
    				 (this.verif_reg_vpr_arr[32:63] == exp_trans.verif_reg_vpr_arr)&&
 					 (this.verif_csr_mstatusWr[127:64] == exp_trans.verif_csr_mstatusWr) &&
@@ -162,12 +164,96 @@ class data_trans extends uvm_sequence_item;
 					 (this.verif_csr_vlWr[127:64] == exp_trans.verif_csr_vlWr) &&
 					 (this.verif_csr_vstartWr[127:64] == exp_trans.verif_csr_vstartWr); 
 	endfunction
+
+
 endclass : data_trans
 
 function data_trans::new(string name = "data_trans");
   super.new(name);
 endfunction : new
 
+
+function string data_trans::sprint_low(data_trans act_trans);
+  `uvm_info(get_type_name(),$sformatf(" verif_commit_valid    :'h%0b ",act_trans.verif_commit_valid[0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_commit_currPc   :'h%0h ",act_trans.verif_commit_currPc[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_commit_insn     :'h%0h ",act_trans.verif_commit_insn[31:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_sim_halt        :'h%0h ",act_trans.verif_sim_halt),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_trap_valid      :'h%0h ",act_trans.verif_trap_valid),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_trap_code       :'h%0h ",act_trans.verif_trap_code),UVM_NONE);
+	for(int i = 1;i <31; i++)begin
+  `uvm_info(get_type_name(),$sformatf(" verif_reg_gpr_arr[%0d]  :'h%0h ",i,act_trans.verif_reg_gpr_arr[i]),UVM_NONE);
+	end
+	for(int j = 1;j <32; j++)begin
+  `uvm_info(get_type_name(),$sformatf(" verif_reg_fpr_arr[%0d]  :'h%0h ",j,act_trans.verif_reg_fpr_arr[j]),UVM_NONE);
+	end
+	for(int k = 1;k <32; k++)begin
+  `uvm_info(get_type_name(),$sformatf(" verif_reg_vpr_arr[%0d]  :'h%0h ",k,act_trans.verif_reg_vpr_arr[k]),UVM_NONE);
+	end
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mstatus     :'h%0h ",act_trans.verif_csr_mstatusWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mepc        :'h%0h ",act_trans.verif_csr_mepcWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mtval       :'h%0h ",act_trans.verif_csr_mtvalWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mtvec       :'h%0h ",act_trans.verif_csr_mtvecWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mcause      :'h%0h ",act_trans.verif_csr_mcauseWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mip         :'h%0h ",act_trans.verif_csr_mipWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mie         :'h%0h ",act_trans.verif_csr_mieWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mscratch    :'h%0h ",act_trans.verif_csr_mscratchWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mideleg     :'h%0h ",act_trans.verif_csr_midelegWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_medeleg     :'h%0h ",act_trans.verif_csr_medelegWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_minstret    :'h%0h ",act_trans.verif_csr_minstretWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_sstatus     :'h%0h ",act_trans.verif_csr_sstatusWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_sepc        :'h%0h ",act_trans.verif_csr_sepcWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_stval       :'h%0h ",act_trans.verif_csr_stvalWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_stvec       :'h%0h ",act_trans.verif_csr_stvecWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_scause      :'h%0h ",act_trans.verif_csr_scauseWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_satp        :'h%0h ",act_trans.verif_csr_satpWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_sscratch    :'h%0h ",act_trans.verif_csr_sscratchWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_vtype       :'h%0h ",act_trans.verif_csr_vtypeWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_vcsr        :'h%0h ",act_trans.verif_csr_vcsrWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_vl          :'h%0h ",act_trans.verif_csr_vlWr[63:0]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_vstart      :'h%0h ",act_trans.verif_csr_vstartWr[63:0]),UVM_NONE);
+	
+endfunction
+
+function string data_trans::sprint_high(data_trans act_trans);
+  `uvm_info(get_type_name(),$sformatf(" verif_commit_valid    :'h%0b ",act_trans.verif_commit_valid[1]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_commit_currPc   :'h%0h ",act_trans.verif_commit_currPc[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_commit_insn     :'h%0h ",act_trans.verif_commit_insn[63:32]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_sim_halt        :'h%0h ",act_trans.verif_sim_halt),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_trap_valid      :'h%0h ",act_trans.verif_trap_valid),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_trap_code       :'h%0h ",act_trans.verif_trap_code),UVM_NONE);
+	for(int i = 32;i <62; i++)begin
+  `uvm_info(get_type_name(),$sformatf(" verif_reg_gpr_arr[%0d]  :'h%0h ",i,act_trans.verif_reg_gpr_arr[i]),UVM_NONE);
+	end
+	for(int j = 33;j <64; j++)begin
+  `uvm_info(get_type_name(),$sformatf(" verif_reg_fpr_arr[%0d]  :'h%0h ",j,act_trans.verif_reg_fpr_arr[j]),UVM_NONE);
+	end
+	for(int k = 33;k <64; k++)begin
+  `uvm_info(get_type_name(),$sformatf(" verif_reg_vpr_arr[%0d]  :'h%0h ",k,act_trans.verif_reg_vpr_arr[k]),UVM_NONE);
+	end
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mstatus     :'h%0h ",act_trans.verif_csr_mstatusWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mepc        :'h%0h ",act_trans.verif_csr_mepcWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mtval       :'h%0h ",act_trans.verif_csr_mtvalWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mtvec       :'h%0h ",act_trans.verif_csr_mtvecWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mcause      :'h%0h ",act_trans.verif_csr_mcauseWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mip         :'h%0h ",act_trans.verif_csr_mipWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mie         :'h%0h ",act_trans.verif_csr_mieWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mscratch    :'h%0h ",act_trans.verif_csr_mscratchWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_mideleg     :'h%0h ",act_trans.verif_csr_midelegWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_medeleg     :'h%0h ",act_trans.verif_csr_medelegWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_minstret    :'h%0h ",act_trans.verif_csr_minstretWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_sstatus     :'h%0h ",act_trans.verif_csr_sstatusWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_sepc        :'h%0h ",act_trans.verif_csr_sepcWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_stval       :'h%0h ",act_trans.verif_csr_stvalWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_stvec       :'h%0h ",act_trans.verif_csr_stvecWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_slowcause      :'h%0h ",act_trans.verif_csr_scauseWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_satp        :'h%0h ",act_trans.verif_csr_satpWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_sscratch    :'h%0h ",act_trans.verif_csr_sscratchWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_vtype       :'h%0h ",act_trans.verif_csr_vtypeWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_vcsr        :'h%0h ",act_trans.verif_csr_vcsrWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_vl          :'h%0h ",act_trans.verif_csr_vlWr[127:64]),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" verif_csr_vstart      :'h%0h ",act_trans.verif_csr_vstartWr[127:64]),UVM_NONE);
+	
+endfunction
 `endif // DATA_TRANS_SV
 
 
