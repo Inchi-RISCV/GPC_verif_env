@@ -30,7 +30,7 @@ interface data_if(input clk, input rst_n);
 
   //trap signals
   logic                     verif_trap_valid;
-  logic [`NRET*`XLEN-1:0]   verif_trap_code;
+  logic [`XLEN-1:0]         verif_trap_code;
 
   //reg signals
   logic [`NRET*31*`XLEN-1:0] verif_reg_gpr;

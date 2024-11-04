@@ -16,8 +16,8 @@ if grep -q "commit info timeout" "$input_file"; then
 fi
 
 # 生成输出文件名
-output_file1="${input_file%.*}_act.log"
-output_file2="${input_file%.*}_exp.log"
+output_file1="${input_file%.*}_exp.log"
+output_file2="${input_file%.*}_act.log"
 
 # 删除已经存在的输出文件
 rm -f "$output_file1" "$output_file2"
@@ -46,9 +46,9 @@ BEGIN {
     }
 }
 
-/verif_sfma.*/ {
+/UVM_ERROR.*/ {
     if(file1_started == 1){
-    end_start = 1;
+			file1_started = 0;
     }
 }
 
