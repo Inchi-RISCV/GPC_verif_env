@@ -7,14 +7,15 @@ import os
 import random
 import getopt
 import time
-import glob
+import subprocess
 
 def usage():
     print('------------------------------------------------------------------')
     print("      USAGE: python regress.py -help/h (print this message)       ")
-    print("      submit jobs        : python regress.py -r    tc_list        ")
-    print("      get regress result : python regress.py --rpt tc_list        ")
-    print("      resubmit fail jobs : python regress.py --rerun              ")
+    print("      submit jobs           : python regress.py -r    tc_list     ")
+    print("      get regress result    : python regress.py --rpt tc_list     ")
+    print("      resubmit fail jobs    : python regress.py --rerun           ")
+    print("      submit and get result : python regress.py --regress tc_list ")
     print("------------------------------------------------------------------")
 
 def get_list_argv(ar_list):
@@ -52,10 +53,18 @@ def get_list_path(list_path):
     regr_list_path = os.path.realpath(list_path)
     return regr_list_path
 
+def generate_unique_seed(existing_seed):
+    while True:
+        seed = random.randint(10000000,99999999)
+        if seed not in existing_seed:
+            existing_seed.add(seed)
+            return seed
+
 def run_sim(dict_list):
     jobs_cnt = 0
     regr_num = 0
     all_regr_list = []
+    seed_list = []
     # deal comp, sim log
     #print dict_list
     for p_idx in dict_list:
@@ -68,9 +77,10 @@ def run_sim(dict_list):
             os.mkdir(tmp_mode_name + '/logs')
         else:
             for i in os.listdir(tmp_mode_dir + '/logs'):
-                pth_fi = tmp_mode_dir + '/logs/' + i
-                #if i != 'vcs_compiler.log':
-                    #os.remove(pth_fi)
+                if 'log' in i:
+                    pth_fi = tmp_mode_dir + '/logs/' + i
+                    if i != 'vcs_compiler.log':
+                        os.remove(pth_fi)
     # submit regression jobs
     for para in dict_list:
         mode_name  = para['mode']
@@ -92,7 +102,12 @@ def run_sim(dict_list):
             # seed = random .randint (10000000,99999999)
             # os.system ("bsub -J 'regression' make run mode=%s seed=%s %s" %(mode_ name,seed,cmd_str))
             # #jobs_cnt = jobs_cnt + 1
-    seed_list = random.sample(range(10000000, 99999999), regr_num)
+    #seed_list = random.sample(range(10000000, 99999999), regr_num)
+    existing_seed = set()
+    for i in range(regr_num):
+        seed= generate_unique_seed(existing_seed)
+        seed_list.append(seed)
+    print seed_list
     if len(seed_list) != len(all_regr_list):
         print("ERROR! seed list len not equal all_regr_list len")
     for seed,run_cmd in zip(seed_list, all_regr_list):
@@ -109,13 +124,13 @@ def write_bash_script(write_options,number):
     with open(regression_path,'w+') as fs:
         fs.write("#!/bin/bash\n")
         fs.write("#SBATCH -J %d\n" %num)
-        #fs.write("#SBATCH -w ictest2\n")
+        fs.write("#SBATCH -w amd9754\n")
         fs.write("#SBATCH --mem-per-cpu=1000\n")
         fs.write("#SBATCH --nodes=1\n")
         #fs.write("#SBATCH --ntasks-per-node=1\n")
         fs.write("#SBATCH --cpus-per-task=1\n")
-        #fs.write("#SBATCH --oversubscribe\n")
-        fs.write("#SBATCH -t 6:0:0\n")
+        fs.write("#SBATCH --oversubscribe\n")
+        fs.write("#SBATCH -t 1:0:0\n")
         fs.write("#SBATCH -o /datahdd/slurm_data/result%d\n" %num)
         fs.write("\n")
         fs.write("\n")
@@ -129,7 +144,7 @@ def judge_cfg(input_file,cfg_str):
     with open(input_file,'r') as f:
         line = f.readline()
         for i in cfg_str:
-            if i in line:
+            if (i + '.cfg') in line:
                 cfg_match = 1
                 return cfg_match
             else:
@@ -143,11 +158,11 @@ def get_last_nline(input_file):
         return None
     else:
         with open(input_file,'rb') as fp:
-            offset = -40
+            offset = -200
             while -offset < filesize:
                 fp.seek(offset,2)
                 lines = fp.readlines()
-                if len(lines) >= 40:
+                if len(lines) >= 50:
                     return lines
                 else:
                     offset *= 2
@@ -160,13 +175,13 @@ def get_sim_result(last_nline_list):
     pass_ftl_flag   = 0
     pass_err_flag   = 0
     for line in last_nline_list:
-        if 'UVM_FATAL' in line and '(' not in line:
+        if 'UVM_FATAL' in line and '(' not in line and 'Number' not in line:
                 new_line = line.replace(' ', '')
                 new_line =new_line.replace('\n','')
                 line_lst =new_line.split(':')
                 if line_lst[-1] == '0':
                     pass_ftl_flag = 1
-        if 'UVM_ERROR' in line and '(' not in line:
+        if 'UVM_ERROR' in line and '(' not in line and 'Number' not in line:
                 new_line = line.replace(' ','')
                 new_line = new_line.replace('\n','')
                 line_lst = new_line.split(':')
@@ -225,7 +240,6 @@ def deal_log(in_dict_list):
                     tmp_log         = tmp_log.replace(tc_name,'')
                     seed            = tmp_log.replace('_','')
                     log_last_nline  = get_last_nline(log_path)
-                    #print("deal log")
                     sim_result      = get_sim_result(log_last_nline)
                     if (sim_result == 'PASS'):
                         pass_num = pass_num + 1
@@ -285,10 +299,12 @@ def deal_log(in_dict_list):
                 for ad_value in n.values():
                     log_f.write('%-25s'%ad_value)
                 log_f.write(' %-60s %-5s\n'%(tmp_nlog,tmp_nsim))
-    # rm  slurnm log
-    for file in glob.glob("/datahdd/slurm_data/result*"):
-        os.remove(file)
-
+        #log_f.write('\n')
+        #log_f.write('------------------------------------------------------------------------------------------------------------------------------\n')
+        #log_f.write('testcase'+ ' '*24 + 'cfg'+ ' '*34 + 'total_num'+ ' ' * 13 + 'pass_num' + ' '*12 + 'fail_num\n')
+        #log_f.write('------------------------------------------------------------------------------------------------------------------------------\n')
+        #for m in total_res_list:
+        #    log_f.write('%-30s %-40s %-20s %-20s %-15s\n' %(m['test'], m['cfg'], m['all'], m['pass'], m['fail']))
 
 def rerun_proc(re_log_path):
     re_sub_cnt = 0
@@ -299,36 +315,56 @@ def rerun_proc(re_log_path):
                 new_line = line.replace('FAIL', '')
                 new_line = new_line.rstrip('\n')
                 new_line = new_line.rstrip(' ')
-                #new_line = new_line.replace('fsdb=on','fsdb=off')
+                new_line = new_line.replace('fsdb=on','fsdb=off')
                 tmp_list = new_line.split(' ')
                 del tmp_list[-1]
                 sub_str = ' '.join(tmp_list)
                 sub_str = sub_str.rstrip(' ')
-                pattern = r'\d{8}'
-                rerun_seed=re.findall(pattern,sub_str)
-                #print('seed=%s' %rerun_seed)
-                seed = rerun_seed[0]
-                #print(type(seed))
-                #print(seed)
-                rerun_regression = write_bash_script(sub_str,int(seed))
-                print('sbatch %s' %rerun_regression)
-                os.system('sbatch %s' %rerun_regression)                
                 re_sub_cnt = re_sub_cnt + 1
                 #os.system("bsub -J 'regression' %s" % sub_str)
-                #print('sbatch %s' %sub_str)
+                os.system("%s" % sub_str)
     print('%d fail jobs were resubmitted' %re_sub_cnt)
+
+
+def judge_run_state():
+    running = "R"
+    pending = "PD"
+    command = "squeue -u $USER"
+    user = os.getenv('USER')
+    print("waiting for the program finish")
+    try:
+        while True:
+            process = subprocess.Popen(command,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
+            stdout,stderr = process.communicate()
+            output_lines = stdout.splitlines()
+
+            found = False
+
+            for line in output_lines:
+                if (running and user in line) or (pending and user in line):
+                    found = True
+                    break
+            
+            if found:
+                continue
+
+            print("No running or pending found.Exit while loop")
+            break
+    except KeyboardInterrupt:
+        print("Exit loop forcibly")
 
 # main
 if __name__ == "__main__":
     try:
-        opts,args = getopt.getopt(sys.argv[1:], "hr:", ["help", "rpt=", "rerun"])
+        opts,args = getopt.getopt(sys.argv[1:], "hr:", ["help", "rpt=", "rerun", "regress="])
     except getopt.GetoptError:
         print("Error! ! ! pls input argvs")
         usage()
         sys.exit(2)
-    rerun_flag = 0
-    rpt_flag   = 0
-    list_flag  = 0
+    rerun_flag  = 0
+    rpt_flag    = 0
+    list_flag   = 0
+    regress_flag= 0
     list_path  = ""
     for opt,arg in opts:
         if opt in ('-h', '--help'):
@@ -343,6 +379,9 @@ if __name__ == "__main__":
             #list_path = args.pop()
         elif opt in ("--rerun"):
             rerun_flag = 1
+        elif opt in ("--regress"):
+            list_path =arg
+            regress_flag =1
 
     if(list_flag):
         all_para_list = []
@@ -357,6 +396,16 @@ if __name__ == "__main__":
     elif (rerun_flag):
         regr_log_path = './regress.log'
         rerun_proc(regr_log_path)
+    elif (regress_flag):
+        all_para_list = []
+        list_realpath = get_list_path(list_path)
+        all_para_list = analy_tclist(list_realpath)
+        run_sim(all_para_list)
+        judge_run_state()
+        para_list = []
+        list_realway = get_list_path(list_path)
+        para_list = analy_tclist(list_realway)
+        deal_log(para_list)
 
 
 
