@@ -170,7 +170,7 @@ task vpu_scb::commit_check();
 		     	 	commit_num ++;
 
 		     	 	if(comp_pass_low)begin
-           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc[63:0],commit_num),UVM_NONE);
+           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[63:0],commit_num),UVM_NONE);
 		     	 	end
 		     	 	else begin
 
@@ -179,7 +179,7 @@ task vpu_scb::commit_check();
 							//`uvm_info(get_type_name(),{" scb get exp data : ",data_exp_tr.sprint},UVM_NONE);
 							`uvm_info(get_type_name(),(" scb get exp data : -------------- "),UVM_NONE);
 		     	 		data_act_tr.sprint_low(data_exp_tr);
-		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc[63:0],commit_num));
+		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[63:0],commit_num));
 
 		     	 	end// end else if comp pass
 					 end
@@ -192,7 +192,7 @@ task vpu_scb::commit_check();
 		     	 	commit_num ++;
 
 		     	 	if(comp_pass_high)begin
-           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc[127:64],commit_num),UVM_NONE);
+           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[127:64],commit_num),UVM_NONE);
 		     	 	end
 		     	 	else begin
 
@@ -200,7 +200,7 @@ task vpu_scb::commit_check();
 		     	 		data_act_tr.sprint_high(data_act_tr);
 							`uvm_info(get_type_name(),(" scb get exp data : -------------- "),UVM_NONE);
 		     	 		data_act_tr.sprint_low(data_exp_tr);
-		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0h ",data_act_tr.verif_commit_currPc[127:64],commit_num));
+		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[127:64],commit_num));
 
 		     	 	end// end else if comp pass
 					 end
