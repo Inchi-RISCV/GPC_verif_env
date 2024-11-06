@@ -144,7 +144,7 @@ def judge_cfg(input_file,cfg_str):
     with open(input_file,'r') as f:
         line = f.readline()
         for i in cfg_str:
-            if (i + '.cfg') in line:
+            if i in line:
                 cfg_match = 1
                 return cfg_match
             else:
@@ -305,6 +305,9 @@ def deal_log(in_dict_list):
         #log_f.write('------------------------------------------------------------------------------------------------------------------------------\n')
         #for m in total_res_list:
         #    log_f.write('%-30s %-40s %-20s %-20s %-15s\n' %(m['test'], m['cfg'], m['all'], m['pass'], m['fail']))
+    # rm  slurnm log
+    for file in glob.glob("/datahdd/slurm_data/result*"):
+        os.remove(file)
 
 def rerun_proc(re_log_path):
     re_sub_cnt = 0
@@ -330,7 +333,8 @@ def judge_run_state():
     running = "R"
     pending = "PD"
     command = "squeue -u $USER"
-    user = os.getenv('USER')
+    name = os.getenv('USER')
+    user = name[:8]
     print("waiting for the program finish")
     try:
         while True:
