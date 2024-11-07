@@ -121,7 +121,8 @@ def run_sim(dict_list):
 
 def write_bash_script(write_options,number):
     num = number
-    regression_path = ("/datahdd/slurm_data/slurm%d.sh" %num)
+    user_name = os.getlogin()
+    regression_path = "/datahdd/slurm_data/{}/slurm{}.sh".format(user_name, num)
     with open(regression_path,'w+') as fs:
         fs.write("#!/bin/bash\n")
         fs.write("#SBATCH -J %d\n" %num)
@@ -132,7 +133,7 @@ def write_bash_script(write_options,number):
         fs.write("#SBATCH --cpus-per-task=1\n")
         fs.write("#SBATCH --oversubscribe\n")
         fs.write("#SBATCH -t 1:0:0\n")
-        fs.write("#SBATCH -o /datahdd/slurm_data/result%d\n" %num)
+        fs.write("#SBATCH -o /datahdd/slurm_data/{}/result{}\n".format(user_name, num))
         fs.write("\n")
         fs.write("\n")
         fs.write("\n")
