@@ -197,6 +197,7 @@ def get_sim_result(last_nline_list):
 
 
 def deal_log(in_dict_list):
+    user_name = os.getlogin()
     all_log_list    = []
     total_res_list  = []
     total_pass_num  = 0
@@ -308,7 +309,7 @@ def deal_log(in_dict_list):
         #for m in total_res_list:
         #    log_f.write('%-30s %-40s %-20s %-20s %-15s\n' %(m['test'], m['cfg'], m['all'], m['pass'], m['fail']))
     # rm  slurnm log
-    for file in glob.glob("/datahdd/slurm_data/result*"):
+    for file in glob.glob("/datahdd/slurm_data/{}/result*".format(user_name)):
         os.remove(file)
 
 def rerun_proc(re_log_path):
