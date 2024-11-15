@@ -13,8 +13,9 @@ import glob
 def usage():
     print('------------------------------------------------------------------')
     print("      USAGE: python regress.py -help/h (print this message)       ")
-    print("      submit jobs           : python regress.py -r    tc_list     ")
-    print("      get regress result    : python regress.py --rpt tc_list     ")
+    print("      submit jobs           : python regress.py -r     tc_list    ")
+    print("      get regress result    : python regress.py --rpt  tc_list    ")
+    print("      get pass result       : python regress.py --pass tc_list    ")
     print("      resubmit fail jobs    : python regress.py --rerun           ")
     print("      submit and get result : python regress.py --regress tc_list ")
     print("------------------------------------------------------------------")
@@ -280,7 +281,7 @@ def deal_log(in_dict_list):
         log_f.write('------------------------------------------------------------------------------------------------------------------------------\n')
         log_f.write('total_num'+ ' ' * 50 + 'pass_num' + ' '*50 + 'fail_num\n')
         log_f.write('------------------------------------------------------------------------------------------------------------------------------\n')
-        log_f.write('%-59s %-59s %-15s \n' %(total_tc_num, total_pass_num, total_fail_num))
+        log_f.write('%-59s %-59s %-59s\n' %(total_tc_num, total_pass_num, total_fail_num))
         log_f.write('\n')
         for n in all_log_list:
             dict_len = len(n)
@@ -302,6 +303,131 @@ def deal_log(in_dict_list):
                 for ad_value in n.values():
                     log_f.write('%-25s'%ad_value)
                 log_f.write(' %-60s %-5s\n'%(tmp_nlog,tmp_nsim))
+        #log_f.write('\n')
+        #log_f.write('------------------------------------------------------------------------------------------------------------------------------\n')
+        #log_f.write('testcase'+ ' '*24 + 'cfg'+ ' '*34 + 'total_num'+ ' ' * 13 + 'pass_num' + ' '*12 + 'fail_num\n')
+        #log_f.write('------------------------------------------------------------------------------------------------------------------------------\n')
+        #for m in total_res_list:
+        #    log_f.write('%-30s %-40s %-20s %-20s %-15s\n' %(m['test'], m['cfg'], m['all'], m['pass'], m['fail']))
+    # rm  slurnm log
+    for file in glob.glob("/datahdd/slurm_data/{}/result*".format(user_name)):
+        os.remove(file)
+
+def deal_pass(in_dict_list):
+    user_name = os.getlogin()
+    all_log_list    = []
+    total_res_list  = []
+    total_pass_num  = 0
+    total_fail_num  = 0
+    total_tc_num    = 0
+    for para in in_dict_list:
+        mode_name    = para['mode']
+        mode_dir     = os.path.abspath(mode_name)
+        log_dir      = mode_dir + '/logs'
+        tc_name      = para['tc']
+        tc_num       = para['num']
+        num_int      = int(tc_num)
+        fsdb_sw      = para['fsdb']
+        tc_cfg       = para['cfg']
+        tc_cov       = para['cov']
+        tc_cfg_dir   = para['cfg_dir']
+        log_list     = os.listdir(log_dir)
+        tmp_dict     = {}
+        test_num     = 0
+        fail_num     = 0
+        pass_num     = 0
+        rm_elem      = []
+        cmd_list     = []
+        # new_cfg_str  = para['cfg'] + '.cfg'
+        del para['mode']
+        del para['tc']
+        # del para[ 'cfg']
+        del para['num']
+        del para['fsdb']
+        total_tc_num = total_tc_num + num_int
+        for t_key,t_value in para.items():
+            if t_key == 'cfg':
+                new_str       = t_value
+                #new_str       = t_value + '.cfg'
+                cmd_list.append(new_str)
+        for lp_log in log_list:
+            if tc_name in lp_log:
+                log_path     =log_dir + '/' +lp_log
+                cfg_exist    =judge_cfg(log_path,cmd_list)
+                if cfg_exist == 1:
+                    test_num        = test_num + 1
+                    seed            = ''
+                    sim_result      = ''
+                    tmp_log         = lp_log.replace('.log','')
+                    tmp_log         = tmp_log.replace(tc_name,'')
+                    seed            = tmp_log.replace('_','')
+                    log_last_nline  = get_last_nline(log_path)
+                    sim_result      = get_sim_result(log_last_nline)
+                    if (sim_result == 'PASS'):
+                        pass_num = pass_num + 1
+                    else:
+                        fail_num = fail_num + 1
+                    wr_str_dict         =       {}
+                    #wr_str_dict = 'make run mode=ss tces cfg=s fsdb=ks seed=ks cov=ss %(para['mode'],tc name,paral ['cfg'] ,fsdb _sw.seed,paral ['cov'])
+                    wr_str_dict['mode'] = 'mode="{}"'.format(mode_name)
+                    wr_str_dict['tc']   = 'tc="{}"'.format(tc_name)
+                    wr_str_dict['cfg']  = 'cfg="{}"'.format(tc_cfg)
+                    wr_str_dict['fsdb'] = 'fsdb="{}"'.format(fsdb_sw)
+                    wr_str_dict['num'] = 'num="{}"'.format(tc_num)
+                    wr_str_dict['cov'] = 'cov="{}"'.format(tc_cov)
+                    wr_str_dict['cfg_dir'] = 'cfg_dir="{}"'.format(tc_cfg_dir)
+                    wr_str_dict['log'] = log_path
+                    wr_str_dict['sim'] = sim_result
+                    wr_str_dict['seed'] = 'seed=' + seed
+                    #for key,value in para.items():
+                    #    wr_str_dict[key] = key + '=' + value
+                    all_log_list.append(wr_str_dict)
+                    rm_elem.append(lp_log)
+                    if (test_num == tc_num):
+                        break
+        # remove have deal log
+        for rm_log in rm_elem:
+            log_list.remove(rm_log)
+        tmp_dict['pass'] = pass_num
+        tmp_dict['fail'] = fail_num
+        tmp_dict['all']  = test_num
+        tmp_dict['cfg']  = tc_cfg
+        tmp_dict['test'] = tc_name
+        total_pass_num = pass_num + total_pass_num
+        total_fail_num = fail_num + total_fail_num
+        total_res_list.append(tmp_dict)
+    re_log_path = './regress_pass.log'
+    with open(re_log_path,'w') as log_f:
+        log_f.write('#------------------------------------------------------------------------------------------------------------------------------\n')
+        log_f.write('#total_num'+ ' ' * 50 + 'pass_num\n')
+        log_f.write('#------------------------------------------------------------------------------------------------------------------------------\n')
+        log_f.write('#%-59s %-59s \n' %(total_tc_num, total_pass_num))
+        #log_f.write('\n')
+        for n in all_log_list:
+            dict_len = len(n)
+            result = n['sim']
+            if (result == 'PASS'):
+                log_f.write('{%-25s, %-30s, %-25s, %-25s, %-12s, %-16s, %-20s}\n' %(n['mode'], n['tc'], n['cfg'], n['num'], n['fsdb'],n['cov'],n['cfg_dir']))
+            #if dict_len == 9:
+            #    if (result == 'PASS'):
+            #        log_f.write('%-25s %-30s %-25s %-8s %-16s %-8s %-60s %-5s\n' %(n['mode'], n['tc'], n['cfg'],n['fsdb'],n['seed'],n['cov'],n['log'],n['sim']))
+            #elif dict_len > 8:
+            #    if (result == 'PASS'):
+            #        log_f.write('%-25s %-30s %-8s %-16s %-8s %-80s %-30s' %(n['mode'], n['tc'], n['fsdb'], n['seed'],n['cov'],n['cfg'],n['cfg_dir']))
+            #        tmp_nlog = n['log']
+            #        tmp_nsim = n['sim']
+            #        del n['mode']
+            #        del n['tc']
+            #        del n['fsdb']
+            #        del n['seed']
+            #        del n['cov']
+            #        del n['log']
+            #        del n['sim']
+            #        del n['cfg']
+            #        del n['cfg_dir']
+            #        for ad_value in n.values():
+            #            log_f.write('%-25s'%ad_value)
+            #        log_f.write(' %-60s %-5s\n'%(tmp_nlog,tmp_nsim))
         #log_f.write('\n')
         #log_f.write('------------------------------------------------------------------------------------------------------------------------------\n')
         #log_f.write('testcase'+ ' '*24 + 'cfg'+ ' '*34 + 'total_num'+ ' ' * 13 + 'pass_num' + ' '*12 + 'fail_num\n')
@@ -363,7 +489,7 @@ def judge_run_state():
 # main
 if __name__ == "__main__":
     try:
-        opts,args = getopt.getopt(sys.argv[1:], "hr:", ["help", "rpt=", "rerun", "regress="])
+        opts,args = getopt.getopt(sys.argv[1:], "hr:", ["help", "rpt=", "rerun", "regress=", "pass="])
     except getopt.GetoptError:
         print("Error! ! ! pls input argvs")
         usage()
@@ -389,6 +515,9 @@ if __name__ == "__main__":
         elif opt in ("--regress"):
             list_path =arg
             regress_flag =1
+        elif opt in ("--pass"):
+            list_path = arg
+            pass_flag = 1
 
     if(list_flag):
         all_para_list = []
@@ -413,6 +542,11 @@ if __name__ == "__main__":
         list_realway = get_list_path(list_path)
         para_list = analy_tclist(list_realway)
         deal_log(para_list)
+    elif (pass_flag):
+        all_para_list = []
+        list_realpath = get_list_path(list_path)
+        all_para_list = analy_tclist(list_realpath)
+        deal_pass(all_para_list)
 
 
 
