@@ -14,4 +14,6 @@ step 4:
 adding spike executable file under vpu/common
 step 5 :
 simulate under vpu/sim:
-make run mode=base_func tc=instr_test  fsdb=on seed=123  cov=on cfg=vadd.elf  cfg_dir=../tc/sequence/bin_3
+make run mode=base_func tc=instr_test  fsdb=on seed=123  cov=on cfg=vadd.elf  cfg_dir=../tc/sequence/bin_3     
+
+
