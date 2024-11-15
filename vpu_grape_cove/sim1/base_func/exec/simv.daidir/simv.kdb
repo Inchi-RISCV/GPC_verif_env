@@ -1,0 +1,22 @@
+rc file Version 1.0
+
+[Design]
+COMPILE_PATH=/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1
+VCS_HOME=/tools/synopsys/vcs/T-2022.06
+VERDI_HOME=/tools/synopsys/verdi/V-2023.12
+SystemC=FALSE
+UUM=FALSE
+KDB=TRUE
+USE_NOVAS_HOME=FALSE
+COSIM=FALSE
+TOP=DebugROBPushTrace DebugROBPushWb DebugROBPopTrace ClockDivider2 ClockDivider3 AsyncResetReg SimDTM tb_top 
+OPTION=-ssv -ssy 
+ELAB_OPTION=-ssv -ssy 
+ELAB=TRUE
+SIMV_WRAPPER=FALSE
+[vcs]
+RUN_ELABCOM=unset TURBO_LOG_DIR ;\rm -rf /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/elabcomLog ;/tools/synopsys/vcs/T-2022.06/linux64/bin/elabcom -logdir /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/elabcomLog  -simvdaidir /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir  -lib /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/work  -saveLevel  -elab /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/kdb -simflow -simdir /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/kdb_libs -topfile /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/.elabcomTopFile -pkgfile /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/.elabcomPkgFile -ssv -ssy  -Lf work +disable_message+C00380+C00381 +disable_message+C00388+C00389  >& /dev/null  && echo Success >& /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/.elabcomReport || echo Fail >& /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/.elabcomReport; \rm -rf /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/work.lib++ /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv.daidir/kdb_libs/ 
+
+[Value]
+WREALX=ffff534e50535f58
+WREALZ=ffff534e50535f5a

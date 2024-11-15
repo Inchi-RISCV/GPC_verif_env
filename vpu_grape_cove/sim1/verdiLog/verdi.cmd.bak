@@ -1,0 +1,4 @@
+verdiSetActWin -dock widgetDock_<Message>
+simSetSimulator "-vcssv" -exec "./base_func/exec/simv" -args
+debImport "-dbdir" "./base_func/exec/simv.daidir"
+verdiSetActWin -dock widgetDock_MTB_SOURCE_TAB_1

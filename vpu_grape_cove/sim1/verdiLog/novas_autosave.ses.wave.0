@@ -1,0 +1,66 @@
+Magic 271485
+Revision Verdi_V-2023.12
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 28 1920 387 457 161
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/base_func/wave/instr_test_45146359.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 110808.612900 111496.855118
+cursor 111100.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 0
+; marker line index
+markerPos 12
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G1"
+activeDirFile "" "/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/base_func/wave/instr_test_45146359.fsdb"
+addSignal -h 23 /tb_top/testHarness/ldut/tile_prci_domain/element_reset_domain_gpctile/frontend/io_cpu_req_valid
+addSignal -h 23 -UNSIGNED -HEX -holdScope io_cpu_req_bits_pc[39:0]
+addGroup "G2"
+addSignal -h 23 /tb_top/testHarness/ldut/tile_prci_domain/element_reset_domain_gpctile/frontend/io_cpu_resp_0_ready
+addSignal -h 23 -holdScope io_cpu_resp_0_valid
+addSignal -h 23 -UNSIGNED -HEX -holdScope io_cpu_resp_0_bits_pc[39:0]
+addSignal -h 23 -UNSIGNED -HEX -holdScope io_cpu_resp_0_bits_next_pc[39:0]
+addGroup "G3"
+addSignal -h 23 /tb_top/testHarness/ldut/tile_prci_domain/element_reset_domain_gpctile/frontend/io_cpu_resp_1_ready
+addSignal -h 23 -holdScope io_cpu_resp_1_valid
+addSignal -h 23 -UNSIGNED -HEX -holdScope io_cpu_resp_1_bits_pc[39:0]
+addSignal -h 23 -UNSIGNED -HEX -holdScope io_cpu_resp_1_bits_next_pc[39:0]
+addGroup "G4"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+

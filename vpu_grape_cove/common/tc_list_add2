@@ -1,0 +1,4 @@
+{mode="base_func", tc="instr_test" ,cfg="vadd.vv_10001"                                                                    ,num="1",fsdb="off",cov="on",cfg_dir="../tc/sequence/bin_2_try"}
+{mode="base_func", tc="instr_test" ,cfg="vfcvt.rtz.xu.f.v_18001"                                                           ,num="1",fsdb="off",cov="on",cfg_dir="../tc/sequence/bin_2_try"}
+{mode="base_func", tc="instr_test" ,cfg="viota.m_10001"                                                                    ,num="1",fsdb="off",cov="on",cfg_dir="../tc/sequence/bin_2_try"}
+{mode="base_func", tc="instr_test" ,cfg="viota.m_9001"                                                                     ,num="1",fsdb="off",cov="on",cfg_dir="../tc/sequence/bin_2_try"}

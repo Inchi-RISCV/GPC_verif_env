@@ -1,0 +1,128 @@
+simSetSimulator "-vcssv" -exec "./base_func/exec/simv" -args
+debImport "-dbdir" "./base_func/exec/simv.daidir"
+verdiSetActWin -dock widgetDock_MTB_SOURCE_TAB_1
+wvCreateWindow
+verdiSetActWin -win $_nWave2
+wvSetPosition -win $_nWave2 {("G1" 0)}
+wvOpenFile -win $_nWave2 \
+           {/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/base_func/wave/instr_test_12345.fsdb}
+srcDeselectAll -win $_nTrace1
+verdiSetActWin -dock widgetDock_MTB_SOURCE_TAB_1
+verdiSetActWin -dock widgetDock_<Inst._Tree>
+verdiDockWidgetSetCurTab -dock widgetDock_<Decl._Tree>
+verdiSetActWin -dock widgetDock_<Decl._Tree>
+srcTBBTreeSelect -win $_nTrace1 -path "FrontendGpc"
+srcTBBTreeSelect -win $_nTrace1 -path "FixedClockBroadcast"
+srcTBBTreeSelect -win $_nTrace1 -path "Gpc"
+srcTBTreeAction -win $_nTrace1 -path "Gpc"
+srcDeselectAll -win $_nTrace1
+verdiSetActWin -dock widgetDock_MTB_SOURCE_TAB_1
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "wb_reg_uop" -next
+verdiSetActWin -win $_nWave2
+srcDeselectAll -win $_nTrace1
+srcSelect -signal "wb_reg_uops_0_pc" -line 1014 -pos 1 -win $_nTrace1
+verdiSetActWin -dock widgetDock_MTB_SOURCE_TAB_1
+wvAddSignal -win $_nWave2 \
+           "/tb_top/testHarness/ldut/tile_prci_domain/element_reset_domain_gpctile/core/wb_reg_uops_0_pc\[39:0\]"
+wvSetPosition -win $_nWave2 {("G1" 0)}
+wvSetPosition -win $_nWave2 {("G1" 1)}
+wvSetPosition -win $_nWave2 {("G1" 1)}
+srcDeselectAll -win $_nTrace1
+srcSelect -signal "wb_reg_uops_1_pc" -line 1073 -pos 1 -win $_nTrace1
+wvSetPosition -win $_nWave2 {("G1" 0)}
+wvSetPosition -win $_nWave2 {("G1" 1)}
+wvAddSignal -win $_nWave2 \
+           "/tb_top/testHarness/ldut/tile_prci_domain/element_reset_domain_gpctile/core/wb_reg_uops_1_pc\[39:0\]"
+wvSetPosition -win $_nWave2 {("G1" 1)}
+wvSetPosition -win $_nWave2 {("G1" 2)}
+srcDeselectAll -win $_nTrace1
+srcSelect -signal "wb_reg_valids_0" -line 1099 -pos 1 -win $_nTrace1
+wvSetPosition -win $_nWave2 {("G1" 0)}
+wvSetPosition -win $_nWave2 {("G1" 1)}
+wvSetPosition -win $_nWave2 {("G1" 0)}
+wvAddSignal -win $_nWave2 \
+           "/tb_top/testHarness/ldut/tile_prci_domain/element_reset_domain_gpctile/core/wb_reg_valids_0"
+wvSetPosition -win $_nWave2 {("G1" 0)}
+wvSetPosition -win $_nWave2 {("G1" 1)}
+srcDeselectAll -win $_nTrace1
+srcSelect -signal "wb_reg_valids_1" -line 1100 -pos 1 -win $_nTrace1
+wvSetPosition -win $_nWave2 {("G1" 2)}
+wvAddSignal -win $_nWave2 \
+           "/tb_top/testHarness/ldut/tile_prci_domain/element_reset_domain_gpctile/core/wb_reg_valids_1"
+wvSetPosition -win $_nWave2 {("G1" 2)}
+wvSetPosition -win $_nWave2 {("G1" 3)}
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+verdiSetActWin -win $_nWave2
+wvZoom -win $_nWave2 116831.143445 120731.046671
+wvSetCursor -win $_nWave2 118300.633405 -snap {("G1" 2)}
+srcDeselectAll -win $_nTrace1
+srcSelect -win $_nTrace1 -range {1097 1098 1 1 1 1}
+verdiSetActWin -dock widgetDock_MTB_SOURCE_TAB_1
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "take_pc" -next
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "take_pc" -next
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "take_pc" -next
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "take_pc" -next
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "take_pc" -next
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "take_pc" -next
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "take_pc" -next
+srcDeselectAll -win $_nTrace1
+srcDeselectAll -win $_nTrace1
+srcSelect -signal "take_pc_all" -line 1122 -pos 1 -win $_nTrace1
+wvSetPosition -win $_nWave2 {("G1" 0)}
+wvSetPosition -win $_nWave2 {("G1" 1)}
+wvSetPosition -win $_nWave2 {("G1" 2)}
+wvSetPosition -win $_nWave2 {("G1" 3)}
+wvSetPosition -win $_nWave2 {("G1" 4)}
+wvAddSignal -win $_nWave2 \
+           "/tb_top/testHarness/ldut/tile_prci_domain/element_reset_domain_gpctile/core/take_pc_all"
+wvSetPosition -win $_nWave2 {("G1" 4)}
+wvSetPosition -win $_nWave2 {("G1" 5)}
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "io_imem_" -next
+uniFindSearchString -widget MTB_SOURCE_TAB_1 -pattern "io_imem_req" -next
+srcDeselectAll -win $_nTrace1
+srcSelect -signal "io_imem_req_valid" -line 19799 -pos 1 -win $_nTrace1
+srcAddSelectedToWave -clipboard -win $_nTrace1
+wvDrop -win $_nWave2
+srcDeselectAll -win $_nTrace1
+srcSelect -signal "io_imem_req_bits_pc" -line 19800 -pos 1 -win $_nTrace1
+srcAddSelectedToWave -clipboard -win $_nTrace1
+wvDrop -win $_nWave2
+verdiSetActWin -win $_nWave2
+wvSetCursor -win $_nWave2 118809.284493 -snap {("G1" 6)}
+wvZoomIn -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomIn -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoom -win $_nWave2 117574.244294 117795.550284
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvSetCursor -win $_nWave2 119515.944995 -snap {("G1" 7)}
+wvSetCursor -win $_nWave2 119448.284565 -snap {("G1" 5)}
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoom -win $_nWave2 117298.467491 117864.810351
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoom -win $_nWave2 119351.481197 120396.790595
+wvZoomOut -win $_nWave2
+wvZoomIn -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoomOut -win $_nWave2
+wvZoom -win $_nWave2 119468.848075 119729.407837
+wvZoomOut -win $_nWave2
+verdiWindowResize -win $_Verdi_1 "529" "303" "840" "716"
+debExit

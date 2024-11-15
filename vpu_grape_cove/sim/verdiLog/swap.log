@@ -1,0 +1,51 @@
+version: (200506)
+
+available memory: 64M bytes
+used memory: 4M bytes [need 4M bytes if disable swap]
+
+used block: 263 [memory(263) file(0)]
+                 [ 8K(233) 64K(30) { total 4M bytes } ]
+overhead: (40256) bytes for (263) blocks [Average: (153) bytes/block]
+
+write  => 0(times) 0K(bytes) [0K bytes to file]
+read   => 30(times) 1M(bytes) [125K bytes compressed data from file]
+access => 577677(times) 4882M(bytes)
+          [hit ratio: 99.9948%]
+
+time: write(0) read(0.001)  unit: second
+
+swap file directory: (/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/verdiLog)
+used swap file number: (6)
+
+
+
+swap file manager:
+arrSize: (256)
+idxCnt: (7)
+closeHead: (1)
+closeTail: (6)
+openCnt: (5)
+fid(6): fd(1073741827) fileName(/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/base_func/exec/simv.daidir/kdb.elab++/work.lib++/UvmVerification.sv.tdc)
+	size(116198) lastModTime(1731478228) curModTime(1731478228)
+	mode(rb)	hot(0) cool(5) pos(0)
+fid(5): fd(1073741826) fileName(/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/base_func/exec/simv.daidir/kdb.elab++/work.lib++/CSRFile.sv.tdc)
+	size(282050) lastModTime(1731478228) curModTime(1731478228)
+	mode(rb)	hot(6) cool(4) pos(0)
+fid(4): fd(1073741825) fileName(/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/base_func/exec/simv.daidir/kdb.elab++/work.lib++/Gpc.sv.tdc)
+	size(543207) lastModTime(1731478228) curModTime(1731478228)
+	mode(rb)	hot(5) cool(2) pos(0)
+fid(3): fd(0) fileName(/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/base_func/exec/simv.daidir/kdb.elab++/work.lib++/snps_reg.svh#inc___vcs_unit__1__148#.tdc)
+	size(20577) lastModTime(1731478227) curModTime(1731478227)
+	mode(rb)	hot(0) cool(0) pos(0)
+fid(2): fd(26) fileName(/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/verdiLog/_swap_0001#-995790742#2904487)
+	size(0) lastModTime(0) curModTime(1731478276)
+	mode(w+b)	hot(4) cool(1) pos(0)
+fid(1): fd(1073741824) fileName(/datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim/base_func/exec/simv.daidir/kdb.elab++/work.lib++/debug_rob.v.tdc)
+	size(5575) lastModTime(1731478227) curModTime(1731478227)
+	mode(rb)	hot(2) cool(0) pos(0)
+fid(0): fd(0) fileName(NULL)
+	mode(NULL)	hot(0) cool(0) pos(0)
+==================================================
+mySelf(0x2515a660) pre(0x1f179970) next((nil))
+version(200506)
+date(Apr 25 2022 02:34:42)

@@ -1,0 +1,234 @@
+Command: /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv +permissive +UVM_TESTNAME=instr_test +UVM_VERBOSITY=UVM_MEDIUM +ntb_random_seed=34967649 +SPIKE_INSTR_NAME=../tc/sequence/riscv-tests/rv64uzba-v-sh3add.elf +DUT_INSTR_NAME=../tc/sequence/riscv-tests/hex/rv64uzba-v-sh3add.hex -cm line+cond+tgl+fsm+branch+assert -cm_name instr_test_34967649 -sv_liblist ../cfg/spike.f +permissive-off -l ./base_func/logs/instr_test_34967649.log
+Chronologic VCS simulator copyright 1991-2022
+Contains Synopsys proprietary information.
+Compiler version T-2022.06_Full64; Runtime version T-2022.06_Full64;  Nov 13 13:47 2024
+UVM_INFO /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_root.svh(402) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2.Synopsys
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO ../th/tb_top.sv(76) @ 0: reporter [tb_top]  spike init instr = ../tc/sequence/riscv-tests/rv64uzba-v-sh3add.elf
+ 
+UVM_INFO @ 0: reporter [RNTST] Running test instr_test...
+UVM_WARNING ../env/data_agent/data_agent.sv(50) @ 0: uvm_test_top.m_env.m_data_agent [NOCONFIG] Config not set for Rx agent, using default is_active field
+UVM_WARNING ../env/instr_agent/instr_agent.sv(52) @ 0: uvm_test_top.m_env.m_instr_agent [NOCONFIG] Config not set for Rx agent, using default is_active field
+UVM_INFO /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_root.svh(589) @ 0: reporter [UVMTOP] UVM testbench topology:
+-------------------------------------------------------------------------
+Name                        Type                        Size  Value      
+-------------------------------------------------------------------------
+m_vseqr                     vpu_vseqr                   -     @373       
+  rsp_export                uvm_analysis_export         -     @382       
+  seq_item_export           uvm_seq_item_pull_imp       -     @500       
+  arbitration_queue         array                       0     -          
+  lock_queue                array                       0     -          
+  num_last_reqs             integral                    32    'd1        
+  num_last_rsps             integral                    32    'd1        
+uvm_test_top                instr_test                  -     @351       
+  m_env                     vpu_env                     -     @364       
+    data_trans_fifo         uvm_tlm_analysis_fifo #(T)  -     @582       
+      analysis_export       uvm_analysis_imp            -     @631       
+      get_ap                uvm_analysis_port           -     @621       
+      get_peek_export       uvm_get_peek_imp            -     @601       
+      put_ap                uvm_analysis_port           -     @611       
+      put_export            uvm_put_imp                 -     @591       
+    data_trans_fifo_trap    uvm_tlm_analysis_fifo #(T)  -     @641       
+      analysis_export       uvm_analysis_imp            -     @690       
+      get_ap                uvm_analysis_port           -     @680       
+      get_peek_export       uvm_get_peek_imp            -     @660       
+      put_ap                uvm_analysis_port           -     @670       
+      put_export            uvm_put_imp                 -     @650       
+    m_data_agent            data_agent                  -     @544       
+      m_monitor             data_monitor                -     @708       
+        analysis_port       uvm_analysis_port           -     @717       
+        analysis_port_trap  uvm_analysis_port           -     @727       
+      is_active             uvm_active_passive_enum     1     UVM_PASSIVE
+      m_cfg                 data_agent_config           -     @707       
+    m_instr_agent           instr_agent                 -     @525       
+      analysis_port         uvm_analysis_port           -     @534       
+      m_driver              instr_driver                -     @764       
+        rsp_port            uvm_analysis_port           -     @783       
+        seq_item_port       uvm_seq_item_pull_port      -     @773       
+      m_monitor             instr_monitor               -     @745       
+        analysis_port       uvm_analysis_port           -     @754       
+      m_sequencer           instr_sequencer             -     @793       
+        rsp_export          uvm_analysis_export         -     @802       
+        seq_item_export     uvm_seq_item_pull_imp       -     @920       
+        arbitration_queue   array                       0     -          
+        lock_queue          array                       0     -          
+        num_last_reqs       integral                    32    'd1        
+        num_last_rsps       integral                    32    'd1        
+      is_active             uvm_active_passive_enum     1     UVM_ACTIVE 
+      m_cfg                 instr_agent_config          -     @744       
+    m_scb                   vpu_scb                     -     @553       
+      data_agent_port       uvm_blocking_get_port       -     @562       
+      data_agent_port_trap  uvm_blocking_get_port       -     @572       
+-------------------------------------------------------------------------
+
+UVM_INFO ../tc/vpu_base_test.sv(69) @ 0: uvm_test_top [instr_test] Verbosity level is set to:         200
+UVM_INFO ../tc/vpu_base_test.sv(70) @ 0: uvm_test_top [instr_test] Print all Factory overrides
+UVM_INFO /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_factory.svh(1645) @ 0: reporter [UVM/FACTORY/PRINT] 
+#### Factory Configuration (*)
+
+  No instance or type overrides are registered with this factory
+
+All types registered with the factory: 72 total
+  Type Name
+  ---------
+  data_agent
+  data_agent_config
+  data_monitor
+  data_trans
+  instr_agent
+  instr_agent_config
+  instr_driver
+  instr_monitor
+  instr_seq
+  instr_sequence
+  instr_sequencer
+  instr_test
+  instr_trans
+  snps_uvm_reg_bank_group
+  snps_uvm_reg_map
+  vpu_base_test
+  vpu_env
+  vpu_env_config
+  vpu_refm
+  vpu_scb
+  vpu_vseqr
+(*) Types with no associated type name will be printed as <unknown>
+
+####
+
+
+UVM_INFO ../tc/sequence/instr_sequence.sv(38) @ 0: m_vseqr@@instr_seq [body] sequence start
+UVM_INFO ../tc/sequence/instr_sequence.sv(46) @ 0: m_vseqr@@instr_seq [body] sequence end
+UVM_INFO ../env/data_agent/data_monitor.sv(93) @ 500: uvm_test_top.m_env.m_data_agent.m_monitor [data_monitor]  spike wait start,cur_pc=80000000
+UVM_INFO ../th/tb_top.sv(53) @ 77800: reporter [tb_top]  dut init instr = ../tc/sequence/riscv-tests/hex/rv64uzba-v-sh3add.hex
+ 
+Current working directory: 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000000,commit_num=1 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000000c,commit_num=2 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000010,commit_num=3 
+UVM_INFO ../env/vpu_scb.sv(195) @ 93600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000014,commit_num=4 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000018,commit_num=5 
+UVM_INFO ../env/vpu_scb.sv(195) @ 93700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000001c,commit_num=6 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000020,commit_num=7 
+UVM_INFO ../env/vpu_scb.sv(195) @ 93800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000024,commit_num=8 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000028,commit_num=9 
+UVM_INFO ../env/vpu_scb.sv(195) @ 93900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000002c,commit_num=10 
+UVM_INFO ../env/vpu_scb.sv(173) @ 94000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000030,commit_num=11 
+UVM_INFO ../env/vpu_scb.sv(195) @ 94000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000034,commit_num=12 
+UVM_INFO ../env/vpu_scb.sv(173) @ 94100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000038,commit_num=13 
+UVM_INFO ../env/vpu_scb.sv(195) @ 94100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000003c,commit_num=14 
+UVM_INFO ../env/vpu_scb.sv(173) @ 96600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000040,commit_num=15 
+UVM_INFO ../env/vpu_scb.sv(195) @ 96600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000044,commit_num=16 
+UVM_INFO ../env/vpu_scb.sv(173) @ 96700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000048,commit_num=17 
+UVM_INFO ../env/vpu_scb.sv(195) @ 96700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000004c,commit_num=18 
+UVM_INFO ../env/vpu_scb.sv(173) @ 96800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000050,commit_num=19 
+UVM_INFO ../env/vpu_scb.sv(195) @ 96800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000054,commit_num=20 
+UVM_INFO ../env/vpu_scb.sv(173) @ 96900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000058,commit_num=21 
+UVM_INFO ../env/vpu_scb.sv(195) @ 96900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000005c,commit_num=22 
+UVM_INFO ../env/vpu_scb.sv(173) @ 97000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000060,commit_num=23 
+UVM_INFO ../env/vpu_scb.sv(195) @ 97000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000064,commit_num=24 
+UVM_INFO ../env/vpu_scb.sv(173) @ 97100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000068,commit_num=25 
+UVM_INFO ../env/vpu_scb.sv(195) @ 97100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000006c,commit_num=26 
+UVM_INFO ../env/vpu_scb.sv(173) @ 97200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000070,commit_num=27 
+UVM_INFO ../env/vpu_scb.sv(195) @ 97200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000074,commit_num=28 
+UVM_INFO ../env/vpu_scb.sv(173) @ 97300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000078,commit_num=29 
+UVM_INFO ../env/vpu_scb.sv(195) @ 97300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000007c,commit_num=30 
+UVM_INFO ../env/vpu_scb.sv(173) @ 99800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000080,commit_num=31 
+UVM_INFO ../env/vpu_scb.sv(195) @ 99800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000084,commit_num=32 
+UVM_INFO ../env/vpu_scb.sv(173) @ 99900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000088,commit_num=33 
+UVM_INFO ../env/vpu_scb.sv(173) @ 100000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000008c,commit_num=34 
+UVM_INFO ../env/vpu_scb.sv(173) @ 100100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000090,commit_num=35 
+UVM_INFO ../env/vpu_scb.sv(173) @ 100700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000094,commit_num=36 
+UVM_INFO ../env/vpu_scb.sv(173) @ 100800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000098,commit_num=37 
+UVM_INFO ../env/vpu_scb.sv(195) @ 100800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000009c,commit_num=38 
+UVM_INFO ../env/vpu_scb.sv(173) @ 101100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000a0,commit_num=39 
+UVM_INFO ../env/vpu_scb.sv(173) @ 101200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000a4,commit_num=40 
+UVM_INFO ../env/vpu_scb.sv(173) @ 101300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000a8,commit_num=41 
+UVM_INFO ../env/vpu_scb.sv(195) @ 101300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000ac,commit_num=42 
+UVM_INFO ../env/vpu_scb.sv(173) @ 102900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800029dc,commit_num=43 
+UVM_INFO ../env/vpu_scb.sv(173) @ 103300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000b0,commit_num=44 
+UVM_INFO ../env/vpu_scb.sv(173) @ 103400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000b4,commit_num=45 
+UVM_INFO ../env/vpu_scb.sv(195) @ 103400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000b8,commit_num=46 
+UVM_INFO ../env/vpu_scb.sv(173) @ 106000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800027e0,commit_num=47 
+UVM_INFO ../env/vpu_scb.sv(173) @ 106300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800027e4,commit_num=48 
+UVM_INFO ../env/vpu_scb.sv(195) @ 106300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800027e8,commit_num=49 
+UVM_INFO ../env/vpu_scb.sv(173) @ 106400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800027ec,commit_num=50 
+UVM_INFO ../env/vpu_scb.sv(195) @ 106400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800027f0,commit_num=51 
+UVM_INFO ../env/vpu_scb.sv(173) @ 106500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800027f4,commit_num=52 
+UVM_INFO ../env/vpu_scb.sv(195) @ 106500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800027f8,commit_num=53 
+UVM_INFO ../env/vpu_scb.sv(173) @ 106600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800027fc,commit_num=54 
+UVM_INFO ../env/vpu_scb.sv(173) @ 108700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002800,commit_num=55 
+UVM_INFO ../env/vpu_scb.sv(195) @ 108700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002804,commit_num=56 
+UVM_INFO ../env/vpu_scb.sv(173) @ 108800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002808,commit_num=57 
+UVM_INFO ../env/vpu_scb.sv(195) @ 108800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000280c,commit_num=58 
+UVM_INFO ../env/vpu_scb.sv(173) @ 108900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002810,commit_num=59 
+UVM_INFO ../env/vpu_scb.sv(195) @ 108900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002814,commit_num=60 
+UVM_INFO ../env/vpu_scb.sv(173) @ 109000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002818,commit_num=61 
+UVM_INFO ../env/vpu_scb.sv(195) @ 109000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000281c,commit_num=62 
+UVM_INFO ../env/vpu_scb.sv(173) @ 109100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002820,commit_num=63 
+UVM_INFO ../env/vpu_scb.sv(195) @ 109100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002824,commit_num=64 
+UVM_INFO ../env/vpu_scb.sv(173) @ 109200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002828,commit_num=65 
+UVM_INFO ../env/vpu_scb.sv(195) @ 109200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000282c,commit_num=66 
+UVM_INFO ../env/vpu_scb.sv(173) @ 109900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002830,commit_num=67 
+UVM_INFO ../env/vpu_scb.sv(195) @ 109900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002834,commit_num=68 
+UVM_INFO ../env/vpu_scb.sv(173) @ 110000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002838,commit_num=69 
+UVM_INFO ../env/vpu_scb.sv(195) @ 110000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000283c,commit_num=70 
+UVM_INFO ../env/vpu_scb.sv(173) @ 111900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002840,commit_num=71 
+UVM_INFO ../env/vpu_scb.sv(195) @ 111900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002844,commit_num=72 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002848,commit_num=73 
+UVM_INFO ../env/vpu_scb.sv(195) @ 112000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000284c,commit_num=74 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002850,commit_num=75 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002854,commit_num=76 
+UVM_ERROR ../env/vpu_scb.sv(88) @ 312200: uvm_test_top.m_env.m_scb [vpu_scb] commit info timeout ! 
+UVM_INFO /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_report_server.svh(894) @ 312200: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+Quit count reached!
+Quit count :     1 of     1
+** Report counts by severity
+UVM_INFO :   87
+UVM_WARNING :    2
+UVM_ERROR :    1
+UVM_FATAL :    0
+** Report counts by id
+[NOCONFIG]     2
+[RNTST]     1
+[UVM/FACTORY/PRINT]     1
+[UVM/RELNOTES]     1
+[UVMTOP]     1
+[body]     2
+[data_monitor]     1
+[instr_test]     2
+[tb_top]     2
+[vpu_scb]    77
+
+$finish called from file "/tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_root.svh", line 135.
+$finish at simulation time               312200
+
+---------------------------------------------------------------------------
+VCS Coverage Metrics: during simulation line, cond, FSM, branch, tgl was monitored
+---------------------------------------------------------------------------
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 3122000 ps
+CPU Time:      1.830 seconds;       Data structure size:  10.6Mb
+Wed Nov 13 13:47:22 2024

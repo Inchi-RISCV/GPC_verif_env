@@ -1,0 +1,1299 @@
+Command: /datahdd/riscv/zhangxiran/GCC_verification/GPC_verif_env/vpu_grape_cove/sim1/./base_func/exec/simv +permissive +UVM_TESTNAME=instr_test +UVM_VERBOSITY=UVM_MEDIUM +ntb_random_seed=53585331 +SPIKE_INSTR_NAME=../tc/sequence/riscv-tests/rv64uf-v-move.elf +DUT_INSTR_NAME=../tc/sequence/riscv-tests/hex/rv64uf-v-move.hex -cm line+cond+tgl+fsm+branch+assert -cm_name instr_test_53585331 -sv_liblist ../cfg/spike.f +permissive-off -l ./base_func/logs/instr_test_53585331.log
+Chronologic VCS simulator copyright 1991-2022
+Contains Synopsys proprietary information.
+Compiler version T-2022.06_Full64; Runtime version T-2022.06_Full64;  Nov 13 13:47 2024
+UVM_INFO /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_root.svh(402) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2.Synopsys
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO ../th/tb_top.sv(76) @ 0: reporter [tb_top]  spike init instr = ../tc/sequence/riscv-tests/rv64uf-v-move.elf
+ 
+UVM_INFO @ 0: reporter [RNTST] Running test instr_test...
+UVM_WARNING ../env/data_agent/data_agent.sv(50) @ 0: uvm_test_top.m_env.m_data_agent [NOCONFIG] Config not set for Rx agent, using default is_active field
+UVM_WARNING ../env/instr_agent/instr_agent.sv(52) @ 0: uvm_test_top.m_env.m_instr_agent [NOCONFIG] Config not set for Rx agent, using default is_active field
+UVM_INFO /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_root.svh(589) @ 0: reporter [UVMTOP] UVM testbench topology:
+-------------------------------------------------------------------------
+Name                        Type                        Size  Value      
+-------------------------------------------------------------------------
+m_vseqr                     vpu_vseqr                   -     @373       
+  rsp_export                uvm_analysis_export         -     @382       
+  seq_item_export           uvm_seq_item_pull_imp       -     @500       
+  arbitration_queue         array                       0     -          
+  lock_queue                array                       0     -          
+  num_last_reqs             integral                    32    'd1        
+  num_last_rsps             integral                    32    'd1        
+uvm_test_top                instr_test                  -     @351       
+  m_env                     vpu_env                     -     @364       
+    data_trans_fifo         uvm_tlm_analysis_fifo #(T)  -     @582       
+      analysis_export       uvm_analysis_imp            -     @631       
+      get_ap                uvm_analysis_port           -     @621       
+      get_peek_export       uvm_get_peek_imp            -     @601       
+      put_ap                uvm_analysis_port           -     @611       
+      put_export            uvm_put_imp                 -     @591       
+    data_trans_fifo_trap    uvm_tlm_analysis_fifo #(T)  -     @641       
+      analysis_export       uvm_analysis_imp            -     @690       
+      get_ap                uvm_analysis_port           -     @680       
+      get_peek_export       uvm_get_peek_imp            -     @660       
+      put_ap                uvm_analysis_port           -     @670       
+      put_export            uvm_put_imp                 -     @650       
+    m_data_agent            data_agent                  -     @544       
+      m_monitor             data_monitor                -     @708       
+        analysis_port       uvm_analysis_port           -     @717       
+        analysis_port_trap  uvm_analysis_port           -     @727       
+      is_active             uvm_active_passive_enum     1     UVM_PASSIVE
+      m_cfg                 data_agent_config           -     @707       
+    m_instr_agent           instr_agent                 -     @525       
+      analysis_port         uvm_analysis_port           -     @534       
+      m_driver              instr_driver                -     @764       
+        rsp_port            uvm_analysis_port           -     @783       
+        seq_item_port       uvm_seq_item_pull_port      -     @773       
+      m_monitor             instr_monitor               -     @745       
+        analysis_port       uvm_analysis_port           -     @754       
+      m_sequencer           instr_sequencer             -     @793       
+        rsp_export          uvm_analysis_export         -     @802       
+        seq_item_export     uvm_seq_item_pull_imp       -     @920       
+        arbitration_queue   array                       0     -          
+        lock_queue          array                       0     -          
+        num_last_reqs       integral                    32    'd1        
+        num_last_rsps       integral                    32    'd1        
+      is_active             uvm_active_passive_enum     1     UVM_ACTIVE 
+      m_cfg                 instr_agent_config          -     @744       
+    m_scb                   vpu_scb                     -     @553       
+      data_agent_port       uvm_blocking_get_port       -     @562       
+      data_agent_port_trap  uvm_blocking_get_port       -     @572       
+-------------------------------------------------------------------------
+
+UVM_INFO ../tc/vpu_base_test.sv(69) @ 0: uvm_test_top [instr_test] Verbosity level is set to:         200
+UVM_INFO ../tc/vpu_base_test.sv(70) @ 0: uvm_test_top [instr_test] Print all Factory overrides
+UVM_INFO /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_factory.svh(1645) @ 0: reporter [UVM/FACTORY/PRINT] 
+#### Factory Configuration (*)
+
+  No instance or type overrides are registered with this factory
+
+All types registered with the factory: 72 total
+  Type Name
+  ---------
+  data_agent
+  data_agent_config
+  data_monitor
+  data_trans
+  instr_agent
+  instr_agent_config
+  instr_driver
+  instr_monitor
+  instr_seq
+  instr_sequence
+  instr_sequencer
+  instr_test
+  instr_trans
+  snps_uvm_reg_bank_group
+  snps_uvm_reg_map
+  vpu_base_test
+  vpu_env
+  vpu_env_config
+  vpu_refm
+  vpu_scb
+  vpu_vseqr
+(*) Types with no associated type name will be printed as <unknown>
+
+####
+
+
+UVM_INFO ../tc/sequence/instr_sequence.sv(38) @ 0: m_vseqr@@instr_seq [body] sequence start
+UVM_INFO ../tc/sequence/instr_sequence.sv(46) @ 0: m_vseqr@@instr_seq [body] sequence end
+UVM_INFO ../env/data_agent/data_monitor.sv(93) @ 500: uvm_test_top.m_env.m_data_agent.m_monitor [data_monitor]  spike wait start,cur_pc=80000000
+UVM_INFO ../th/tb_top.sv(53) @ 77800: reporter [tb_top]  dut init instr = ../tc/sequence/riscv-tests/hex/rv64uf-v-move.hex
+ 
+Current working directory: 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000000,commit_num=1 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000000c,commit_num=2 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000010,commit_num=3 
+UVM_INFO ../env/vpu_scb.sv(195) @ 93600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000014,commit_num=4 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000018,commit_num=5 
+UVM_INFO ../env/vpu_scb.sv(195) @ 93700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000001c,commit_num=6 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000020,commit_num=7 
+UVM_INFO ../env/vpu_scb.sv(195) @ 93800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000024,commit_num=8 
+UVM_INFO ../env/vpu_scb.sv(173) @ 93900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000028,commit_num=9 
+UVM_INFO ../env/vpu_scb.sv(195) @ 93900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000002c,commit_num=10 
+UVM_INFO ../env/vpu_scb.sv(173) @ 94000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000030,commit_num=11 
+UVM_INFO ../env/vpu_scb.sv(195) @ 94000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000034,commit_num=12 
+UVM_INFO ../env/vpu_scb.sv(173) @ 94100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000038,commit_num=13 
+UVM_INFO ../env/vpu_scb.sv(195) @ 94100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000003c,commit_num=14 
+UVM_INFO ../env/vpu_scb.sv(173) @ 96600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000040,commit_num=15 
+UVM_INFO ../env/vpu_scb.sv(195) @ 96600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000044,commit_num=16 
+UVM_INFO ../env/vpu_scb.sv(173) @ 96700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000048,commit_num=17 
+UVM_INFO ../env/vpu_scb.sv(195) @ 96700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000004c,commit_num=18 
+UVM_INFO ../env/vpu_scb.sv(173) @ 96800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000050,commit_num=19 
+UVM_INFO ../env/vpu_scb.sv(195) @ 96800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000054,commit_num=20 
+UVM_INFO ../env/vpu_scb.sv(173) @ 96900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000058,commit_num=21 
+UVM_INFO ../env/vpu_scb.sv(195) @ 96900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000005c,commit_num=22 
+UVM_INFO ../env/vpu_scb.sv(173) @ 97000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000060,commit_num=23 
+UVM_INFO ../env/vpu_scb.sv(195) @ 97000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000064,commit_num=24 
+UVM_INFO ../env/vpu_scb.sv(173) @ 97100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000068,commit_num=25 
+UVM_INFO ../env/vpu_scb.sv(195) @ 97100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000006c,commit_num=26 
+UVM_INFO ../env/vpu_scb.sv(173) @ 97200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000070,commit_num=27 
+UVM_INFO ../env/vpu_scb.sv(195) @ 97200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000074,commit_num=28 
+UVM_INFO ../env/vpu_scb.sv(173) @ 97300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000078,commit_num=29 
+UVM_INFO ../env/vpu_scb.sv(195) @ 97300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000007c,commit_num=30 
+UVM_INFO ../env/vpu_scb.sv(173) @ 99800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000080,commit_num=31 
+UVM_INFO ../env/vpu_scb.sv(195) @ 99800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000084,commit_num=32 
+UVM_INFO ../env/vpu_scb.sv(173) @ 99900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000088,commit_num=33 
+UVM_INFO ../env/vpu_scb.sv(173) @ 100000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000008c,commit_num=34 
+UVM_INFO ../env/vpu_scb.sv(173) @ 100100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000090,commit_num=35 
+UVM_INFO ../env/vpu_scb.sv(173) @ 100700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000094,commit_num=36 
+UVM_INFO ../env/vpu_scb.sv(173) @ 100800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80000098,commit_num=37 
+UVM_INFO ../env/vpu_scb.sv(195) @ 100800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000009c,commit_num=38 
+UVM_INFO ../env/vpu_scb.sv(173) @ 101100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000a0,commit_num=39 
+UVM_INFO ../env/vpu_scb.sv(173) @ 101200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000a4,commit_num=40 
+UVM_INFO ../env/vpu_scb.sv(173) @ 101300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000a8,commit_num=41 
+UVM_INFO ../env/vpu_scb.sv(195) @ 101300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000ac,commit_num=42 
+UVM_INFO ../env/vpu_scb.sv(173) @ 102900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800029f8,commit_num=43 
+UVM_INFO ../env/vpu_scb.sv(173) @ 103300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000b0,commit_num=44 
+UVM_INFO ../env/vpu_scb.sv(173) @ 103400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000b4,commit_num=45 
+UVM_INFO ../env/vpu_scb.sv(195) @ 103400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800000b8,commit_num=46 
+UVM_INFO ../env/vpu_scb.sv(173) @ 106000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800027fc,commit_num=47 
+UVM_INFO ../env/vpu_scb.sv(173) @ 108500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002800,commit_num=48 
+UVM_INFO ../env/vpu_scb.sv(195) @ 108500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002804,commit_num=49 
+UVM_INFO ../env/vpu_scb.sv(173) @ 108600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002808,commit_num=50 
+UVM_INFO ../env/vpu_scb.sv(195) @ 108600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000280c,commit_num=51 
+UVM_INFO ../env/vpu_scb.sv(173) @ 108700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002810,commit_num=52 
+UVM_INFO ../env/vpu_scb.sv(195) @ 108700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002814,commit_num=53 
+UVM_INFO ../env/vpu_scb.sv(173) @ 108800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002818,commit_num=54 
+UVM_INFO ../env/vpu_scb.sv(173) @ 108900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000281c,commit_num=55 
+UVM_INFO ../env/vpu_scb.sv(195) @ 108900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002820,commit_num=56 
+UVM_INFO ../env/vpu_scb.sv(173) @ 109000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002824,commit_num=57 
+UVM_INFO ../env/vpu_scb.sv(195) @ 109000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002828,commit_num=58 
+UVM_INFO ../env/vpu_scb.sv(173) @ 109100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000282c,commit_num=59 
+UVM_INFO ../env/vpu_scb.sv(195) @ 109100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002830,commit_num=60 
+UVM_INFO ../env/vpu_scb.sv(173) @ 109200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002834,commit_num=61 
+UVM_INFO ../env/vpu_scb.sv(195) @ 109200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002838,commit_num=62 
+UVM_INFO ../env/vpu_scb.sv(173) @ 109300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000283c,commit_num=63 
+UVM_INFO ../env/vpu_scb.sv(173) @ 111900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002840,commit_num=64 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002844,commit_num=65 
+UVM_INFO ../env/vpu_scb.sv(195) @ 112000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002848,commit_num=66 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000284c,commit_num=67 
+UVM_INFO ../env/vpu_scb.sv(195) @ 112100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002850,commit_num=68 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002854,commit_num=69 
+UVM_INFO ../env/vpu_scb.sv(195) @ 112200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002858,commit_num=70 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000285c,commit_num=71 
+UVM_INFO ../env/vpu_scb.sv(195) @ 112300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002860,commit_num=72 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002864,commit_num=73 
+UVM_INFO ../env/vpu_scb.sv(195) @ 112400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002868,commit_num=74 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000286c,commit_num=75 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002870,commit_num=76 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002874,commit_num=77 
+UVM_INFO ../env/vpu_scb.sv(173) @ 112900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002878,commit_num=78 
+UVM_INFO ../env/vpu_scb.sv(195) @ 112900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000287c,commit_num=79 
+UVM_INFO ../env/vpu_scb.sv(173) @ 116100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002880,commit_num=80 
+UVM_INFO ../env/vpu_scb.sv(173) @ 116700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002884,commit_num=81 
+UVM_INFO ../env/vpu_scb.sv(173) @ 117000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002888,commit_num=82 
+UVM_INFO ../env/vpu_scb.sv(195) @ 117000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000288c,commit_num=83 
+UVM_INFO ../env/vpu_scb.sv(173) @ 117100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002890,commit_num=84 
+UVM_INFO ../env/vpu_scb.sv(195) @ 117100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002894,commit_num=85 
+UVM_INFO ../env/vpu_scb.sv(173) @ 117200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002898,commit_num=86 
+UVM_INFO ../env/vpu_scb.sv(173) @ 117300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000289c,commit_num=87 
+UVM_INFO ../env/vpu_scb.sv(173) @ 117900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028a0,commit_num=88 
+UVM_INFO ../env/vpu_scb.sv(173) @ 118500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028a4,commit_num=89 
+UVM_INFO ../env/vpu_scb.sv(173) @ 119100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028a8,commit_num=90 
+UVM_INFO ../env/vpu_scb.sv(173) @ 119700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028ac,commit_num=91 
+UVM_INFO ../env/vpu_scb.sv(173) @ 120200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028b0,commit_num=92 
+UVM_INFO ../env/vpu_scb.sv(195) @ 120200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028b4,commit_num=93 
+UVM_INFO ../env/vpu_scb.sv(173) @ 120300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028b8,commit_num=94 
+UVM_INFO ../env/vpu_scb.sv(173) @ 120400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028bc,commit_num=95 
+UVM_INFO ../env/vpu_scb.sv(173) @ 120500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028c0,commit_num=96 
+UVM_INFO ../env/vpu_scb.sv(173) @ 121100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028c4,commit_num=97 
+UVM_INFO ../env/vpu_scb.sv(173) @ 121400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028c8,commit_num=98 
+UVM_INFO ../env/vpu_scb.sv(173) @ 121500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028cc,commit_num=99 
+UVM_INFO ../env/vpu_scb.sv(195) @ 121500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028d0,commit_num=100 
+UVM_INFO ../env/vpu_scb.sv(173) @ 121600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028d4,commit_num=101 
+UVM_INFO ../env/vpu_scb.sv(173) @ 121700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028d8,commit_num=102 
+UVM_INFO ../env/vpu_scb.sv(173) @ 122300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028dc,commit_num=103 
+UVM_INFO ../env/vpu_scb.sv(173) @ 122400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028e0,commit_num=104 
+UVM_INFO ../env/vpu_scb.sv(173) @ 122500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028e4,commit_num=105 
+UVM_INFO ../env/vpu_scb.sv(173) @ 123100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028e8,commit_num=106 
+UVM_INFO ../env/vpu_scb.sv(173) @ 123700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028ec,commit_num=107 
+UVM_INFO ../env/vpu_scb.sv(173) @ 124600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028f0,commit_num=108 
+UVM_INFO ../env/vpu_scb.sv(195) @ 124600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028f4,commit_num=109 
+UVM_INFO ../env/vpu_scb.sv(173) @ 124700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028f8,commit_num=110 
+UVM_INFO ../env/vpu_scb.sv(195) @ 124700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800028fc,commit_num=111 
+UVM_INFO ../env/vpu_scb.sv(173) @ 124800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002900,commit_num=112 
+UVM_INFO ../env/vpu_scb.sv(195) @ 124800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002904,commit_num=113 
+UVM_INFO ../env/vpu_scb.sv(173) @ 124900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002908,commit_num=114 
+UVM_INFO ../env/vpu_scb.sv(195) @ 124900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000290c,commit_num=115 
+UVM_INFO ../env/vpu_scb.sv(173) @ 125000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002910,commit_num=116 
+UVM_INFO ../env/vpu_scb.sv(195) @ 125000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002914,commit_num=117 
+UVM_INFO ../env/vpu_scb.sv(173) @ 125100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002918,commit_num=118 
+UVM_INFO ../env/vpu_scb.sv(195) @ 125100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000291c,commit_num=119 
+UVM_INFO ../env/vpu_scb.sv(173) @ 125200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002920,commit_num=120 
+UVM_INFO ../env/vpu_scb.sv(195) @ 125200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002924,commit_num=121 
+UVM_INFO ../env/vpu_scb.sv(173) @ 125300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=122 
+UVM_INFO ../env/vpu_scb.sv(195) @ 125300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=123 
+UVM_INFO ../env/vpu_scb.sv(173) @ 125400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=124 
+UVM_INFO ../env/vpu_scb.sv(195) @ 125400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=125 
+UVM_INFO ../env/vpu_scb.sv(173) @ 125500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=126 
+UVM_INFO ../env/vpu_scb.sv(195) @ 125500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=127 
+UVM_INFO ../env/vpu_scb.sv(173) @ 128100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=128 
+UVM_INFO ../env/vpu_scb.sv(173) @ 128200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=129 
+UVM_INFO ../env/vpu_scb.sv(195) @ 128200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=130 
+UVM_INFO ../env/vpu_scb.sv(173) @ 128300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=131 
+UVM_INFO ../env/vpu_scb.sv(195) @ 128300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=132 
+UVM_INFO ../env/vpu_scb.sv(173) @ 128400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=133 
+UVM_INFO ../env/vpu_scb.sv(173) @ 129000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=134 
+UVM_INFO ../env/vpu_scb.sv(195) @ 129000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=135 
+UVM_INFO ../env/vpu_scb.sv(173) @ 129100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=136 
+UVM_INFO ../env/vpu_scb.sv(195) @ 129100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=137 
+UVM_INFO ../env/vpu_scb.sv(173) @ 129200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=138 
+UVM_INFO ../env/vpu_scb.sv(195) @ 129200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=139 
+UVM_INFO ../env/vpu_scb.sv(173) @ 129400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=140 
+UVM_INFO ../env/vpu_scb.sv(173) @ 129500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=141 
+UVM_INFO ../env/vpu_scb.sv(195) @ 129500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=142 
+UVM_INFO ../env/vpu_scb.sv(173) @ 129600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=143 
+UVM_INFO ../env/vpu_scb.sv(195) @ 129600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=144 
+UVM_INFO ../env/vpu_scb.sv(173) @ 129700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=145 
+UVM_INFO ../env/vpu_scb.sv(173) @ 130300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=146 
+UVM_INFO ../env/vpu_scb.sv(195) @ 130300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=147 
+UVM_INFO ../env/vpu_scb.sv(173) @ 130400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=148 
+UVM_INFO ../env/vpu_scb.sv(195) @ 130400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=149 
+UVM_INFO ../env/vpu_scb.sv(173) @ 130500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=150 
+UVM_INFO ../env/vpu_scb.sv(195) @ 130500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=151 
+UVM_INFO ../env/vpu_scb.sv(173) @ 130700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=152 
+UVM_INFO ../env/vpu_scb.sv(173) @ 130800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=153 
+UVM_INFO ../env/vpu_scb.sv(195) @ 130800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=154 
+UVM_INFO ../env/vpu_scb.sv(173) @ 130900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=155 
+UVM_INFO ../env/vpu_scb.sv(195) @ 130900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=156 
+UVM_INFO ../env/vpu_scb.sv(173) @ 131000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=157 
+UVM_INFO ../env/vpu_scb.sv(173) @ 131600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=158 
+UVM_INFO ../env/vpu_scb.sv(195) @ 131600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=159 
+UVM_INFO ../env/vpu_scb.sv(173) @ 131700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=160 
+UVM_INFO ../env/vpu_scb.sv(195) @ 131700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=161 
+UVM_INFO ../env/vpu_scb.sv(173) @ 131800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=162 
+UVM_INFO ../env/vpu_scb.sv(195) @ 131800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=163 
+UVM_INFO ../env/vpu_scb.sv(173) @ 132000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=164 
+UVM_INFO ../env/vpu_scb.sv(173) @ 132100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=165 
+UVM_INFO ../env/vpu_scb.sv(195) @ 132100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=166 
+UVM_INFO ../env/vpu_scb.sv(173) @ 132200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=167 
+UVM_INFO ../env/vpu_scb.sv(195) @ 132200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=168 
+UVM_INFO ../env/vpu_scb.sv(173) @ 132300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=169 
+UVM_INFO ../env/vpu_scb.sv(173) @ 132900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=170 
+UVM_INFO ../env/vpu_scb.sv(195) @ 132900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=171 
+UVM_INFO ../env/vpu_scb.sv(173) @ 133000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=172 
+UVM_INFO ../env/vpu_scb.sv(195) @ 133000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=173 
+UVM_INFO ../env/vpu_scb.sv(173) @ 133100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=174 
+UVM_INFO ../env/vpu_scb.sv(195) @ 133100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=175 
+UVM_INFO ../env/vpu_scb.sv(173) @ 133300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=176 
+UVM_INFO ../env/vpu_scb.sv(173) @ 133400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=177 
+UVM_INFO ../env/vpu_scb.sv(195) @ 133400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=178 
+UVM_INFO ../env/vpu_scb.sv(173) @ 133500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=179 
+UVM_INFO ../env/vpu_scb.sv(195) @ 133500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=180 
+UVM_INFO ../env/vpu_scb.sv(173) @ 133600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=181 
+UVM_INFO ../env/vpu_scb.sv(173) @ 134200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=182 
+UVM_INFO ../env/vpu_scb.sv(195) @ 134200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=183 
+UVM_INFO ../env/vpu_scb.sv(173) @ 134300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=184 
+UVM_INFO ../env/vpu_scb.sv(195) @ 134300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=185 
+UVM_INFO ../env/vpu_scb.sv(173) @ 134400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=186 
+UVM_INFO ../env/vpu_scb.sv(195) @ 134400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=187 
+UVM_INFO ../env/vpu_scb.sv(173) @ 134600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=188 
+UVM_INFO ../env/vpu_scb.sv(173) @ 134700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=189 
+UVM_INFO ../env/vpu_scb.sv(195) @ 134700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=190 
+UVM_INFO ../env/vpu_scb.sv(173) @ 134800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=191 
+UVM_INFO ../env/vpu_scb.sv(195) @ 134800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=192 
+UVM_INFO ../env/vpu_scb.sv(173) @ 134900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=193 
+UVM_INFO ../env/vpu_scb.sv(173) @ 135500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=194 
+UVM_INFO ../env/vpu_scb.sv(195) @ 135500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=195 
+UVM_INFO ../env/vpu_scb.sv(173) @ 135600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=196 
+UVM_INFO ../env/vpu_scb.sv(195) @ 135600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=197 
+UVM_INFO ../env/vpu_scb.sv(173) @ 135700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=198 
+UVM_INFO ../env/vpu_scb.sv(195) @ 135700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=199 
+UVM_INFO ../env/vpu_scb.sv(173) @ 135900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=200 
+UVM_INFO ../env/vpu_scb.sv(173) @ 136000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=201 
+UVM_INFO ../env/vpu_scb.sv(195) @ 136000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=202 
+UVM_INFO ../env/vpu_scb.sv(173) @ 136100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=203 
+UVM_INFO ../env/vpu_scb.sv(195) @ 136100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=204 
+UVM_INFO ../env/vpu_scb.sv(173) @ 136200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=205 
+UVM_INFO ../env/vpu_scb.sv(173) @ 136800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=206 
+UVM_INFO ../env/vpu_scb.sv(195) @ 136800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=207 
+UVM_INFO ../env/vpu_scb.sv(173) @ 136900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=208 
+UVM_INFO ../env/vpu_scb.sv(195) @ 136900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=209 
+UVM_INFO ../env/vpu_scb.sv(173) @ 137000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=210 
+UVM_INFO ../env/vpu_scb.sv(195) @ 137000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=211 
+UVM_INFO ../env/vpu_scb.sv(173) @ 137200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=212 
+UVM_INFO ../env/vpu_scb.sv(173) @ 137300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=213 
+UVM_INFO ../env/vpu_scb.sv(195) @ 137300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=214 
+UVM_INFO ../env/vpu_scb.sv(173) @ 137400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=215 
+UVM_INFO ../env/vpu_scb.sv(195) @ 137400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=216 
+UVM_INFO ../env/vpu_scb.sv(173) @ 137500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=217 
+UVM_INFO ../env/vpu_scb.sv(173) @ 138100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=218 
+UVM_INFO ../env/vpu_scb.sv(195) @ 138100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=219 
+UVM_INFO ../env/vpu_scb.sv(173) @ 138200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=220 
+UVM_INFO ../env/vpu_scb.sv(195) @ 138200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=221 
+UVM_INFO ../env/vpu_scb.sv(173) @ 138300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=222 
+UVM_INFO ../env/vpu_scb.sv(195) @ 138300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=223 
+UVM_INFO ../env/vpu_scb.sv(173) @ 138500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=224 
+UVM_INFO ../env/vpu_scb.sv(173) @ 138600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=225 
+UVM_INFO ../env/vpu_scb.sv(195) @ 138600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=226 
+UVM_INFO ../env/vpu_scb.sv(173) @ 138700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=227 
+UVM_INFO ../env/vpu_scb.sv(195) @ 138700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=228 
+UVM_INFO ../env/vpu_scb.sv(173) @ 138800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=229 
+UVM_INFO ../env/vpu_scb.sv(173) @ 139400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=230 
+UVM_INFO ../env/vpu_scb.sv(195) @ 139400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=231 
+UVM_INFO ../env/vpu_scb.sv(173) @ 139500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=232 
+UVM_INFO ../env/vpu_scb.sv(195) @ 139500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=233 
+UVM_INFO ../env/vpu_scb.sv(173) @ 139600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=234 
+UVM_INFO ../env/vpu_scb.sv(195) @ 139600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=235 
+UVM_INFO ../env/vpu_scb.sv(173) @ 139800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=236 
+UVM_INFO ../env/vpu_scb.sv(173) @ 139900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=237 
+UVM_INFO ../env/vpu_scb.sv(195) @ 139900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=238 
+UVM_INFO ../env/vpu_scb.sv(173) @ 140000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=239 
+UVM_INFO ../env/vpu_scb.sv(195) @ 140000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=240 
+UVM_INFO ../env/vpu_scb.sv(173) @ 140100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=241 
+UVM_INFO ../env/vpu_scb.sv(173) @ 140700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=242 
+UVM_INFO ../env/vpu_scb.sv(195) @ 140700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=243 
+UVM_INFO ../env/vpu_scb.sv(173) @ 140800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=244 
+UVM_INFO ../env/vpu_scb.sv(195) @ 140800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=245 
+UVM_INFO ../env/vpu_scb.sv(173) @ 140900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=246 
+UVM_INFO ../env/vpu_scb.sv(195) @ 140900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=247 
+UVM_INFO ../env/vpu_scb.sv(173) @ 141100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=248 
+UVM_INFO ../env/vpu_scb.sv(173) @ 141200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=249 
+UVM_INFO ../env/vpu_scb.sv(195) @ 141200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=250 
+UVM_INFO ../env/vpu_scb.sv(173) @ 141300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=251 
+UVM_INFO ../env/vpu_scb.sv(195) @ 141300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=252 
+UVM_INFO ../env/vpu_scb.sv(173) @ 141400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=253 
+UVM_INFO ../env/vpu_scb.sv(173) @ 142000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=254 
+UVM_INFO ../env/vpu_scb.sv(195) @ 142000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=255 
+UVM_INFO ../env/vpu_scb.sv(173) @ 142100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=256 
+UVM_INFO ../env/vpu_scb.sv(195) @ 142100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=257 
+UVM_INFO ../env/vpu_scb.sv(173) @ 142200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=258 
+UVM_INFO ../env/vpu_scb.sv(195) @ 142200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=259 
+UVM_INFO ../env/vpu_scb.sv(173) @ 142400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=260 
+UVM_INFO ../env/vpu_scb.sv(173) @ 142500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=261 
+UVM_INFO ../env/vpu_scb.sv(195) @ 142500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=262 
+UVM_INFO ../env/vpu_scb.sv(173) @ 142600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=263 
+UVM_INFO ../env/vpu_scb.sv(195) @ 142600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=264 
+UVM_INFO ../env/vpu_scb.sv(173) @ 142700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=265 
+UVM_INFO ../env/vpu_scb.sv(173) @ 143300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=266 
+UVM_INFO ../env/vpu_scb.sv(195) @ 143300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=267 
+UVM_INFO ../env/vpu_scb.sv(173) @ 143400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=268 
+UVM_INFO ../env/vpu_scb.sv(195) @ 143400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=269 
+UVM_INFO ../env/vpu_scb.sv(173) @ 143500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=270 
+UVM_INFO ../env/vpu_scb.sv(195) @ 143500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=271 
+UVM_INFO ../env/vpu_scb.sv(173) @ 143700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=272 
+UVM_INFO ../env/vpu_scb.sv(173) @ 143800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=273 
+UVM_INFO ../env/vpu_scb.sv(195) @ 143800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=274 
+UVM_INFO ../env/vpu_scb.sv(173) @ 143900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=275 
+UVM_INFO ../env/vpu_scb.sv(195) @ 143900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=276 
+UVM_INFO ../env/vpu_scb.sv(173) @ 144000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=277 
+UVM_INFO ../env/vpu_scb.sv(173) @ 144600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=278 
+UVM_INFO ../env/vpu_scb.sv(195) @ 144600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=279 
+UVM_INFO ../env/vpu_scb.sv(173) @ 144700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=280 
+UVM_INFO ../env/vpu_scb.sv(195) @ 144700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=281 
+UVM_INFO ../env/vpu_scb.sv(173) @ 144800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=282 
+UVM_INFO ../env/vpu_scb.sv(195) @ 144800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=283 
+UVM_INFO ../env/vpu_scb.sv(173) @ 145000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=284 
+UVM_INFO ../env/vpu_scb.sv(173) @ 145100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=285 
+UVM_INFO ../env/vpu_scb.sv(195) @ 145100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=286 
+UVM_INFO ../env/vpu_scb.sv(173) @ 145200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=287 
+UVM_INFO ../env/vpu_scb.sv(195) @ 145200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=288 
+UVM_INFO ../env/vpu_scb.sv(173) @ 145300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=289 
+UVM_INFO ../env/vpu_scb.sv(173) @ 145900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=290 
+UVM_INFO ../env/vpu_scb.sv(195) @ 145900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=291 
+UVM_INFO ../env/vpu_scb.sv(173) @ 146000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=292 
+UVM_INFO ../env/vpu_scb.sv(195) @ 146000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=293 
+UVM_INFO ../env/vpu_scb.sv(173) @ 146100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=294 
+UVM_INFO ../env/vpu_scb.sv(195) @ 146100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=295 
+UVM_INFO ../env/vpu_scb.sv(173) @ 146300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=296 
+UVM_INFO ../env/vpu_scb.sv(173) @ 146400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=297 
+UVM_INFO ../env/vpu_scb.sv(195) @ 146400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=298 
+UVM_INFO ../env/vpu_scb.sv(173) @ 146500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=299 
+UVM_INFO ../env/vpu_scb.sv(195) @ 146500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=300 
+UVM_INFO ../env/vpu_scb.sv(173) @ 146600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=301 
+UVM_INFO ../env/vpu_scb.sv(173) @ 147200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=302 
+UVM_INFO ../env/vpu_scb.sv(195) @ 147200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=303 
+UVM_INFO ../env/vpu_scb.sv(173) @ 147300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=304 
+UVM_INFO ../env/vpu_scb.sv(195) @ 147300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=305 
+UVM_INFO ../env/vpu_scb.sv(173) @ 147400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=306 
+UVM_INFO ../env/vpu_scb.sv(195) @ 147400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=307 
+UVM_INFO ../env/vpu_scb.sv(173) @ 147600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=308 
+UVM_INFO ../env/vpu_scb.sv(173) @ 147700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=309 
+UVM_INFO ../env/vpu_scb.sv(195) @ 147700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=310 
+UVM_INFO ../env/vpu_scb.sv(173) @ 147800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=311 
+UVM_INFO ../env/vpu_scb.sv(195) @ 147800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=312 
+UVM_INFO ../env/vpu_scb.sv(173) @ 147900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=313 
+UVM_INFO ../env/vpu_scb.sv(173) @ 148500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=314 
+UVM_INFO ../env/vpu_scb.sv(195) @ 148500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=315 
+UVM_INFO ../env/vpu_scb.sv(173) @ 148600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=316 
+UVM_INFO ../env/vpu_scb.sv(195) @ 148600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=317 
+UVM_INFO ../env/vpu_scb.sv(173) @ 148700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=318 
+UVM_INFO ../env/vpu_scb.sv(195) @ 148700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=319 
+UVM_INFO ../env/vpu_scb.sv(173) @ 148900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=320 
+UVM_INFO ../env/vpu_scb.sv(173) @ 149000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=321 
+UVM_INFO ../env/vpu_scb.sv(195) @ 149000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=322 
+UVM_INFO ../env/vpu_scb.sv(173) @ 149100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=323 
+UVM_INFO ../env/vpu_scb.sv(195) @ 149100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=324 
+UVM_INFO ../env/vpu_scb.sv(173) @ 149200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=325 
+UVM_INFO ../env/vpu_scb.sv(173) @ 149800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=326 
+UVM_INFO ../env/vpu_scb.sv(195) @ 149800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=327 
+UVM_INFO ../env/vpu_scb.sv(173) @ 149900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=328 
+UVM_INFO ../env/vpu_scb.sv(195) @ 149900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=329 
+UVM_INFO ../env/vpu_scb.sv(173) @ 150000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=330 
+UVM_INFO ../env/vpu_scb.sv(195) @ 150000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=331 
+UVM_INFO ../env/vpu_scb.sv(173) @ 150200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=332 
+UVM_INFO ../env/vpu_scb.sv(173) @ 150300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=333 
+UVM_INFO ../env/vpu_scb.sv(195) @ 150300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=334 
+UVM_INFO ../env/vpu_scb.sv(173) @ 150400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=335 
+UVM_INFO ../env/vpu_scb.sv(195) @ 150400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=336 
+UVM_INFO ../env/vpu_scb.sv(173) @ 150500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=337 
+UVM_INFO ../env/vpu_scb.sv(173) @ 151100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=338 
+UVM_INFO ../env/vpu_scb.sv(195) @ 151100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=339 
+UVM_INFO ../env/vpu_scb.sv(173) @ 151200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=340 
+UVM_INFO ../env/vpu_scb.sv(195) @ 151200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=341 
+UVM_INFO ../env/vpu_scb.sv(173) @ 151300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=342 
+UVM_INFO ../env/vpu_scb.sv(195) @ 151300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=343 
+UVM_INFO ../env/vpu_scb.sv(173) @ 151500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=344 
+UVM_INFO ../env/vpu_scb.sv(173) @ 151600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=345 
+UVM_INFO ../env/vpu_scb.sv(195) @ 151600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=346 
+UVM_INFO ../env/vpu_scb.sv(173) @ 151700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=347 
+UVM_INFO ../env/vpu_scb.sv(195) @ 151700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=348 
+UVM_INFO ../env/vpu_scb.sv(173) @ 151800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=349 
+UVM_INFO ../env/vpu_scb.sv(173) @ 152400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=350 
+UVM_INFO ../env/vpu_scb.sv(195) @ 152400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=351 
+UVM_INFO ../env/vpu_scb.sv(173) @ 152500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=352 
+UVM_INFO ../env/vpu_scb.sv(195) @ 152500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=353 
+UVM_INFO ../env/vpu_scb.sv(173) @ 152600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=354 
+UVM_INFO ../env/vpu_scb.sv(195) @ 152600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=355 
+UVM_INFO ../env/vpu_scb.sv(173) @ 152800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=356 
+UVM_INFO ../env/vpu_scb.sv(173) @ 152900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=357 
+UVM_INFO ../env/vpu_scb.sv(195) @ 152900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=358 
+UVM_INFO ../env/vpu_scb.sv(173) @ 153000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=359 
+UVM_INFO ../env/vpu_scb.sv(195) @ 153000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=360 
+UVM_INFO ../env/vpu_scb.sv(173) @ 153100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=361 
+UVM_INFO ../env/vpu_scb.sv(173) @ 153700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=362 
+UVM_INFO ../env/vpu_scb.sv(195) @ 153700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=363 
+UVM_INFO ../env/vpu_scb.sv(173) @ 153800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=364 
+UVM_INFO ../env/vpu_scb.sv(195) @ 153800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=365 
+UVM_INFO ../env/vpu_scb.sv(173) @ 153900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=366 
+UVM_INFO ../env/vpu_scb.sv(195) @ 153900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=367 
+UVM_INFO ../env/vpu_scb.sv(173) @ 154100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=368 
+UVM_INFO ../env/vpu_scb.sv(173) @ 154200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=369 
+UVM_INFO ../env/vpu_scb.sv(195) @ 154200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=370 
+UVM_INFO ../env/vpu_scb.sv(173) @ 154300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=371 
+UVM_INFO ../env/vpu_scb.sv(195) @ 154300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=372 
+UVM_INFO ../env/vpu_scb.sv(173) @ 154400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=373 
+UVM_INFO ../env/vpu_scb.sv(173) @ 155000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=374 
+UVM_INFO ../env/vpu_scb.sv(195) @ 155000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=375 
+UVM_INFO ../env/vpu_scb.sv(173) @ 155100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=376 
+UVM_INFO ../env/vpu_scb.sv(195) @ 155100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=377 
+UVM_INFO ../env/vpu_scb.sv(173) @ 155200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=378 
+UVM_INFO ../env/vpu_scb.sv(195) @ 155200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=379 
+UVM_INFO ../env/vpu_scb.sv(173) @ 155400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=380 
+UVM_INFO ../env/vpu_scb.sv(173) @ 155500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=381 
+UVM_INFO ../env/vpu_scb.sv(195) @ 155500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=382 
+UVM_INFO ../env/vpu_scb.sv(173) @ 155600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=383 
+UVM_INFO ../env/vpu_scb.sv(195) @ 155600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=384 
+UVM_INFO ../env/vpu_scb.sv(173) @ 155700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=385 
+UVM_INFO ../env/vpu_scb.sv(173) @ 156300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=386 
+UVM_INFO ../env/vpu_scb.sv(195) @ 156300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=387 
+UVM_INFO ../env/vpu_scb.sv(173) @ 156400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=388 
+UVM_INFO ../env/vpu_scb.sv(195) @ 156400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=389 
+UVM_INFO ../env/vpu_scb.sv(173) @ 156500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=390 
+UVM_INFO ../env/vpu_scb.sv(195) @ 156500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=391 
+UVM_INFO ../env/vpu_scb.sv(173) @ 156700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=392 
+UVM_INFO ../env/vpu_scb.sv(173) @ 156800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=393 
+UVM_INFO ../env/vpu_scb.sv(195) @ 156800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=394 
+UVM_INFO ../env/vpu_scb.sv(173) @ 156900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=395 
+UVM_INFO ../env/vpu_scb.sv(195) @ 156900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=396 
+UVM_INFO ../env/vpu_scb.sv(173) @ 157000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=397 
+UVM_INFO ../env/vpu_scb.sv(173) @ 157600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=398 
+UVM_INFO ../env/vpu_scb.sv(195) @ 157600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=399 
+UVM_INFO ../env/vpu_scb.sv(173) @ 157700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=400 
+UVM_INFO ../env/vpu_scb.sv(195) @ 157700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=401 
+UVM_INFO ../env/vpu_scb.sv(173) @ 157800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=402 
+UVM_INFO ../env/vpu_scb.sv(195) @ 157800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=403 
+UVM_INFO ../env/vpu_scb.sv(173) @ 158000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=404 
+UVM_INFO ../env/vpu_scb.sv(173) @ 158100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=405 
+UVM_INFO ../env/vpu_scb.sv(195) @ 158100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=406 
+UVM_INFO ../env/vpu_scb.sv(173) @ 158200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=407 
+UVM_INFO ../env/vpu_scb.sv(195) @ 158200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=408 
+UVM_INFO ../env/vpu_scb.sv(173) @ 158300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=409 
+UVM_INFO ../env/vpu_scb.sv(173) @ 158900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=410 
+UVM_INFO ../env/vpu_scb.sv(195) @ 158900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=411 
+UVM_INFO ../env/vpu_scb.sv(173) @ 159000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=412 
+UVM_INFO ../env/vpu_scb.sv(195) @ 159000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=413 
+UVM_INFO ../env/vpu_scb.sv(173) @ 159100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=414 
+UVM_INFO ../env/vpu_scb.sv(195) @ 159100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=415 
+UVM_INFO ../env/vpu_scb.sv(173) @ 159300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=416 
+UVM_INFO ../env/vpu_scb.sv(173) @ 159400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=417 
+UVM_INFO ../env/vpu_scb.sv(195) @ 159400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=418 
+UVM_INFO ../env/vpu_scb.sv(173) @ 159500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=419 
+UVM_INFO ../env/vpu_scb.sv(195) @ 159500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=420 
+UVM_INFO ../env/vpu_scb.sv(173) @ 159600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=421 
+UVM_INFO ../env/vpu_scb.sv(173) @ 160200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=422 
+UVM_INFO ../env/vpu_scb.sv(195) @ 160200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=423 
+UVM_INFO ../env/vpu_scb.sv(173) @ 160300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=424 
+UVM_INFO ../env/vpu_scb.sv(195) @ 160300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=425 
+UVM_INFO ../env/vpu_scb.sv(173) @ 160400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=426 
+UVM_INFO ../env/vpu_scb.sv(195) @ 160400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=427 
+UVM_INFO ../env/vpu_scb.sv(173) @ 160600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=428 
+UVM_INFO ../env/vpu_scb.sv(173) @ 160700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=429 
+UVM_INFO ../env/vpu_scb.sv(195) @ 160700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=430 
+UVM_INFO ../env/vpu_scb.sv(173) @ 160800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=431 
+UVM_INFO ../env/vpu_scb.sv(195) @ 160800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=432 
+UVM_INFO ../env/vpu_scb.sv(173) @ 160900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=433 
+UVM_INFO ../env/vpu_scb.sv(173) @ 161500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=434 
+UVM_INFO ../env/vpu_scb.sv(195) @ 161500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=435 
+UVM_INFO ../env/vpu_scb.sv(173) @ 161600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=436 
+UVM_INFO ../env/vpu_scb.sv(195) @ 161600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=437 
+UVM_INFO ../env/vpu_scb.sv(173) @ 161700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=438 
+UVM_INFO ../env/vpu_scb.sv(195) @ 161700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=439 
+UVM_INFO ../env/vpu_scb.sv(173) @ 161900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=440 
+UVM_INFO ../env/vpu_scb.sv(173) @ 162000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=441 
+UVM_INFO ../env/vpu_scb.sv(195) @ 162000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=442 
+UVM_INFO ../env/vpu_scb.sv(173) @ 162100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=443 
+UVM_INFO ../env/vpu_scb.sv(195) @ 162100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=444 
+UVM_INFO ../env/vpu_scb.sv(173) @ 162200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=445 
+UVM_INFO ../env/vpu_scb.sv(173) @ 162800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=446 
+UVM_INFO ../env/vpu_scb.sv(195) @ 162800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=447 
+UVM_INFO ../env/vpu_scb.sv(173) @ 162900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=448 
+UVM_INFO ../env/vpu_scb.sv(195) @ 162900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=449 
+UVM_INFO ../env/vpu_scb.sv(173) @ 163000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=450 
+UVM_INFO ../env/vpu_scb.sv(195) @ 163000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=451 
+UVM_INFO ../env/vpu_scb.sv(173) @ 163200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=452 
+UVM_INFO ../env/vpu_scb.sv(173) @ 163300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=453 
+UVM_INFO ../env/vpu_scb.sv(195) @ 163300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=454 
+UVM_INFO ../env/vpu_scb.sv(173) @ 163400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=455 
+UVM_INFO ../env/vpu_scb.sv(195) @ 163400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=456 
+UVM_INFO ../env/vpu_scb.sv(173) @ 163500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=457 
+UVM_INFO ../env/vpu_scb.sv(173) @ 164100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=458 
+UVM_INFO ../env/vpu_scb.sv(195) @ 164100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=459 
+UVM_INFO ../env/vpu_scb.sv(173) @ 164200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=460 
+UVM_INFO ../env/vpu_scb.sv(195) @ 164200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=461 
+UVM_INFO ../env/vpu_scb.sv(173) @ 164300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=462 
+UVM_INFO ../env/vpu_scb.sv(195) @ 164300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=463 
+UVM_INFO ../env/vpu_scb.sv(173) @ 164500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=464 
+UVM_INFO ../env/vpu_scb.sv(173) @ 164600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=465 
+UVM_INFO ../env/vpu_scb.sv(195) @ 164600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=466 
+UVM_INFO ../env/vpu_scb.sv(173) @ 164700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=467 
+UVM_INFO ../env/vpu_scb.sv(195) @ 164700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=468 
+UVM_INFO ../env/vpu_scb.sv(173) @ 164800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=469 
+UVM_INFO ../env/vpu_scb.sv(173) @ 165400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=470 
+UVM_INFO ../env/vpu_scb.sv(195) @ 165400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=471 
+UVM_INFO ../env/vpu_scb.sv(173) @ 165500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=472 
+UVM_INFO ../env/vpu_scb.sv(195) @ 165500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=473 
+UVM_INFO ../env/vpu_scb.sv(173) @ 165600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=474 
+UVM_INFO ../env/vpu_scb.sv(195) @ 165600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=475 
+UVM_INFO ../env/vpu_scb.sv(173) @ 165800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=476 
+UVM_INFO ../env/vpu_scb.sv(173) @ 165900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=477 
+UVM_INFO ../env/vpu_scb.sv(195) @ 165900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=478 
+UVM_INFO ../env/vpu_scb.sv(173) @ 166000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=479 
+UVM_INFO ../env/vpu_scb.sv(195) @ 166000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=480 
+UVM_INFO ../env/vpu_scb.sv(173) @ 166100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=481 
+UVM_INFO ../env/vpu_scb.sv(173) @ 166700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=482 
+UVM_INFO ../env/vpu_scb.sv(195) @ 166700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=483 
+UVM_INFO ../env/vpu_scb.sv(173) @ 166800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=484 
+UVM_INFO ../env/vpu_scb.sv(195) @ 166800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=485 
+UVM_INFO ../env/vpu_scb.sv(173) @ 166900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=486 
+UVM_INFO ../env/vpu_scb.sv(195) @ 166900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=487 
+UVM_INFO ../env/vpu_scb.sv(173) @ 167100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=488 
+UVM_INFO ../env/vpu_scb.sv(173) @ 167200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=489 
+UVM_INFO ../env/vpu_scb.sv(195) @ 167200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=490 
+UVM_INFO ../env/vpu_scb.sv(173) @ 167300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=491 
+UVM_INFO ../env/vpu_scb.sv(195) @ 167300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=492 
+UVM_INFO ../env/vpu_scb.sv(173) @ 167400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=493 
+UVM_INFO ../env/vpu_scb.sv(173) @ 168000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=494 
+UVM_INFO ../env/vpu_scb.sv(195) @ 168000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=495 
+UVM_INFO ../env/vpu_scb.sv(173) @ 168100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=496 
+UVM_INFO ../env/vpu_scb.sv(195) @ 168100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=497 
+UVM_INFO ../env/vpu_scb.sv(173) @ 168200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=498 
+UVM_INFO ../env/vpu_scb.sv(195) @ 168200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=499 
+UVM_INFO ../env/vpu_scb.sv(173) @ 168400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=500 
+UVM_INFO ../env/vpu_scb.sv(173) @ 168500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=501 
+UVM_INFO ../env/vpu_scb.sv(195) @ 168500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=502 
+UVM_INFO ../env/vpu_scb.sv(173) @ 168600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=503 
+UVM_INFO ../env/vpu_scb.sv(195) @ 168600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=504 
+UVM_INFO ../env/vpu_scb.sv(173) @ 168700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=505 
+UVM_INFO ../env/vpu_scb.sv(173) @ 169300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=506 
+UVM_INFO ../env/vpu_scb.sv(195) @ 169300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=507 
+UVM_INFO ../env/vpu_scb.sv(173) @ 169400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=508 
+UVM_INFO ../env/vpu_scb.sv(195) @ 169400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=509 
+UVM_INFO ../env/vpu_scb.sv(173) @ 169500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=510 
+UVM_INFO ../env/vpu_scb.sv(195) @ 169500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=511 
+UVM_INFO ../env/vpu_scb.sv(173) @ 169700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=512 
+UVM_INFO ../env/vpu_scb.sv(173) @ 169800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=513 
+UVM_INFO ../env/vpu_scb.sv(195) @ 169800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=514 
+UVM_INFO ../env/vpu_scb.sv(173) @ 169900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=515 
+UVM_INFO ../env/vpu_scb.sv(195) @ 169900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=516 
+UVM_INFO ../env/vpu_scb.sv(173) @ 170000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=517 
+UVM_INFO ../env/vpu_scb.sv(173) @ 170600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=518 
+UVM_INFO ../env/vpu_scb.sv(195) @ 170600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=519 
+UVM_INFO ../env/vpu_scb.sv(173) @ 170700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=520 
+UVM_INFO ../env/vpu_scb.sv(195) @ 170700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=521 
+UVM_INFO ../env/vpu_scb.sv(173) @ 170800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=522 
+UVM_INFO ../env/vpu_scb.sv(195) @ 170800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=523 
+UVM_INFO ../env/vpu_scb.sv(173) @ 171000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=524 
+UVM_INFO ../env/vpu_scb.sv(173) @ 171100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=525 
+UVM_INFO ../env/vpu_scb.sv(195) @ 171100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=526 
+UVM_INFO ../env/vpu_scb.sv(173) @ 171200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=527 
+UVM_INFO ../env/vpu_scb.sv(195) @ 171200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=528 
+UVM_INFO ../env/vpu_scb.sv(173) @ 171300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=529 
+UVM_INFO ../env/vpu_scb.sv(173) @ 171900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=530 
+UVM_INFO ../env/vpu_scb.sv(195) @ 171900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=531 
+UVM_INFO ../env/vpu_scb.sv(173) @ 172000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=532 
+UVM_INFO ../env/vpu_scb.sv(195) @ 172000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=533 
+UVM_INFO ../env/vpu_scb.sv(173) @ 172100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=534 
+UVM_INFO ../env/vpu_scb.sv(195) @ 172100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=535 
+UVM_INFO ../env/vpu_scb.sv(173) @ 172300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=536 
+UVM_INFO ../env/vpu_scb.sv(173) @ 172400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=537 
+UVM_INFO ../env/vpu_scb.sv(195) @ 172400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=538 
+UVM_INFO ../env/vpu_scb.sv(173) @ 172500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=539 
+UVM_INFO ../env/vpu_scb.sv(195) @ 172500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=540 
+UVM_INFO ../env/vpu_scb.sv(173) @ 172600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=541 
+UVM_INFO ../env/vpu_scb.sv(173) @ 173200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=542 
+UVM_INFO ../env/vpu_scb.sv(195) @ 173200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=543 
+UVM_INFO ../env/vpu_scb.sv(173) @ 173300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=544 
+UVM_INFO ../env/vpu_scb.sv(195) @ 173300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=545 
+UVM_INFO ../env/vpu_scb.sv(173) @ 173400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=546 
+UVM_INFO ../env/vpu_scb.sv(195) @ 173400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=547 
+UVM_INFO ../env/vpu_scb.sv(173) @ 173600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=548 
+UVM_INFO ../env/vpu_scb.sv(173) @ 173700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=549 
+UVM_INFO ../env/vpu_scb.sv(195) @ 173700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=550 
+UVM_INFO ../env/vpu_scb.sv(173) @ 173800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=551 
+UVM_INFO ../env/vpu_scb.sv(195) @ 173800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=552 
+UVM_INFO ../env/vpu_scb.sv(173) @ 173900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=553 
+UVM_INFO ../env/vpu_scb.sv(173) @ 174500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=554 
+UVM_INFO ../env/vpu_scb.sv(195) @ 174500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=555 
+UVM_INFO ../env/vpu_scb.sv(173) @ 174600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=556 
+UVM_INFO ../env/vpu_scb.sv(195) @ 174600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=557 
+UVM_INFO ../env/vpu_scb.sv(173) @ 174700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=558 
+UVM_INFO ../env/vpu_scb.sv(195) @ 174700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=559 
+UVM_INFO ../env/vpu_scb.sv(173) @ 174900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=560 
+UVM_INFO ../env/vpu_scb.sv(173) @ 175000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=561 
+UVM_INFO ../env/vpu_scb.sv(195) @ 175000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=562 
+UVM_INFO ../env/vpu_scb.sv(173) @ 175100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=563 
+UVM_INFO ../env/vpu_scb.sv(195) @ 175100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=564 
+UVM_INFO ../env/vpu_scb.sv(173) @ 175200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=565 
+UVM_INFO ../env/vpu_scb.sv(173) @ 175800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=566 
+UVM_INFO ../env/vpu_scb.sv(195) @ 175800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=567 
+UVM_INFO ../env/vpu_scb.sv(173) @ 175900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=568 
+UVM_INFO ../env/vpu_scb.sv(195) @ 175900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=569 
+UVM_INFO ../env/vpu_scb.sv(173) @ 176000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=570 
+UVM_INFO ../env/vpu_scb.sv(195) @ 176000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=571 
+UVM_INFO ../env/vpu_scb.sv(173) @ 176200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=572 
+UVM_INFO ../env/vpu_scb.sv(173) @ 176300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=573 
+UVM_INFO ../env/vpu_scb.sv(195) @ 176300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=574 
+UVM_INFO ../env/vpu_scb.sv(173) @ 176400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=575 
+UVM_INFO ../env/vpu_scb.sv(195) @ 176400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=576 
+UVM_INFO ../env/vpu_scb.sv(173) @ 176500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=577 
+UVM_INFO ../env/vpu_scb.sv(173) @ 177100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=578 
+UVM_INFO ../env/vpu_scb.sv(195) @ 177100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=579 
+UVM_INFO ../env/vpu_scb.sv(173) @ 177200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=580 
+UVM_INFO ../env/vpu_scb.sv(195) @ 177200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=581 
+UVM_INFO ../env/vpu_scb.sv(173) @ 177300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=582 
+UVM_INFO ../env/vpu_scb.sv(195) @ 177300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=583 
+UVM_INFO ../env/vpu_scb.sv(173) @ 177500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=584 
+UVM_INFO ../env/vpu_scb.sv(173) @ 177600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=585 
+UVM_INFO ../env/vpu_scb.sv(195) @ 177600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=586 
+UVM_INFO ../env/vpu_scb.sv(173) @ 177700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=587 
+UVM_INFO ../env/vpu_scb.sv(195) @ 177700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=588 
+UVM_INFO ../env/vpu_scb.sv(173) @ 177800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=589 
+UVM_INFO ../env/vpu_scb.sv(173) @ 178400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=590 
+UVM_INFO ../env/vpu_scb.sv(195) @ 178400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=591 
+UVM_INFO ../env/vpu_scb.sv(173) @ 178500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=592 
+UVM_INFO ../env/vpu_scb.sv(195) @ 178500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=593 
+UVM_INFO ../env/vpu_scb.sv(173) @ 178600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=594 
+UVM_INFO ../env/vpu_scb.sv(195) @ 178600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=595 
+UVM_INFO ../env/vpu_scb.sv(173) @ 178800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=596 
+UVM_INFO ../env/vpu_scb.sv(173) @ 178900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=597 
+UVM_INFO ../env/vpu_scb.sv(195) @ 178900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=598 
+UVM_INFO ../env/vpu_scb.sv(173) @ 179000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=599 
+UVM_INFO ../env/vpu_scb.sv(195) @ 179000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=600 
+UVM_INFO ../env/vpu_scb.sv(173) @ 179100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=601 
+UVM_INFO ../env/vpu_scb.sv(173) @ 179700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=602 
+UVM_INFO ../env/vpu_scb.sv(195) @ 179700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=603 
+UVM_INFO ../env/vpu_scb.sv(173) @ 179800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=604 
+UVM_INFO ../env/vpu_scb.sv(195) @ 179800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=605 
+UVM_INFO ../env/vpu_scb.sv(173) @ 179900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=606 
+UVM_INFO ../env/vpu_scb.sv(195) @ 179900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=607 
+UVM_INFO ../env/vpu_scb.sv(173) @ 180100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=608 
+UVM_INFO ../env/vpu_scb.sv(173) @ 180200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=609 
+UVM_INFO ../env/vpu_scb.sv(195) @ 180200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=610 
+UVM_INFO ../env/vpu_scb.sv(173) @ 180300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=611 
+UVM_INFO ../env/vpu_scb.sv(195) @ 180300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=612 
+UVM_INFO ../env/vpu_scb.sv(173) @ 180400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=613 
+UVM_INFO ../env/vpu_scb.sv(173) @ 181000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=614 
+UVM_INFO ../env/vpu_scb.sv(195) @ 181000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=615 
+UVM_INFO ../env/vpu_scb.sv(173) @ 181100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=616 
+UVM_INFO ../env/vpu_scb.sv(195) @ 181100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=617 
+UVM_INFO ../env/vpu_scb.sv(173) @ 181200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=618 
+UVM_INFO ../env/vpu_scb.sv(195) @ 181200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=619 
+UVM_INFO ../env/vpu_scb.sv(173) @ 181400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=620 
+UVM_INFO ../env/vpu_scb.sv(173) @ 181500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=621 
+UVM_INFO ../env/vpu_scb.sv(195) @ 181500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=622 
+UVM_INFO ../env/vpu_scb.sv(173) @ 181600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=623 
+UVM_INFO ../env/vpu_scb.sv(195) @ 181600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=624 
+UVM_INFO ../env/vpu_scb.sv(173) @ 181700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=625 
+UVM_INFO ../env/vpu_scb.sv(173) @ 182300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=626 
+UVM_INFO ../env/vpu_scb.sv(195) @ 182300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=627 
+UVM_INFO ../env/vpu_scb.sv(173) @ 182400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=628 
+UVM_INFO ../env/vpu_scb.sv(195) @ 182400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=629 
+UVM_INFO ../env/vpu_scb.sv(173) @ 182500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=630 
+UVM_INFO ../env/vpu_scb.sv(195) @ 182500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=631 
+UVM_INFO ../env/vpu_scb.sv(173) @ 182700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=632 
+UVM_INFO ../env/vpu_scb.sv(173) @ 182800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=633 
+UVM_INFO ../env/vpu_scb.sv(195) @ 182800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=634 
+UVM_INFO ../env/vpu_scb.sv(173) @ 182900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=635 
+UVM_INFO ../env/vpu_scb.sv(195) @ 182900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=636 
+UVM_INFO ../env/vpu_scb.sv(173) @ 183000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=637 
+UVM_INFO ../env/vpu_scb.sv(173) @ 183600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=638 
+UVM_INFO ../env/vpu_scb.sv(195) @ 183600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=639 
+UVM_INFO ../env/vpu_scb.sv(173) @ 183700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=640 
+UVM_INFO ../env/vpu_scb.sv(195) @ 183700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=641 
+UVM_INFO ../env/vpu_scb.sv(173) @ 183800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=642 
+UVM_INFO ../env/vpu_scb.sv(195) @ 183800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=643 
+UVM_INFO ../env/vpu_scb.sv(173) @ 184000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=644 
+UVM_INFO ../env/vpu_scb.sv(173) @ 184100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=645 
+UVM_INFO ../env/vpu_scb.sv(195) @ 184100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=646 
+UVM_INFO ../env/vpu_scb.sv(173) @ 184200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=647 
+UVM_INFO ../env/vpu_scb.sv(195) @ 184200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=648 
+UVM_INFO ../env/vpu_scb.sv(173) @ 184300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=649 
+UVM_INFO ../env/vpu_scb.sv(173) @ 184900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=650 
+UVM_INFO ../env/vpu_scb.sv(195) @ 184900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=651 
+UVM_INFO ../env/vpu_scb.sv(173) @ 185000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=652 
+UVM_INFO ../env/vpu_scb.sv(195) @ 185000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=653 
+UVM_INFO ../env/vpu_scb.sv(173) @ 185100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=654 
+UVM_INFO ../env/vpu_scb.sv(195) @ 185100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=655 
+UVM_INFO ../env/vpu_scb.sv(173) @ 185300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=656 
+UVM_INFO ../env/vpu_scb.sv(173) @ 185400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=657 
+UVM_INFO ../env/vpu_scb.sv(195) @ 185400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=658 
+UVM_INFO ../env/vpu_scb.sv(173) @ 185500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=659 
+UVM_INFO ../env/vpu_scb.sv(195) @ 185500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=660 
+UVM_INFO ../env/vpu_scb.sv(173) @ 185600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=661 
+UVM_INFO ../env/vpu_scb.sv(173) @ 186200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=662 
+UVM_INFO ../env/vpu_scb.sv(195) @ 186200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=663 
+UVM_INFO ../env/vpu_scb.sv(173) @ 186300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=664 
+UVM_INFO ../env/vpu_scb.sv(195) @ 186300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=665 
+UVM_INFO ../env/vpu_scb.sv(173) @ 186400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=666 
+UVM_INFO ../env/vpu_scb.sv(195) @ 186400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=667 
+UVM_INFO ../env/vpu_scb.sv(173) @ 186600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=668 
+UVM_INFO ../env/vpu_scb.sv(173) @ 186700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=669 
+UVM_INFO ../env/vpu_scb.sv(195) @ 186700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=670 
+UVM_INFO ../env/vpu_scb.sv(173) @ 186800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=671 
+UVM_INFO ../env/vpu_scb.sv(195) @ 186800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=672 
+UVM_INFO ../env/vpu_scb.sv(173) @ 186900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=673 
+UVM_INFO ../env/vpu_scb.sv(173) @ 187500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=674 
+UVM_INFO ../env/vpu_scb.sv(195) @ 187500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=675 
+UVM_INFO ../env/vpu_scb.sv(173) @ 187600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=676 
+UVM_INFO ../env/vpu_scb.sv(195) @ 187600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=677 
+UVM_INFO ../env/vpu_scb.sv(173) @ 187700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=678 
+UVM_INFO ../env/vpu_scb.sv(195) @ 187700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=679 
+UVM_INFO ../env/vpu_scb.sv(173) @ 187900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=680 
+UVM_INFO ../env/vpu_scb.sv(173) @ 188000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=681 
+UVM_INFO ../env/vpu_scb.sv(195) @ 188000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=682 
+UVM_INFO ../env/vpu_scb.sv(173) @ 188100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=683 
+UVM_INFO ../env/vpu_scb.sv(195) @ 188100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=684 
+UVM_INFO ../env/vpu_scb.sv(173) @ 188200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=685 
+UVM_INFO ../env/vpu_scb.sv(173) @ 188800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=686 
+UVM_INFO ../env/vpu_scb.sv(195) @ 188800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=687 
+UVM_INFO ../env/vpu_scb.sv(173) @ 188900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=688 
+UVM_INFO ../env/vpu_scb.sv(195) @ 188900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=689 
+UVM_INFO ../env/vpu_scb.sv(173) @ 189000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=690 
+UVM_INFO ../env/vpu_scb.sv(195) @ 189000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=691 
+UVM_INFO ../env/vpu_scb.sv(173) @ 189200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=692 
+UVM_INFO ../env/vpu_scb.sv(173) @ 189300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=693 
+UVM_INFO ../env/vpu_scb.sv(195) @ 189300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=694 
+UVM_INFO ../env/vpu_scb.sv(173) @ 189400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=695 
+UVM_INFO ../env/vpu_scb.sv(195) @ 189400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=696 
+UVM_INFO ../env/vpu_scb.sv(173) @ 189500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=697 
+UVM_INFO ../env/vpu_scb.sv(173) @ 190100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=698 
+UVM_INFO ../env/vpu_scb.sv(195) @ 190100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=699 
+UVM_INFO ../env/vpu_scb.sv(173) @ 190200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=700 
+UVM_INFO ../env/vpu_scb.sv(195) @ 190200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=701 
+UVM_INFO ../env/vpu_scb.sv(173) @ 190300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=702 
+UVM_INFO ../env/vpu_scb.sv(195) @ 190300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=703 
+UVM_INFO ../env/vpu_scb.sv(173) @ 190500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=704 
+UVM_INFO ../env/vpu_scb.sv(173) @ 190600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=705 
+UVM_INFO ../env/vpu_scb.sv(195) @ 190600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=706 
+UVM_INFO ../env/vpu_scb.sv(173) @ 190700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=707 
+UVM_INFO ../env/vpu_scb.sv(195) @ 190700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=708 
+UVM_INFO ../env/vpu_scb.sv(173) @ 190800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=709 
+UVM_INFO ../env/vpu_scb.sv(173) @ 191400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=710 
+UVM_INFO ../env/vpu_scb.sv(195) @ 191400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=711 
+UVM_INFO ../env/vpu_scb.sv(173) @ 191500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=712 
+UVM_INFO ../env/vpu_scb.sv(195) @ 191500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=713 
+UVM_INFO ../env/vpu_scb.sv(173) @ 191600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=714 
+UVM_INFO ../env/vpu_scb.sv(195) @ 191600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=715 
+UVM_INFO ../env/vpu_scb.sv(173) @ 191800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=716 
+UVM_INFO ../env/vpu_scb.sv(173) @ 191900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=717 
+UVM_INFO ../env/vpu_scb.sv(195) @ 191900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=718 
+UVM_INFO ../env/vpu_scb.sv(173) @ 192000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=719 
+UVM_INFO ../env/vpu_scb.sv(195) @ 192000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=720 
+UVM_INFO ../env/vpu_scb.sv(173) @ 192100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=721 
+UVM_INFO ../env/vpu_scb.sv(173) @ 192700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=722 
+UVM_INFO ../env/vpu_scb.sv(195) @ 192700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=723 
+UVM_INFO ../env/vpu_scb.sv(173) @ 192800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=724 
+UVM_INFO ../env/vpu_scb.sv(195) @ 192800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=725 
+UVM_INFO ../env/vpu_scb.sv(173) @ 192900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=726 
+UVM_INFO ../env/vpu_scb.sv(195) @ 192900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=727 
+UVM_INFO ../env/vpu_scb.sv(173) @ 193100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=728 
+UVM_INFO ../env/vpu_scb.sv(173) @ 193200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=729 
+UVM_INFO ../env/vpu_scb.sv(195) @ 193200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=730 
+UVM_INFO ../env/vpu_scb.sv(173) @ 193300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=731 
+UVM_INFO ../env/vpu_scb.sv(195) @ 193300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=732 
+UVM_INFO ../env/vpu_scb.sv(173) @ 193400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=733 
+UVM_INFO ../env/vpu_scb.sv(173) @ 194000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=734 
+UVM_INFO ../env/vpu_scb.sv(195) @ 194000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=735 
+UVM_INFO ../env/vpu_scb.sv(173) @ 194100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=736 
+UVM_INFO ../env/vpu_scb.sv(195) @ 194100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=737 
+UVM_INFO ../env/vpu_scb.sv(173) @ 194200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=738 
+UVM_INFO ../env/vpu_scb.sv(195) @ 194200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=739 
+UVM_INFO ../env/vpu_scb.sv(173) @ 194400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=740 
+UVM_INFO ../env/vpu_scb.sv(173) @ 194500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=741 
+UVM_INFO ../env/vpu_scb.sv(195) @ 194500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=742 
+UVM_INFO ../env/vpu_scb.sv(173) @ 194600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=743 
+UVM_INFO ../env/vpu_scb.sv(195) @ 194600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=744 
+UVM_INFO ../env/vpu_scb.sv(173) @ 194700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=745 
+UVM_INFO ../env/vpu_scb.sv(173) @ 195300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=746 
+UVM_INFO ../env/vpu_scb.sv(195) @ 195300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=747 
+UVM_INFO ../env/vpu_scb.sv(173) @ 195400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=748 
+UVM_INFO ../env/vpu_scb.sv(195) @ 195400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=749 
+UVM_INFO ../env/vpu_scb.sv(173) @ 195500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=750 
+UVM_INFO ../env/vpu_scb.sv(195) @ 195500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=751 
+UVM_INFO ../env/vpu_scb.sv(173) @ 195700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=752 
+UVM_INFO ../env/vpu_scb.sv(173) @ 195800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=753 
+UVM_INFO ../env/vpu_scb.sv(195) @ 195800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=754 
+UVM_INFO ../env/vpu_scb.sv(173) @ 195900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=755 
+UVM_INFO ../env/vpu_scb.sv(195) @ 195900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=756 
+UVM_INFO ../env/vpu_scb.sv(173) @ 196000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=757 
+UVM_INFO ../env/vpu_scb.sv(173) @ 196600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=758 
+UVM_INFO ../env/vpu_scb.sv(195) @ 196600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=759 
+UVM_INFO ../env/vpu_scb.sv(173) @ 196700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=760 
+UVM_INFO ../env/vpu_scb.sv(195) @ 196700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=761 
+UVM_INFO ../env/vpu_scb.sv(173) @ 196800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=762 
+UVM_INFO ../env/vpu_scb.sv(195) @ 196800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=763 
+UVM_INFO ../env/vpu_scb.sv(173) @ 197000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=764 
+UVM_INFO ../env/vpu_scb.sv(173) @ 197100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=765 
+UVM_INFO ../env/vpu_scb.sv(195) @ 197100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=766 
+UVM_INFO ../env/vpu_scb.sv(173) @ 197200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=767 
+UVM_INFO ../env/vpu_scb.sv(195) @ 197200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=768 
+UVM_INFO ../env/vpu_scb.sv(173) @ 197300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=769 
+UVM_INFO ../env/vpu_scb.sv(173) @ 197900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=770 
+UVM_INFO ../env/vpu_scb.sv(195) @ 197900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=771 
+UVM_INFO ../env/vpu_scb.sv(173) @ 198000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=772 
+UVM_INFO ../env/vpu_scb.sv(195) @ 198000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=773 
+UVM_INFO ../env/vpu_scb.sv(173) @ 198100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=774 
+UVM_INFO ../env/vpu_scb.sv(195) @ 198100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=775 
+UVM_INFO ../env/vpu_scb.sv(173) @ 198300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=776 
+UVM_INFO ../env/vpu_scb.sv(173) @ 198400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=777 
+UVM_INFO ../env/vpu_scb.sv(195) @ 198400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=778 
+UVM_INFO ../env/vpu_scb.sv(173) @ 198500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=779 
+UVM_INFO ../env/vpu_scb.sv(195) @ 198500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=780 
+UVM_INFO ../env/vpu_scb.sv(173) @ 198600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=781 
+UVM_INFO ../env/vpu_scb.sv(173) @ 199200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=782 
+UVM_INFO ../env/vpu_scb.sv(195) @ 199200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=783 
+UVM_INFO ../env/vpu_scb.sv(173) @ 199300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=784 
+UVM_INFO ../env/vpu_scb.sv(195) @ 199300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=785 
+UVM_INFO ../env/vpu_scb.sv(173) @ 199400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=786 
+UVM_INFO ../env/vpu_scb.sv(195) @ 199400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=787 
+UVM_INFO ../env/vpu_scb.sv(173) @ 199600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=788 
+UVM_INFO ../env/vpu_scb.sv(173) @ 199700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=789 
+UVM_INFO ../env/vpu_scb.sv(195) @ 199700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=790 
+UVM_INFO ../env/vpu_scb.sv(173) @ 199800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=791 
+UVM_INFO ../env/vpu_scb.sv(195) @ 199800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=792 
+UVM_INFO ../env/vpu_scb.sv(173) @ 199900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=793 
+UVM_INFO ../env/vpu_scb.sv(173) @ 200500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=794 
+UVM_INFO ../env/vpu_scb.sv(195) @ 200500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=795 
+UVM_INFO ../env/vpu_scb.sv(173) @ 200600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=796 
+UVM_INFO ../env/vpu_scb.sv(195) @ 200600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=797 
+UVM_INFO ../env/vpu_scb.sv(173) @ 200700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=798 
+UVM_INFO ../env/vpu_scb.sv(195) @ 200700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=799 
+UVM_INFO ../env/vpu_scb.sv(173) @ 200900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=800 
+UVM_INFO ../env/vpu_scb.sv(173) @ 201000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=801 
+UVM_INFO ../env/vpu_scb.sv(195) @ 201000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=802 
+UVM_INFO ../env/vpu_scb.sv(173) @ 201100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=803 
+UVM_INFO ../env/vpu_scb.sv(195) @ 201100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=804 
+UVM_INFO ../env/vpu_scb.sv(173) @ 201200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=805 
+UVM_INFO ../env/vpu_scb.sv(173) @ 201800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=806 
+UVM_INFO ../env/vpu_scb.sv(195) @ 201800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=807 
+UVM_INFO ../env/vpu_scb.sv(173) @ 201900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=808 
+UVM_INFO ../env/vpu_scb.sv(195) @ 201900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=809 
+UVM_INFO ../env/vpu_scb.sv(173) @ 202000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=810 
+UVM_INFO ../env/vpu_scb.sv(195) @ 202000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=811 
+UVM_INFO ../env/vpu_scb.sv(173) @ 202200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=812 
+UVM_INFO ../env/vpu_scb.sv(173) @ 202300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=813 
+UVM_INFO ../env/vpu_scb.sv(195) @ 202300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=814 
+UVM_INFO ../env/vpu_scb.sv(173) @ 202400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=815 
+UVM_INFO ../env/vpu_scb.sv(195) @ 202400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=816 
+UVM_INFO ../env/vpu_scb.sv(173) @ 202500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=817 
+UVM_INFO ../env/vpu_scb.sv(173) @ 203100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=818 
+UVM_INFO ../env/vpu_scb.sv(195) @ 203100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=819 
+UVM_INFO ../env/vpu_scb.sv(173) @ 203200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=820 
+UVM_INFO ../env/vpu_scb.sv(195) @ 203200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=821 
+UVM_INFO ../env/vpu_scb.sv(173) @ 203300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=822 
+UVM_INFO ../env/vpu_scb.sv(195) @ 203300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=823 
+UVM_INFO ../env/vpu_scb.sv(173) @ 203500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=824 
+UVM_INFO ../env/vpu_scb.sv(173) @ 203600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=825 
+UVM_INFO ../env/vpu_scb.sv(195) @ 203600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=826 
+UVM_INFO ../env/vpu_scb.sv(173) @ 203700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=827 
+UVM_INFO ../env/vpu_scb.sv(195) @ 203700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=828 
+UVM_INFO ../env/vpu_scb.sv(173) @ 203800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=829 
+UVM_INFO ../env/vpu_scb.sv(173) @ 204400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=830 
+UVM_INFO ../env/vpu_scb.sv(195) @ 204400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=831 
+UVM_INFO ../env/vpu_scb.sv(173) @ 204500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=832 
+UVM_INFO ../env/vpu_scb.sv(195) @ 204500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=833 
+UVM_INFO ../env/vpu_scb.sv(173) @ 204600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=834 
+UVM_INFO ../env/vpu_scb.sv(195) @ 204600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=835 
+UVM_INFO ../env/vpu_scb.sv(173) @ 204800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=836 
+UVM_INFO ../env/vpu_scb.sv(173) @ 204900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=837 
+UVM_INFO ../env/vpu_scb.sv(195) @ 204900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=838 
+UVM_INFO ../env/vpu_scb.sv(173) @ 205000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=839 
+UVM_INFO ../env/vpu_scb.sv(195) @ 205000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=840 
+UVM_INFO ../env/vpu_scb.sv(173) @ 205100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=841 
+UVM_INFO ../env/vpu_scb.sv(173) @ 205700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=842 
+UVM_INFO ../env/vpu_scb.sv(195) @ 205700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=843 
+UVM_INFO ../env/vpu_scb.sv(173) @ 205800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=844 
+UVM_INFO ../env/vpu_scb.sv(195) @ 205800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=845 
+UVM_INFO ../env/vpu_scb.sv(173) @ 205900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=846 
+UVM_INFO ../env/vpu_scb.sv(195) @ 205900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=847 
+UVM_INFO ../env/vpu_scb.sv(173) @ 206100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=848 
+UVM_INFO ../env/vpu_scb.sv(173) @ 206200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=849 
+UVM_INFO ../env/vpu_scb.sv(195) @ 206200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=850 
+UVM_INFO ../env/vpu_scb.sv(173) @ 206300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=851 
+UVM_INFO ../env/vpu_scb.sv(195) @ 206300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=852 
+UVM_INFO ../env/vpu_scb.sv(173) @ 206400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=853 
+UVM_INFO ../env/vpu_scb.sv(173) @ 207000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=854 
+UVM_INFO ../env/vpu_scb.sv(195) @ 207000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=855 
+UVM_INFO ../env/vpu_scb.sv(173) @ 207100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=856 
+UVM_INFO ../env/vpu_scb.sv(195) @ 207100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=857 
+UVM_INFO ../env/vpu_scb.sv(173) @ 207200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=858 
+UVM_INFO ../env/vpu_scb.sv(195) @ 207200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=859 
+UVM_INFO ../env/vpu_scb.sv(173) @ 207400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=860 
+UVM_INFO ../env/vpu_scb.sv(173) @ 207500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=861 
+UVM_INFO ../env/vpu_scb.sv(195) @ 207500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=862 
+UVM_INFO ../env/vpu_scb.sv(173) @ 207600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=863 
+UVM_INFO ../env/vpu_scb.sv(195) @ 207600: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=864 
+UVM_INFO ../env/vpu_scb.sv(173) @ 207700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=865 
+UVM_INFO ../env/vpu_scb.sv(173) @ 208300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002928,commit_num=866 
+UVM_INFO ../env/vpu_scb.sv(195) @ 208300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000292c,commit_num=867 
+UVM_INFO ../env/vpu_scb.sv(173) @ 208400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002930,commit_num=868 
+UVM_INFO ../env/vpu_scb.sv(195) @ 208400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002934,commit_num=869 
+UVM_INFO ../env/vpu_scb.sv(173) @ 208500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002938,commit_num=870 
+UVM_INFO ../env/vpu_scb.sv(195) @ 208500: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000293c,commit_num=871 
+UVM_INFO ../env/vpu_scb.sv(173) @ 208700: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002940,commit_num=872 
+UVM_INFO ../env/vpu_scb.sv(173) @ 208800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002944,commit_num=873 
+UVM_INFO ../env/vpu_scb.sv(195) @ 208800: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002948,commit_num=874 
+UVM_INFO ../env/vpu_scb.sv(173) @ 208900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000294c,commit_num=875 
+UVM_INFO ../env/vpu_scb.sv(195) @ 208900: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002950,commit_num=876 
+UVM_INFO ../env/vpu_scb.sv(173) @ 209000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002954,commit_num=877 
+UVM_INFO ../env/vpu_scb.sv(195) @ 209000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002958,commit_num=878 
+UVM_INFO ../env/vpu_scb.sv(173) @ 209100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000295c,commit_num=879 
+UVM_INFO ../env/vpu_scb.sv(195) @ 209100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002960,commit_num=880 
+UVM_INFO ../env/vpu_scb.sv(173) @ 209200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002964,commit_num=881 
+UVM_INFO ../env/vpu_scb.sv(173) @ 210000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002968,commit_num=882 
+UVM_INFO ../env/vpu_scb.sv(195) @ 210000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000296c,commit_num=883 
+UVM_INFO ../env/vpu_scb.sv(173) @ 212000: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000205c,commit_num=884 
+UVM_INFO ../env/vpu_scb.sv(173) @ 212100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002060,commit_num=885 
+UVM_INFO ../env/vpu_scb.sv(195) @ 212100: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002064,commit_num=886 
+UVM_INFO ../env/vpu_scb.sv(173) @ 212200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002068,commit_num=887 
+UVM_INFO ../env/vpu_scb.sv(195) @ 212200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000206c,commit_num=888 
+UVM_INFO ../env/vpu_scb.sv(173) @ 212300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002070,commit_num=889 
+UVM_INFO ../env/vpu_scb.sv(195) @ 212300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002074,commit_num=890 
+UVM_INFO ../env/vpu_scb.sv(173) @ 212400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=80002078,commit_num=891 
+UVM_INFO ../env/vpu_scb.sv(173) @ 215200: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=8000209c,commit_num=892 
+UVM_INFO ../env/vpu_scb.sv(173) @ 215300: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare success,currPc=800020a0,commit_num=893 
+UVM_INFO ../env/vpu_scb.sv(177) @ 215400: uvm_test_top.m_env.m_scb [vpu_scb]  scb get act data : -------------- 
+ verif_commit_valid    :'h1 
+ verif_commit_currPc   :'h800020a4 
+ verif_commit_insn     :'hc507b783 
+ verif_sim_halt        :'h0 
+ verif_trap_valid      :'h0 
+ verif_trap_code       :'h0 
+ verif_reg_gpr_arr[0]  :'h80002970 
+ verif_reg_gpr_arr[1]  :'h8000bda0 
+ verif_reg_gpr_arr[2]  :'h0 
+ verif_reg_gpr_arr[3]  :'h0 
+ verif_reg_gpr_arr[4]  :'h80000008 
+ verif_reg_gpr_arr[5]  :'h800037e0 
+ verif_reg_gpr_arr[6]  :'h0 
+ verif_reg_gpr_arr[7]  :'h8000bdb0 
+ verif_reg_gpr_arr[8]  :'h0 
+ verif_reg_gpr_arr[9]  :'h8000bdb0 
+ verif_reg_gpr_arr[10]  :'h0 
+ verif_reg_gpr_arr[11]  :'h120 
+ verif_reg_gpr_arr[12]  :'h80064000 
+ verif_reg_gpr_arr[13]  :'h8000bed0 
+ verif_reg_gpr_arr[14]  :'h80002cf0 
+ verif_reg_gpr_arr[15]  :'hffffffff7fe00010 
+ verif_reg_gpr_arr[16]  :'h8003f 
+ verif_reg_gpr_arr[17]  :'h0 
+ verif_reg_gpr_arr[18]  :'h0 
+ verif_reg_gpr_arr[19]  :'h0 
+ verif_reg_gpr_arr[20]  :'h0 
+ verif_reg_gpr_arr[21]  :'h0 
+ verif_reg_gpr_arr[22]  :'h0 
+ verif_reg_gpr_arr[23]  :'h0 
+ verif_reg_gpr_arr[24]  :'h0 
+ verif_reg_gpr_arr[25]  :'h0 
+ verif_reg_gpr_arr[26]  :'h0 
+ verif_reg_gpr_arr[27]  :'h0 
+ verif_reg_gpr_arr[28]  :'h0 
+ verif_reg_gpr_arr[29]  :'h0 
+ verif_reg_gpr_arr[30]  :'h0 
+ verif_reg_fpr_arr[0]  :'h0 
+ verif_reg_fpr_arr[1]  :'h0 
+ verif_reg_fpr_arr[2]  :'h0 
+ verif_reg_fpr_arr[3]  :'h0 
+ verif_reg_fpr_arr[4]  :'h0 
+ verif_reg_fpr_arr[5]  :'h0 
+ verif_reg_fpr_arr[6]  :'h0 
+ verif_reg_fpr_arr[7]  :'h0 
+ verif_reg_fpr_arr[8]  :'h0 
+ verif_reg_fpr_arr[9]  :'h0 
+ verif_reg_fpr_arr[10]  :'h0 
+ verif_reg_fpr_arr[11]  :'h0 
+ verif_reg_fpr_arr[12]  :'h0 
+ verif_reg_fpr_arr[13]  :'h0 
+ verif_reg_fpr_arr[14]  :'h0 
+ verif_reg_fpr_arr[15]  :'h0 
+ verif_reg_fpr_arr[16]  :'h0 
+ verif_reg_fpr_arr[17]  :'h0 
+ verif_reg_fpr_arr[18]  :'h0 
+ verif_reg_fpr_arr[19]  :'h0 
+ verif_reg_fpr_arr[20]  :'h0 
+ verif_reg_fpr_arr[21]  :'h0 
+ verif_reg_fpr_arr[22]  :'h0 
+ verif_reg_fpr_arr[23]  :'h0 
+ verif_reg_fpr_arr[24]  :'h0 
+ verif_reg_fpr_arr[25]  :'h0 
+ verif_reg_fpr_arr[26]  :'h0 
+ verif_reg_fpr_arr[27]  :'h0 
+ verif_reg_fpr_arr[28]  :'h0 
+ verif_reg_fpr_arr[29]  :'h0 
+ verif_reg_fpr_arr[30]  :'h0 
+ verif_reg_fpr_arr[31]  :'h0 
+ verif_reg_vpr_arr[0]  :'h0 
+ verif_reg_vpr_arr[1]  :'h0 
+ verif_reg_vpr_arr[2]  :'h0 
+ verif_reg_vpr_arr[3]  :'h0 
+ verif_reg_vpr_arr[4]  :'h0 
+ verif_reg_vpr_arr[5]  :'h0 
+ verif_reg_vpr_arr[6]  :'h0 
+ verif_reg_vpr_arr[7]  :'h0 
+ verif_reg_vpr_arr[8]  :'h0 
+ verif_reg_vpr_arr[9]  :'h0 
+ verif_reg_vpr_arr[10]  :'h0 
+ verif_reg_vpr_arr[11]  :'h0 
+ verif_reg_vpr_arr[12]  :'h0 
+ verif_reg_vpr_arr[13]  :'h0 
+ verif_reg_vpr_arr[14]  :'h0 
+ verif_reg_vpr_arr[15]  :'h0 
+ verif_reg_vpr_arr[16]  :'h0 
+ verif_reg_vpr_arr[17]  :'h0 
+ verif_reg_vpr_arr[18]  :'h0 
+ verif_reg_vpr_arr[19]  :'h0 
+ verif_reg_vpr_arr[20]  :'h0 
+ verif_reg_vpr_arr[21]  :'h0 
+ verif_reg_vpr_arr[22]  :'h0 
+ verif_reg_vpr_arr[23]  :'h0 
+ verif_reg_vpr_arr[24]  :'h0 
+ verif_reg_vpr_arr[25]  :'h0 
+ verif_reg_vpr_arr[26]  :'h0 
+ verif_reg_vpr_arr[27]  :'h0 
+ verif_reg_vpr_arr[28]  :'h0 
+ verif_reg_vpr_arr[29]  :'h0 
+ verif_reg_vpr_arr[30]  :'h0 
+ verif_reg_vpr_arr[31]  :'h0 
+ verif_csr_mstatus     :'h8000000a00006600 
+ verif_csr_mepc        :'h0 
+ verif_csr_mtval       :'h0 
+ verif_csr_mtvec       :'h80000008 
+ verif_csr_mcause      :'h0 
+ verif_csr_mip         :'h0 
+ verif_csr_mie         :'h0 
+ verif_csr_mscratch    :'h8000bee0 
+ verif_csr_mideleg     :'h0 
+ verif_csr_medeleg     :'hb100 
+ verif_csr_minstret    :'h389 
+ verif_csr_sstatus     :'h8000000200006600 
+ verif_csr_sepc        :'h0 
+ verif_csr_stval       :'h0 
+ verif_csr_stvec       :'hffffffffffe00144 
+ verif_csr_scause      :'h0 
+ verif_csr_satp        :'h8000000000080004 
+ verif_csr_sscratch    :'hffffffffffe0bee0 
+ verif_csr_vtype       :'h8000000000000000 
+ verif_csr_vcsr        :'h0 
+ verif_csr_vl          :'h0 
+ verif_csr_vstart      :'h0 
+UVM_INFO ../env/vpu_scb.sv(180) @ 215400: uvm_test_top.m_env.m_scb [vpu_scb]  scb get exp data : -------------- 
+ verif_commit_valid    :'h1 
+ verif_commit_currPc   :'h800020a4 
+ verif_commit_insn     :'hc507b783 
+ verif_sim_halt        :'h0 
+ verif_trap_valid      :'h0 
+ verif_trap_code       :'h0 
+ verif_reg_gpr_arr[0]  :'h80002970 
+ verif_reg_gpr_arr[1]  :'h8000bda0 
+ verif_reg_gpr_arr[2]  :'h0 
+ verif_reg_gpr_arr[3]  :'h0 
+ verif_reg_gpr_arr[4]  :'h80000008 
+ verif_reg_gpr_arr[5]  :'h800037e0 
+ verif_reg_gpr_arr[6]  :'h0 
+ verif_reg_gpr_arr[7]  :'h8000bdb0 
+ verif_reg_gpr_arr[8]  :'h0 
+ verif_reg_gpr_arr[9]  :'h8000bdb0 
+ verif_reg_gpr_arr[10]  :'h0 
+ verif_reg_gpr_arr[11]  :'h120 
+ verif_reg_gpr_arr[12]  :'h80064000 
+ verif_reg_gpr_arr[13]  :'h8000bed0 
+ verif_reg_gpr_arr[14]  :'h101010101010101 
+ verif_reg_gpr_arr[15]  :'hffffffff7fe00010 
+ verif_reg_gpr_arr[16]  :'h8003f 
+ verif_reg_gpr_arr[17]  :'h0 
+ verif_reg_gpr_arr[18]  :'h0 
+ verif_reg_gpr_arr[19]  :'h0 
+ verif_reg_gpr_arr[20]  :'h0 
+ verif_reg_gpr_arr[21]  :'h0 
+ verif_reg_gpr_arr[22]  :'h0 
+ verif_reg_gpr_arr[23]  :'h0 
+ verif_reg_gpr_arr[24]  :'h0 
+ verif_reg_gpr_arr[25]  :'h0 
+ verif_reg_gpr_arr[26]  :'h0 
+ verif_reg_gpr_arr[27]  :'h0 
+ verif_reg_gpr_arr[28]  :'h0 
+ verif_reg_gpr_arr[29]  :'h0 
+ verif_reg_gpr_arr[30]  :'h0 
+ verif_reg_fpr_arr[0]  :'h0 
+ verif_reg_fpr_arr[1]  :'h0 
+ verif_reg_fpr_arr[2]  :'h0 
+ verif_reg_fpr_arr[3]  :'h0 
+ verif_reg_fpr_arr[4]  :'h0 
+ verif_reg_fpr_arr[5]  :'h0 
+ verif_reg_fpr_arr[6]  :'h0 
+ verif_reg_fpr_arr[7]  :'h0 
+ verif_reg_fpr_arr[8]  :'h0 
+ verif_reg_fpr_arr[9]  :'h0 
+ verif_reg_fpr_arr[10]  :'h0 
+ verif_reg_fpr_arr[11]  :'h0 
+ verif_reg_fpr_arr[12]  :'h0 
+ verif_reg_fpr_arr[13]  :'h0 
+ verif_reg_fpr_arr[14]  :'h0 
+ verif_reg_fpr_arr[15]  :'h0 
+ verif_reg_fpr_arr[16]  :'h0 
+ verif_reg_fpr_arr[17]  :'h0 
+ verif_reg_fpr_arr[18]  :'h0 
+ verif_reg_fpr_arr[19]  :'h0 
+ verif_reg_fpr_arr[20]  :'h0 
+ verif_reg_fpr_arr[21]  :'h0 
+ verif_reg_fpr_arr[22]  :'h0 
+ verif_reg_fpr_arr[23]  :'h0 
+ verif_reg_fpr_arr[24]  :'h0 
+ verif_reg_fpr_arr[25]  :'h0 
+ verif_reg_fpr_arr[26]  :'h0 
+ verif_reg_fpr_arr[27]  :'h0 
+ verif_reg_fpr_arr[28]  :'h0 
+ verif_reg_fpr_arr[29]  :'h0 
+ verif_reg_fpr_arr[30]  :'h0 
+ verif_reg_fpr_arr[31]  :'h0 
+ verif_reg_vpr_arr[0]  :'h0 
+ verif_reg_vpr_arr[1]  :'h0 
+ verif_reg_vpr_arr[2]  :'h0 
+ verif_reg_vpr_arr[3]  :'h0 
+ verif_reg_vpr_arr[4]  :'h0 
+ verif_reg_vpr_arr[5]  :'h0 
+ verif_reg_vpr_arr[6]  :'h0 
+ verif_reg_vpr_arr[7]  :'h0 
+ verif_reg_vpr_arr[8]  :'h0 
+ verif_reg_vpr_arr[9]  :'h0 
+ verif_reg_vpr_arr[10]  :'h0 
+ verif_reg_vpr_arr[11]  :'h0 
+ verif_reg_vpr_arr[12]  :'h0 
+ verif_reg_vpr_arr[13]  :'h0 
+ verif_reg_vpr_arr[14]  :'h0 
+ verif_reg_vpr_arr[15]  :'h0 
+ verif_reg_vpr_arr[16]  :'h0 
+ verif_reg_vpr_arr[17]  :'h0 
+ verif_reg_vpr_arr[18]  :'h0 
+ verif_reg_vpr_arr[19]  :'h0 
+ verif_reg_vpr_arr[20]  :'h0 
+ verif_reg_vpr_arr[21]  :'h0 
+ verif_reg_vpr_arr[22]  :'h0 
+ verif_reg_vpr_arr[23]  :'h0 
+ verif_reg_vpr_arr[24]  :'h0 
+ verif_reg_vpr_arr[25]  :'h0 
+ verif_reg_vpr_arr[26]  :'h0 
+ verif_reg_vpr_arr[27]  :'h0 
+ verif_reg_vpr_arr[28]  :'h0 
+ verif_reg_vpr_arr[29]  :'h0 
+ verif_reg_vpr_arr[30]  :'h0 
+ verif_reg_vpr_arr[31]  :'h0 
+ verif_csr_mstatus     :'h8000000a00006600 
+ verif_csr_mepc        :'h0 
+ verif_csr_mtval       :'h0 
+ verif_csr_mtvec       :'h80000008 
+ verif_csr_mcause      :'h0 
+ verif_csr_mip         :'h0 
+ verif_csr_mie         :'h0 
+ verif_csr_mscratch    :'h8000bee0 
+ verif_csr_mideleg     :'h0 
+ verif_csr_medeleg     :'hb100 
+ verif_csr_minstret    :'h389 
+ verif_csr_sstatus     :'h8000000200006600 
+ verif_csr_sepc        :'h0 
+ verif_csr_stval       :'h0 
+ verif_csr_stvec       :'hffffffffffe00144 
+ verif_csr_scause      :'h0 
+ verif_csr_satp        :'h8000000000080004 
+ verif_csr_sscratch    :'hffffffffffe0bee0 
+ verif_csr_vtype       :'h8000000000000000 
+ verif_csr_vcsr        :'h0 
+ verif_csr_vl          :'h0 
+ verif_csr_vstart      :'h0 
+UVM_ERROR ../env/vpu_scb.sv(182) @ 215400: uvm_test_top.m_env.m_scb [vpu_scb]  dut and spike compare fail,currPc=800020a4,commit_num=894 
+UVM_INFO /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_report_server.svh(894) @ 215400: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+Quit count reached!
+Quit count :     1 of     1
+** Report counts by severity
+UVM_INFO :  906
+UVM_WARNING :    2
+UVM_ERROR :    1
+UVM_FATAL :    0
+** Report counts by id
+[NOCONFIG]     2
+[RNTST]     1
+[UVM/FACTORY/PRINT]     1
+[UVM/RELNOTES]     1
+[UVMTOP]     1
+[body]     2
+[data_monitor]     1
+[instr_test]     2
+[tb_top]     2
+[vpu_scb]   896
+
+$finish called from file "/tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/base/uvm_root.svh", line 135.
+$finish at simulation time               215400
+
+---------------------------------------------------------------------------
+VCS Coverage Metrics: during simulation line, cond, FSM, branch, tgl was monitored
+---------------------------------------------------------------------------
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2154000 ps
+CPU Time:      1.750 seconds;       Data structure size:  10.6Mb
+Wed Nov 13 13:47:15 2024
