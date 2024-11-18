@@ -1,9 +1,0 @@
-{"vcs1":{"timestamp_begin":1731476774.482285937, "rt":33.77, "ut":34.84, "st":1.57}}
-{"vcselab":{"timestamp_begin":1731476808.384752378, "rt":0.78, "ut":0.55, "st":0.21}}
-{"link":{"timestamp_begin":1731476809.260877330, "rt":1.02, "ut":0.50, "st":0.55}}
-{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1731476772.387971140}
-{"VCS_COMP_START_TIME": 1731476772.387971140}
-{"VCS_COMP_END_TIME": 1731476810.543125865}
-{"VCS_USER_OPTIONS": "-full64 -cc gcc-5 -LDFLAGS -Wl,--no-as-needed +v2k -sverilog -timescale=1ns/10ps -debug_access+all -kdb -CFLAGS -DVCS +vcs+lic+wait -Mdir=./base_func/exec/csrc -o ./base_func/exec/simv +vc+list -CC -I/tools/synopsys/vcs/T-2022.06/include -CC -I/tools/others/rocket-tools//include -CC -std=c++17 -CC -Wl,-rpath,/tools/others/rocket-tools//lib /tools/others/rocket-tools//lib/libfesvr.a +define+CLOCK_PERIOD=1.0 +define+RANDOMIZE_DELAY=0.1 +define+FSDB+define+WAVES_FSDB+define+WAVES=fsdb +libext+.v +define+NRET=2 +define+NTRAP=1 +define+XLEN=64 +define+FLEN=64 +define+VLEN=128 -cm line+cond+tgl+fsm+branch+assert -cm_dir ./base_func/cov/simv -cm_hier ../cfg/cov.cfg +incdir+/tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2 +incdir+/tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/dpi /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/uvm.sv /tools/synopsys/vcs/Q-2020.03-SP2-7/etc/uvm-1.2/dpi/uvm_dpi.cc -f ../cfg/dut.f -f ../cfg/tb.f -l ./base_func/logs/vcs_compiler.log"}
-{"vcs1": {"peak_mem": 2775931}}
-{"stitch_vcselab": {"peak_mem": 2776609}}
