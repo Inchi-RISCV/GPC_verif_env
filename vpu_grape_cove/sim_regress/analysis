@@ -1,6 +1,6 @@
 #!/bin/bash
 
-input_file="/datahdd/riscv/$USER/GPC_verif_env/vpu_grape_cove/sim1/regress.log"
+input_file="/datahdd/riscv/$USER/GPC_verif_env/vpu_grape_cove/sim_regress/regress.log"
 output_file_pass="/datahdd/riscv/$USER/GPC_verif_env/vpu_grape_cove/common/tc_list_riscv-tests-passed"
 output_file_fail="/datahdd/riscv/$USER/GPC_verif_env/vpu_grape_cove/common/tc_list_riscv-tests-fail"
 
