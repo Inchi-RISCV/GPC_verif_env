@@ -222,13 +222,13 @@ function string data_trans::sprint_high(data_trans act_trans);
   $display(" verif_trap_valid      :'h%0h ",act_trans.verif_trap_valid);
   $display(" verif_trap_code       :'h%0h ",act_trans.verif_trap_code);
 	for(int i = 31;i <62; i++)begin
-  	$display(" verif_reg_gpr_arr[%0d]  :'h%0h ",i,act_trans.verif_reg_gpr_arr[i]);
+  	$display(" verif_reg_gpr_arr[%0d]  :'h%0h ",i-31,act_trans.verif_reg_gpr_arr[i]);
 	end
 	for(int j = 32;j <64; j++)begin
-  	$display(" verif_reg_fpr_arr[%0d]  :'h%0h ",j,act_trans.verif_reg_fpr_arr[j]);
+  	$display(" verif_reg_fpr_arr[%0d]  :'h%0h ",j-32,act_trans.verif_reg_fpr_arr[j]);
 	end
 	for(int k = 32;k <64; k++)begin
-  	$display(" verif_reg_vpr_arr[%0d]  :'h%0h ",k,act_trans.verif_reg_vpr_arr[k]);
+  	$display(" verif_reg_vpr_arr[%0d]  :'h%0h ",k-32,act_trans.verif_reg_vpr_arr[k]);
 	end
   $display(" verif_csr_mstatus     :'h%0h ",act_trans.verif_csr_mstatusWr[127:64]);
   $display(" verif_csr_mepc        :'h%0h ",act_trans.verif_csr_mepcWr[127:64]);
