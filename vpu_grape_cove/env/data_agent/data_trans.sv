@@ -181,7 +181,7 @@ function string data_trans::sprint_low(data_trans act_trans);
   $display(" verif_trap_valid      :'h%0h ",act_trans.verif_trap_valid);
   $display(" verif_trap_code       :'h%0h ",act_trans.verif_trap_code);
 		for(int i = 0;i <31; i++)begin
-  		$display(" verif_reg_gpr_arr[%0d]  :'h%0h ",i,act_trans.verif_reg_gpr_arr[i]);
+  		$display(" verif_reg_gpr_arr[%0d]  :'h%0h ",i+1,act_trans.verif_reg_gpr_arr[i]);
 		end
 		for(int j = 0;j <32; j++)begin
   		$display(" verif_reg_fpr_arr[%0d]  :'h%0h ",j,act_trans.verif_reg_fpr_arr[j]);
@@ -222,7 +222,7 @@ function string data_trans::sprint_high(data_trans act_trans);
   $display(" verif_trap_valid      :'h%0h ",act_trans.verif_trap_valid);
   $display(" verif_trap_code       :'h%0h ",act_trans.verif_trap_code);
 	for(int i = 31;i <62; i++)begin
-  	$display(" verif_reg_gpr_arr[%0d]  :'h%0h ",i-31,act_trans.verif_reg_gpr_arr[i]);
+  	$display(" verif_reg_gpr_arr[%0d]  :'h%0h ",i-30,act_trans.verif_reg_gpr_arr[i]);
 	end
 	for(int j = 32;j <64; j++)begin
   	$display(" verif_reg_fpr_arr[%0d]  :'h%0h ",j-32,act_trans.verif_reg_fpr_arr[j]);
