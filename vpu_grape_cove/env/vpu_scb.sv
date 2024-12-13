@@ -138,7 +138,7 @@ task vpu_scb::commit_check();
 
 			if(data_act_tr.verif_commit_valid) begin
 
-				data_act_tr.verif_csr_mtvalWr = data_act_tr.verif_csr_mtvalWr& 64'hFF_FFFF_FFFF;
+				//data_act_tr.verif_csr_mtvalWr = data_act_tr.verif_csr_mtvalWr& 64'hFF_FFFF_FFFF;
 				//data_act_tr.verif_csr_mstatusWr = data_act_tr.verif_csr_mstatusWr & 32'h7FFF_9FFF;
         //data_act_tr.verif_csr_sstatusWr = data_act_tr.verif_csr_sstatusWr & 32'h7FFF_9FFF;
 				
