@@ -293,7 +293,7 @@ task vpu_scb::do_exp_tr();
 
     data_exp_tr.verif_csr_mstatusWr  =      spike_arry[24]; // bit 13,14,31 not care
     data_exp_tr.verif_csr_mepcWr     =      spike_arry[22];
-    data_exp_tr.verif_csr_mtvalWr    =      spike_arry[20] & 64'hFF_FFFF_FFFF;
+    data_exp_tr.verif_csr_mtvalWr    =      spike_arry[20];
     data_exp_tr.verif_csr_mtvecWr    =      spike_arry[18];
     data_exp_tr.verif_csr_mcauseWr   =      spike_arry[16];
     data_exp_tr.verif_csr_mipWr      =      spike_arry[13];//todoy
