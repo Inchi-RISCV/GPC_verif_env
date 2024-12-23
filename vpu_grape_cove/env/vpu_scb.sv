@@ -102,7 +102,14 @@ task vpu_scb::commit_check();
 
   bit dut_start_cp;
 	bit [31:0] commit_num;
-
+  bit ex_npc_msb_low;
+  bit ex_npc_msb_high;
+	bit [24:0] ex_npc_a_low;
+	bit [24:0] ex_npc_a_high;
+  bit ex_npc_msb_epc_low;
+  bit ex_npc_msb_epc_high;
+	bit [24:0] ex_npc_a_epc_low;
+	bit [24:0] ex_npc_a_epc_high;
   // 127:64 pc  
 	
 
@@ -138,6 +145,9 @@ task vpu_scb::commit_check();
 
 			if(data_act_tr.verif_commit_valid) begin
 
+				//data_act_tr.verif_csr_mtvalWr[63:0] = data_act_tr.verif_csr_mtvalWr[63:0]& 64'hFF_FFFF_FFFF;
+				//data_act_tr.verif_csr_mtvalWr[127:64] = data_act_tr.verif_csr_mtvalWr[127:64]& 64'hFF_FFFF_FFFF;
+				
 				//data_act_tr.verif_csr_mtvalWr = data_act_tr.verif_csr_mtvalWr& 64'hFF_FFFF_FFFF;
 				//data_act_tr.verif_csr_mstatusWr = data_act_tr.verif_csr_mstatusWr & 32'h7FFF_9FFF;
         //data_act_tr.verif_csr_sstatusWr = data_act_tr.verif_csr_sstatusWr & 32'h7FFF_9FFF;
@@ -151,7 +161,7 @@ task vpu_scb::commit_check();
 		    end
 
 
-		    if(data_act_tr.verif_commit_currPc[63:0] == 'h8000_0000) begin
+		    if(data_act_tr.verif_commit_currPc[40:0] == 'h8000_0000) begin
 		    	dut_start_cp = 1;
 		    	init_spike_info(data_act_tr);
 				  //force tb_top.testHarness.SimDTM.debug_req_bits_data[31:0] = 0;
@@ -165,6 +175,13 @@ task vpu_scb::commit_check();
 		       if(data_act_tr.verif_commit_valid[0] == 1)begin
 					 	inchi_difftest_exec();
 		       	do_exp_tr();
+						ex_npc_a_low =  data_exp_tr.verif_commit_currPc[63:39];
+						ex_npc_msb_low = (ex_npc_a_low == 25'h0 || &ex_npc_a_low) ? data_exp_tr.verif_commit_currPc[39] : ~data_exp_tr.verif_commit_currPc[38];
+        		data_exp_tr.verif_commit_currPc[39:0] = {ex_npc_msb_low,data_exp_tr.verif_commit_currPc[38:0]};
+						
+						ex_npc_a_epc_low =  data_exp_tr.verif_csr_mepcWr[63:39];
+						ex_npc_msb_epc_low = (ex_npc_a_epc_low == 25'h0 || &ex_npc_a_epc_low) ? data_exp_tr.verif_csr_mepcWr[39] : ~data_exp_tr.verif_csr_mepcWr[38];
+        		data_exp_tr.verif_csr_mepcWr[39:0] = {ex_npc_msb_epc_low,data_exp_tr.verif_csr_mepcWr[38:0]};
 
 		     	 	comp_pass_low = data_act_tr.my_compare_low(data_exp_tr);
 		     	 	commit_num ++;
@@ -187,6 +204,14 @@ task vpu_scb::commit_check();
 		       if(data_act_tr.verif_commit_valid[1] == 1)begin
 					 	inchi_difftest_exec();
 		       	do_exp_tr();
+						ex_npc_a_high =  data_exp_tr.verif_commit_currPc[63:39];
+						ex_npc_msb_high = (ex_npc_a_high == 25'h0 || &ex_npc_a_high) ? data_exp_tr.verif_commit_currPc[39] : ~data_exp_tr.verif_commit_currPc[38];
+        		data_exp_tr.verif_commit_currPc[39:0] = {ex_npc_msb_high,data_exp_tr.verif_commit_currPc[38:0]};
+						
+						ex_npc_a_epc_high =  data_exp_tr.verif_csr_mepcWr[63:39];
+						ex_npc_msb_epc_high = (ex_npc_a_epc_high == 25'h0 || &ex_npc_a_epc_high) ? data_exp_tr.verif_csr_mepcWr[39] : ~data_exp_tr.verif_csr_mepcWr[38];
+        		data_exp_tr.verif_csr_mepcWr[39:0] = {ex_npc_msb_epc_high,data_exp_tr.verif_csr_mepcWr[38:0]};
+						
 
 		     	 	comp_pass_high = data_act_tr.my_compare_high(data_exp_tr);
 		     	 	commit_num ++;
