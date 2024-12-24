@@ -20,7 +20,7 @@
 	import "DPI-C" function inchi_difftest_init();
   import "DPI-C" function inchi_difftest_memcpy(string s);
   import "DPI-C" function inchi_difftest_exec();
-  import "DPI-C" function raise_intr();
+  import "DPI-C" function difftest_raise_intr();
   import "DPI-C" function inchi_difftest_set_reg(input bit[63:0] arr[154]);
   import "DPI-C" function inchi_difftest_get_reg(output bit[63:0] arr[154]);
 

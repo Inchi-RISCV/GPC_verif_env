@@ -129,7 +129,7 @@ task vpu_scb::commit_check();
 			
 			if(data_act_tr_trap.verif_trap_valid == 1)begin
 				if(data_act_tr_trap.verif_trap_code[63] == 1)begin
-					raise_intr();
+					difftest_raise_intr();
 				end
 				else begin
 		     inchi_difftest_exec();
