@@ -98,7 +98,7 @@ class data_trans extends uvm_sequence_item;
 
 	function bit my_compare_low(data_trans exp_trans);
   	return (this.verif_commit_valid[0] == exp_trans.verif_commit_valid)&&
-					 (this.verif_commit_currPc[63:0] == exp_trans.verif_commit_currPc[63:0])&&
+					 (this.verif_commit_currPc[39:0] == exp_trans.verif_commit_currPc[39:0])&&
    				 (this.verif_commit_insn[31:0] == exp_trans.verif_commit_insn)&&
    				 (this.verif_sim_halt == exp_trans.verif_sim_halt)&&
    				 (this.verif_trap_valid == exp_trans.verif_trap_valid)&&
@@ -107,8 +107,8 @@ class data_trans extends uvm_sequence_item;
    				 (this.verif_reg_fpr_arr[0:31] == exp_trans.verif_reg_fpr_arr)&&
    				 (this.verif_reg_vpr_arr[0:31] == exp_trans.verif_reg_vpr_arr)&&
 					 (this.verif_csr_mstatusWr[63:0] == exp_trans.verif_csr_mstatusWr) &&
-					 (this.verif_csr_mepcWr[63:0] == exp_trans.verif_csr_mepcWr) &&
-					 (this.verif_csr_mtvalWr[63:0] == exp_trans.verif_csr_mtvalWr) &&
+					 (this.verif_csr_mepcWr[39:0] == exp_trans.verif_csr_mepcWr[39:0]) &&
+					 (this.verif_csr_mtvalWr[31:0] == exp_trans.verif_csr_mtvalWr[31:0]) &&
 					 (this.verif_csr_mtvecWr[63:0] == exp_trans.verif_csr_mtvecWr) &&
 					 (this.verif_csr_mcauseWr[63:0] == exp_trans.verif_csr_mcauseWr) &&
 					 (this.verif_csr_mipWr[63:0] == exp_trans.verif_csr_mipWr) &&
@@ -133,7 +133,7 @@ class data_trans extends uvm_sequence_item;
 
 	function bit my_compare_high(data_trans exp_trans);
   	return (this.verif_commit_valid[1] == exp_trans.verif_commit_valid)&&
-					 (this.verif_commit_currPc[127:64] == exp_trans.verif_commit_currPc[39:0])&&
+					 (this.verif_commit_currPc[103:64] == exp_trans.verif_commit_currPc[39:0])&&
    				 (this.verif_commit_insn[63:32] == exp_trans.verif_commit_insn)&&
    				 (this.verif_sim_halt == exp_trans.verif_sim_halt)&&
    				 (this.verif_trap_valid == exp_trans.verif_trap_valid)&&
@@ -142,8 +142,8 @@ class data_trans extends uvm_sequence_item;
    				 (this.verif_reg_fpr_arr[32:63] == exp_trans.verif_reg_fpr_arr)&&
    				 (this.verif_reg_vpr_arr[32:63] == exp_trans.verif_reg_vpr_arr)&&
 					 (this.verif_csr_mstatusWr[127:64] == exp_trans.verif_csr_mstatusWr) &&
-					 (this.verif_csr_mepcWr[127:64] == exp_trans.verif_csr_mepcWr) &&
-					 (this.verif_csr_mtvalWr[127:64] == exp_trans.verif_csr_mtvalWr) &&
+					 (this.verif_csr_mepcWr[103:64] == exp_trans.verif_csr_mepcWr[39:0]) &&
+					 (this.verif_csr_mtvalWr[95:64] == exp_trans.verif_csr_mtvalWr[31:0]) &&
 					 (this.verif_csr_mtvecWr[127:64] == exp_trans.verif_csr_mtvecWr) &&
 					 (this.verif_csr_mcauseWr[127:64] == exp_trans.verif_csr_mcauseWr) &&
 					 (this.verif_csr_mipWr[127:64] == exp_trans.verif_csr_mipWr) &&
@@ -175,7 +175,7 @@ endfunction : new
 
 function string data_trans::sprint_low(data_trans act_trans);
   $display(" verif_commit_valid    :'h%0b ",act_trans.verif_commit_valid[0]);
-  $display(" verif_commit_currPc   :'h%0h ",act_trans.verif_commit_currPc[63:0]);
+  $display(" verif_commit_currPc   :'h%0h ",act_trans.verif_commit_currPc[39:0]);
   $display(" verif_commit_insn     :'h%0h ",act_trans.verif_commit_insn[31:0]);
   $display(" verif_sim_halt        :'h%0h ",act_trans.verif_sim_halt);
   $display(" verif_trap_valid      :'h%0h ",act_trans.verif_trap_valid);
@@ -190,8 +190,8 @@ function string data_trans::sprint_low(data_trans act_trans);
   		$display(" verif_reg_vpr_arr[%0d]  :'h%0h ",k,act_trans.verif_reg_vpr_arr[k]);
 		end
   $display(" verif_csr_mstatus     :'h%0h ",act_trans.verif_csr_mstatusWr[63:0]);
-  $display(" verif_csr_mepc        :'h%0h ",act_trans.verif_csr_mepcWr[63:0]);
-  $display(" verif_csr_mtval       :'h%0h ",act_trans.verif_csr_mtvalWr[63:0]);
+  $display(" verif_csr_mepc        :'h%0h ",act_trans.verif_csr_mepcWr[39:0]);
+  $display(" verif_csr_mtval       :'h%0h ",act_trans.verif_csr_mtvalWr[31:0]);
   $display(" verif_csr_mtvec       :'h%0h ",act_trans.verif_csr_mtvecWr[63:0]);
   $display(" verif_csr_mcause      :'h%0h ",act_trans.verif_csr_mcauseWr[63:0]);
   $display(" verif_csr_mip         :'h%0h ",act_trans.verif_csr_mipWr[63:0]);
@@ -216,7 +216,7 @@ endfunction
 
 function string data_trans::sprint_high(data_trans act_trans);
   $display(" verif_commit_valid    :'h%0b ",act_trans.verif_commit_valid[1]);
-  $display(" verif_commit_currPc   :'h%0h ",act_trans.verif_commit_currPc[127:64]);
+  $display(" verif_commit_currPc   :'h%0h ",act_trans.verif_commit_currPc[103:64]);
   $display(" verif_commit_insn     :'h%0h ",act_trans.verif_commit_insn[63:32]);
   $display(" verif_sim_halt        :'h%0h ",act_trans.verif_sim_halt);
   $display(" verif_trap_valid      :'h%0h ",act_trans.verif_trap_valid);
@@ -231,8 +231,8 @@ function string data_trans::sprint_high(data_trans act_trans);
   	$display(" verif_reg_vpr_arr[%0d]  :'h%0h ",k-32,act_trans.verif_reg_vpr_arr[k]);
 	end
   $display(" verif_csr_mstatus     :'h%0h ",act_trans.verif_csr_mstatusWr[127:64]);
-  $display(" verif_csr_mepc        :'h%0h ",act_trans.verif_csr_mepcWr[127:64]);
-  $display(" verif_csr_mtval       :'h%0h ",act_trans.verif_csr_mtvalWr[127:64]);
+  $display(" verif_csr_mepc        :'h%0h ",act_trans.verif_csr_mepcWr[103:64]);
+  $display(" verif_csr_mtval       :'h%0h ",act_trans.verif_csr_mtvalWr[95:64]);
   $display(" verif_csr_mtvec       :'h%0h ",act_trans.verif_csr_mtvecWr[127:64]);
   $display(" verif_csr_mcause      :'h%0h ",act_trans.verif_csr_mcauseWr[127:64]);
   $display(" verif_csr_mip         :'h%0h ",act_trans.verif_csr_mipWr[127:64]);
