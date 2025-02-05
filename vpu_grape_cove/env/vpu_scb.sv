@@ -26,6 +26,8 @@ class vpu_scb extends uvm_component;
 	extern task commit_check();
 	extern task do_exp_tr();
   extern task init_spike_info(data_trans data_act_tr);
+  extern task init_spike_info_high(data_trans data_act_tr);
+  extern task init_spike_info_low(data_trans data_act_tr);
 
 	bit     instr_finish;
 	static event time_out_refresh;
@@ -129,7 +131,7 @@ task vpu_scb::commit_check();
 			
 			if(data_act_tr_trap.verif_trap_valid == 1)begin
 				if(data_act_tr_trap.verif_trap_code[63] == 1)begin
-				  difftest_raise_intr(64'b0, data_act_tr_trap.verif_trap_code);
+					difftest_raise_intr(64'b0, data_act_tr_trap.verif_trap_code);
 				end
 				else begin
 		     inchi_difftest_exec();
@@ -173,61 +175,82 @@ task vpu_scb::commit_check();
 		    if(dut_start_cp & instr_finish!=1) begin
          	//`uvm_info(get_type_name(),{" scb get act data : ",data_act_tr.sprint},UVM_NONE);
 		       if(data_act_tr.verif_commit_valid[0] == 1)begin
-					 	inchi_difftest_exec();
-		       	do_exp_tr();
-						ex_npc_a_low =  data_exp_tr.verif_commit_currPc[63:39];
-						ex_npc_msb_low = (ex_npc_a_low == 25'h0 || &ex_npc_a_low) ? data_exp_tr.verif_commit_currPc[39] : ~data_exp_tr.verif_commit_currPc[38];
-        		data_exp_tr.verif_commit_currPc[39:0] = {ex_npc_msb_low,data_exp_tr.verif_commit_currPc[38:0]};
-						
-						ex_npc_a_epc_low =  data_exp_tr.verif_csr_mepcWr[63:39];
-						ex_npc_msb_epc_low = (ex_npc_a_epc_low == 25'h0 || &ex_npc_a_epc_low) ? data_exp_tr.verif_csr_mepcWr[39] : ~data_exp_tr.verif_csr_mepcWr[38];
-        		data_exp_tr.verif_csr_mepcWr[39:0] = {ex_npc_msb_epc_low,data_exp_tr.verif_csr_mepcWr[38:0]};
+						 if(data_act_tr.verif_commit_insn[31:0] == 32'hb00027f3 || data_act_tr.verif_commit_insn[31:0] == 32'hb0002573 || data_act_tr.verif_commit_insn[31:0] == 32'hb0002773)begin
+					 			inchi_difftest_exec();
+		    	      init_spike_info_low(data_act_tr);
+		       		  do_exp_tr();
+		     	 		//data_act_tr.sprint_low(data_act_tr);
+		     	 		//data_act_tr.sprint_low(data_exp_tr);
 
-		     	 	comp_pass_low = data_act_tr.my_compare_low(data_exp_tr);
-		     	 	commit_num ++;
+						 end
+						 else begin
+					 		inchi_difftest_exec();
+		       		do_exp_tr();
+					 		//inchi_difftest_exec();
+		       		//do_exp_tr();
+							ex_npc_a_low =  data_exp_tr.verif_commit_currPc[63:39];
+							ex_npc_msb_low = (ex_npc_a_low == 25'h0 || &ex_npc_a_low) ? data_exp_tr.verif_commit_currPc[39] : ~data_exp_tr.verif_commit_currPc[38];
+        			data_exp_tr.verif_commit_currPc[39:0] = {ex_npc_msb_low,data_exp_tr.verif_commit_currPc[38:0]};
+							
+							ex_npc_a_epc_low =  data_exp_tr.verif_csr_mepcWr[63:39];
+							ex_npc_msb_epc_low = (ex_npc_a_epc_low == 25'h0 || &ex_npc_a_epc_low) ? data_exp_tr.verif_csr_mepcWr[39] : ~data_exp_tr.verif_csr_mepcWr[38];
+        			data_exp_tr.verif_csr_mepcWr[39:0] = {ex_npc_msb_epc_low,data_exp_tr.verif_csr_mepcWr[38:0]};
 
-		     	 	if(comp_pass_low)begin
-           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[63:0],commit_num),UVM_NONE);
-		     	 	end
-		     	 	else begin
+		     	 		comp_pass_low = data_act_tr.my_compare_low(data_exp_tr);
+		     	 		commit_num ++;
 
-         	 	  `uvm_info(get_type_name(),(" scb get act data : -------------- "),UVM_NONE);
-		     	 		data_act_tr.sprint_low(data_act_tr);
-							//`uvm_info(get_type_name(),{" scb get exp data : ",data_exp_tr.sprint},UVM_NONE);
-							`uvm_info(get_type_name(),(" scb get exp data : -------------- "),UVM_NONE);
-		     	 		data_act_tr.sprint_low(data_exp_tr);
-		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[63:0],commit_num));
+		     	 		if(comp_pass_low)begin
+           		 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[63:0],commit_num),UVM_NONE);
+		     	 		end
+		     	 		else begin
 
-		     	 	end// end else if comp pass
+         	 		  `uvm_info(get_type_name(),(" scb get act data : -------------- "),UVM_NONE);
+		     	 			data_act_tr.sprint_low(data_act_tr);
+								//`uvm_info(get_type_name(),{" scb get exp data : ",data_exp_tr.sprint},UVM_NONE);
+								`uvm_info(get_type_name(),(" scb get exp data : -------------- "),UVM_NONE);
+		     	 			data_act_tr.sprint_low(data_exp_tr);
+		     	 			`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[63:0],commit_num));
+
+		     	 		end// end else if comp pass
+						 end 
 					 end
 
 		       if(data_act_tr.verif_commit_valid[1] == 1)begin
-					 	inchi_difftest_exec();
-		       	do_exp_tr();
-						ex_npc_a_high =  data_exp_tr.verif_commit_currPc[63:39];
-						ex_npc_msb_high = (ex_npc_a_high == 25'h0 || &ex_npc_a_high) ? data_exp_tr.verif_commit_currPc[39] : ~data_exp_tr.verif_commit_currPc[38];
-        		data_exp_tr.verif_commit_currPc[39:0] = {ex_npc_msb_high,data_exp_tr.verif_commit_currPc[38:0]};
-						
-						ex_npc_a_epc_high =  data_exp_tr.verif_csr_mepcWr[63:39];
-						ex_npc_msb_epc_high = (ex_npc_a_epc_high == 25'h0 || &ex_npc_a_epc_high) ? data_exp_tr.verif_csr_mepcWr[39] : ~data_exp_tr.verif_csr_mepcWr[38];
-        		data_exp_tr.verif_csr_mepcWr[39:0] = {ex_npc_msb_epc_high,data_exp_tr.verif_csr_mepcWr[38:0]};
-						
+						 if(data_act_tr.verif_commit_insn[63:32] == 32'hb00027f3 || data_act_tr.verif_commit_insn[63:32] == 32'hb0002573 || data_act_tr.verif_commit_insn[63:32] == 32'hb0002773)begin
+					 		inchi_difftest_exec();
+		    	    init_spike_info_high(data_act_tr);
+		       		do_exp_tr();
+		     	 		//data_act_tr.sprint_high(data_act_tr);
+		     	 		//data_act_tr.sprint_low(data_exp_tr);
+						 end
+						 else begin
+					 		inchi_difftest_exec();
+		       		do_exp_tr();
+							ex_npc_a_high =  data_exp_tr.verif_commit_currPc[63:39];
+							ex_npc_msb_high = (ex_npc_a_high == 25'h0 || &ex_npc_a_high) ? data_exp_tr.verif_commit_currPc[39] : ~data_exp_tr.verif_commit_currPc[38];
+        			data_exp_tr.verif_commit_currPc[39:0] = {ex_npc_msb_high,data_exp_tr.verif_commit_currPc[38:0]};
+							
+							ex_npc_a_epc_high =  data_exp_tr.verif_csr_mepcWr[63:39];
+							ex_npc_msb_epc_high = (ex_npc_a_epc_high == 25'h0 || &ex_npc_a_epc_high) ? data_exp_tr.verif_csr_mepcWr[39] : ~data_exp_tr.verif_csr_mepcWr[38];
+        			data_exp_tr.verif_csr_mepcWr[39:0] = {ex_npc_msb_epc_high,data_exp_tr.verif_csr_mepcWr[38:0]};
+							
 
-		     	 	comp_pass_high = data_act_tr.my_compare_high(data_exp_tr);
-		     	 	commit_num ++;
+		     	 		comp_pass_high = data_act_tr.my_compare_high(data_exp_tr);
+		     	 		commit_num ++;
 
-		     	 	if(comp_pass_high)begin
-           	 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[127:64],commit_num),UVM_NONE);
-		     	 	end
-		     	 	else begin
+		     	 		if(comp_pass_high)begin
+           		 	`uvm_info(get_type_name(),$sformatf(" dut and spike compare success,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[127:64],commit_num),UVM_NONE);
+		     	 		end
+		     	 		else begin
 
-         	 	  `uvm_info(get_type_name(),(" scb get act data : -------------- "),UVM_NONE);
-		     	 		data_act_tr.sprint_high(data_act_tr);
-							`uvm_info(get_type_name(),(" scb get exp data : -------------- "),UVM_NONE);
-		     	 		data_act_tr.sprint_low(data_exp_tr);
-		     	 		`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[127:64],commit_num));
+         	 		  `uvm_info(get_type_name(),(" scb get act data : -------------- "),UVM_NONE);
+		     	 			data_act_tr.sprint_high(data_act_tr);
+								`uvm_info(get_type_name(),(" scb get exp data : -------------- "),UVM_NONE);
+		     	 			data_act_tr.sprint_low(data_exp_tr);
+		     	 			`uvm_error(get_type_name(),$sformatf(" dut and spike compare fail,currPc=%0h,commit_num=%0d ",data_act_tr.verif_commit_currPc[127:64],commit_num));
 
-		     	 	end// end else if comp pass
+		     	 		end// end else if comp pass
+						 end
 					 end
 
 		    end //end if dut_start_cp
@@ -350,6 +373,7 @@ task vpu_scb::init_spike_info(data_trans data_act_tr);
     bit [63:0] spike_arry[154];
 
     spike_arry[6] = data_act_tr.verif_commit_currPc[63:0];
+    spike_arry[0] = data_act_tr.verif_commit_insn[63:0];
 
 		for(int i=0;i<31;i++)begin
     	spike_arry[i+122+1] = data_act_tr.verif_reg_gpr_arr[i];
@@ -387,10 +411,105 @@ task vpu_scb::init_spike_info(data_trans data_act_tr);
   spike_arry[2]  =   data_act_tr.verif_csr_vlWr[63:0]       ;      
   spike_arry[1]  =   data_act_tr.verif_csr_vstartWr[63:0]   ;      
   //`uvm_info(get_type_name(),$sformatf(" get set_reg initial value %0h",data_act_tr.verif_csr_medelegWr ),UVM_NONE);
+  `uvm_info(get_type_name(),$sformatf(" before set reg %0h",spike_arry[5] ),UVM_NONE);
 
 	inchi_difftest_set_reg(spike_arry);
 	
 endtask
 
+task vpu_scb::init_spike_info_low(data_trans data_act_tr);
+
+    bit [63:0] spike_arry[154];
+
+    spike_arry[6] = data_act_tr.verif_commit_currPc[63:0];
+    spike_arry[0] = data_act_tr.verif_commit_insn[63:0];
+
+		for(int i=0;i<31;i++)begin
+    	spike_arry[i+122+1] = data_act_tr.verif_reg_gpr_arr[i];
+		//`uvm_info(get_type_name(),$sformatf(" verif_reg_gpr_arr=%0h,verif_reg_gpr=%0h", data_exp_tr.verif_reg_gpr_arr[i],vif.verif_reg_gpr[64*i+:64]),UVM_NONE);
+	  end
+    for(int i=0;i<32;i++)begin
+    	spike_arry[90+i] = data_act_tr.verif_reg_fpr_arr[i];
+
+			spike_arry[2*i+26] = data_act_tr.verif_reg_vpr_arr[i][63:0];
+			spike_arry[2*i+27] = data_act_tr.verif_reg_vpr_arr[i][127:64];
+	   end
+
+
+
+  spike_arry[24] =   data_act_tr.verif_csr_mstatusWr[63:0]  ;      
+  spike_arry[22] =   data_act_tr.verif_csr_mepcWr[63:0]     ;      
+  spike_arry[20] =   data_act_tr.verif_csr_mtvalWr[63:0]    ;      
+  spike_arry[18] =   data_act_tr.verif_csr_mtvecWr[63:0]    ;      
+  spike_arry[16] =   data_act_tr.verif_csr_mcauseWr[63:0]   ;      
+  spike_arry[13] =   data_act_tr.verif_csr_mipWr[63:0]      ;      
+  spike_arry[12] =   data_act_tr.verif_csr_mieWr[63:0]      ;      
+  spike_arry[11] =   data_act_tr.verif_csr_mscratchWr[63:0] ;      
+  spike_arry[9]  =   data_act_tr.verif_csr_midelegWr[63:0]  ;      
+  spike_arry[8]  =   data_act_tr.verif_csr_medelegWr[63:0]  ;      
+  spike_arry[5]  =   data_act_tr.verif_csr_minstretWr[63:0] + 1;      
+  spike_arry[23] =   data_act_tr.verif_csr_sstatusWr[63:0]  ;      
+  spike_arry[21] =   data_act_tr.verif_csr_sepcWr[63:0]     ;      
+  spike_arry[19] =   data_act_tr.verif_csr_stvalWr[63:0]    ;      
+  spike_arry[17] =   data_act_tr.verif_csr_stvecWr[63:0]    ;      
+  spike_arry[15] =   data_act_tr.verif_csr_scauseWr[63:0]   ;      
+  spike_arry[14] =   data_act_tr.verif_csr_satpWr[63:0]     ;      
+  spike_arry[10] =   data_act_tr.verif_csr_sscratchWr[63:0] ;      
+  spike_arry[4]  =   data_act_tr.verif_csr_vtypeWr[63:0]    ;      
+  spike_arry[3]  =   data_act_tr.verif_csr_vcsrWr[63:0]     ;      
+  spike_arry[2]  =   data_act_tr.verif_csr_vlWr[63:0]       ;      
+  spike_arry[1]  =   data_act_tr.verif_csr_vstartWr[63:0]   ;      
+  //`uvm_info(get_type_name(),$sformatf(" get set_reg initial value %0h",data_act_tr.verif_csr_medelegWr ),UVM_NONE);
+
+	inchi_difftest_set_reg(spike_arry);
+	
+endtask
+task vpu_scb::init_spike_info_high(data_trans data_act_tr);
+
+    bit [63:0] spike_arry[154];
+
+    spike_arry[6] = data_act_tr.verif_commit_currPc[127:64];
+    spike_arry[0] = data_act_tr.verif_commit_insn[127:64];
+
+		for(int i=0;i<31;i++)begin
+    	spike_arry[i+122+1] = data_act_tr.verif_reg_gpr_arr[i+31];
+		//`uvm_info(get_type_name(),$sformatf(" verif_reg_gpr_arr=%0h,verif_reg_gpr=%0h", data_exp_tr.verif_reg_gpr_arr[i],vif.verif_reg_gpr[64*i+:64]),UVM_NONE);
+	  end
+    for(int i=0;i<32;i++)begin
+    	spike_arry[90+i] = data_act_tr.verif_reg_fpr_arr[i+32];
+
+			spike_arry[2*i+26] = data_act_tr.verif_reg_vpr_arr[i+32][63:0];
+			spike_arry[2*i+27] = data_act_tr.verif_reg_vpr_arr[i+32][127:64];
+	   end
+
+
+
+  spike_arry[24] =   data_act_tr.verif_csr_mstatusWr[127:64]  ;      
+  spike_arry[22] =   data_act_tr.verif_csr_mepcWr[127:64]     ;      
+  spike_arry[20] =   data_act_tr.verif_csr_mtvalWr[127:64]    ;      
+  spike_arry[18] =   data_act_tr.verif_csr_mtvecWr[127:64]    ;      
+  spike_arry[16] =   data_act_tr.verif_csr_mcauseWr[127:64]   ;      
+  spike_arry[13] =   data_act_tr.verif_csr_mipWr[127:64]      ;      
+  spike_arry[12] =   data_act_tr.verif_csr_mieWr[127:64]      ;      
+  spike_arry[11] =   data_act_tr.verif_csr_mscratchWr[127:64] ;      
+  spike_arry[9]  =   data_act_tr.verif_csr_midelegWr[127:64]  ;      
+  spike_arry[8]  =   data_act_tr.verif_csr_medelegWr[127:64]  ;      
+  spike_arry[5]  =   data_act_tr.verif_csr_minstretWr[127:64] + 1 ;      
+  spike_arry[23] =   data_act_tr.verif_csr_sstatusWr[127:64]  ;      
+  spike_arry[21] =   data_act_tr.verif_csr_sepcWr[127:64]     ;      
+  spike_arry[19] =   data_act_tr.verif_csr_stvalWr[127:64]    ;      
+  spike_arry[17] =   data_act_tr.verif_csr_stvecWr[127:64]    ;      
+  spike_arry[15] =   data_act_tr.verif_csr_scauseWr[127:64]   ;      
+  spike_arry[14] =   data_act_tr.verif_csr_satpWr[127:64]     ;      
+  spike_arry[10] =   data_act_tr.verif_csr_sscratchWr[127:64] ;      
+  spike_arry[4]  =   data_act_tr.verif_csr_vtypeWr[127:64]    ;      
+  spike_arry[3]  =   data_act_tr.verif_csr_vcsrWr[127:64]     ;      
+  spike_arry[2]  =   data_act_tr.verif_csr_vlWr[127:64]       ;      
+  spike_arry[1]  =   data_act_tr.verif_csr_vstartWr[127:64]   ;      
+  //`uvm_info(get_type_name(),$sformatf(" get set_reg initial value %0h",data_act_tr.verif_csr_medelegWr ),UVM_NONE);
+
+	inchi_difftest_set_reg(spike_arry);
+	
+endtask
 `endif // VPU_SCB_SV
 
